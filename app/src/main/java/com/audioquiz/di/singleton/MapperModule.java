@@ -1,9 +1,10 @@
 package com.audioquiz.di.singleton;
 
-import com.adrian.data.mapper.INetworkMapper;
-import com.adrian.data.mapper.NetworkMapper;
-import com.adrian.database.mapper.DatabaseMapper;
-import com.adrian.database.mapper.IDatabaseMapper;
+/*
+import com.audioquiz.data.local.mapper.DatabaseMapper;
+import com.audioquiz.data.local.mapper.IDatabaseMapper;
+import com.audioquiz.data.remote.mapper.INetworkMapper;
+import com.audioquiz.data.remote.mapper.NetworkMapper;
 
 import dagger.Binds;
 import dagger.Module;
@@ -21,3 +22,4 @@ public abstract class MapperModule {
     abstract INetworkMapper bindNetworkMapper(NetworkMapper impl);
 
 }
+*/

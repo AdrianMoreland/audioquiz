@@ -1,7 +1,7 @@
 package com.audioquiz.di.activity.navigation;
 
-import com.adrian.audioquiz.MainActivity;
-import com.adrian.audioquiz.presentation.navigation.NavControllerProvider;
+import com.audioquiz.presentation.navigation.NavControllerProvider;
+import com.audioquiz.ui.MainActivity;
 
 import dagger.Binds;
 import dagger.Module;

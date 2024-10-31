@@ -1,11 +1,10 @@
 //MainActivity.java
-package com.audioquiz;
+package com.audioquiz.ui;
 
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewOutlineProvider;
 import android.view.Window;
@@ -20,12 +19,12 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
-import com.adrian.audioquiz.databinding.ActivityMainBinding;
-import com.adrian.audioquiz.presentation.component.bottom_nav_bar.BottomNavigationComponentApi;
-import com.adrian.audioquiz.presentation.component.toolbar.ToolbarComponent;
-import com.adrian.audioquiz.presentation.events.ThemeEvents;
-import com.adrian.audioquiz.presentation.navigation.NavControllerProvider;
-import com.adrian.audioquiz.presentation.viewmodel.MainViewModel;
+import com.audioquiz.R;
+import com.audioquiz.databinding.ActivityMainBinding;
+import com.audioquiz.presentation.events.ThemeEvents;
+import com.audioquiz.presentation.navigation.NavControllerProvider;
+import com.audioquiz.ui.component.bottom_nav_bar.BottomNavigationComponentApi;
+import com.audioquiz.ui.component.toolbar.ToolbarComponent;
 
 import java.util.Objects;
 
@@ -34,6 +33,7 @@ import javax.inject.Inject;
 import dagger.hilt.android.AndroidEntryPoint;
 import eightbitlab.com.blurview.BlurView;
 import eightbitlab.com.blurview.RenderScriptBlur;
+import timber.log.Timber;
 
 
 /**
@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity implements NavControllerProv
     protected void onCreate(Bundle savedInstanceState) {
         SplashScreen splashScreen = SplashScreen.installSplashScreen(this);
         super.onCreate(savedInstanceState);
-        setTheme(com.adrian.ui.R.style.Theme_AudioQuiz);
+        setTheme(com.audioquiz.designsystem.R.style.Theme_AudioQuiz);
 
         // VIEW BINDING
         binding = ActivityMainBinding.inflate(getLayoutInflater());
@@ -76,9 +76,9 @@ public class MainActivity extends AppCompatActivity implements NavControllerProv
         initializeNavComponents();
 
         // Setup other components if NavController is available
-        mainViewModel.getNavControllerLiveData().observe(this, navController -> {
-            if (navController != null) {
-                Log.d(TAG, "NavController initialized successfully");
+        mainViewModel.getNavControllerLiveData().observe(this, navController2 -> {
+            if (navController2 != null) {
+                Timber.tag(TAG).d("NavController initialized successfully");
                 splashScreen.setOnExitAnimationListener(SplashScreenViewProvider::remove);
                 setupBottomNavigation();
                 setupToolbar();
@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements NavControllerProv
         navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
         if (navHostFragment != null) {
             navController = navHostFragment.getNavController();
-            Log.d(TAG, "NavController initialized successfully");
+            Timber.tag(TAG).d("NavController initialized successfully");
             mainViewModel.setNavController(navController);
             setupOnDestinationChangedListener(navController);
         } else {
@@ -104,10 +104,10 @@ public class MainActivity extends AppCompatActivity implements NavControllerProv
     @Override
     public NavController getNavController() {
         if (navController != null) {
-            Log.d(TAG, "getNavController: " + Objects.requireNonNull(navController.getCurrentDestination()).getLabel());
+            Timber.tag(TAG).d("getNavController: %s", Objects.requireNonNull(navController.getCurrentDestination()).getLabel());
             return navController;
         } else {
-            Log.e(TAG, "NavController is null");
+            Timber.e("NavController is null");
             return null;
         }
     }
@@ -115,17 +115,17 @@ public class MainActivity extends AppCompatActivity implements NavControllerProv
     private void setupToolbar() {
         // COMMENTED OUT FOR NOW FOR TESTING
         if (toolbarComponent != null) {
-            Log.d(TAG, "setupToolbar: ToolbarComponent initialized");
+            Timber.tag(TAG).d("setupToolbar: ToolbarComponent initialized");
          //   toolbarComponent.initializeToolbar(binding.toolbar, findViewById(R.id.tvToolbarTitle));
         } else {
-            Log.e(TAG, "ToolbarComponent is null");
+            Timber.e("ToolbarComponent is null");
         }
     }
 
 
     private void setupOnDestinationChangedListener(NavController navController) {
         navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
-            Log.d(TAG, "setupOnDestinationChangedListener: " + destination.getLabel());
+            Timber.tag(TAG).d("setupOnDestinationChangedListener: %s", destination.getLabel());
             // COMMENTED OUT FOR NOW FOR TESTING
 /*            toolbarComponent.updateToolbar(new ToolbarConfiguration.Builder()
                     .setVisible(true)
@@ -140,7 +140,7 @@ public class MainActivity extends AppCompatActivity implements NavControllerProv
             bottomNavigationComponent.setupBottomNavigation(binding.navView.bottomNavigationContainer);
             setupBlurView();
         } else {
-            Log.e(TAG, "BottomNavigationComponent is null");
+            Timber.e("BottomNavigationComponent is null");
         }
     }
 
@@ -149,7 +149,7 @@ public class MainActivity extends AppCompatActivity implements NavControllerProv
         if (navController != null) {
             return navController.navigateUp() || super.onSupportNavigateUp();
         } else {
-            Log.e(TAG, "NavController is null. Cannot navigate up.");
+            Timber.e("NavController is null. Cannot navigate up.");
             return super.onSupportNavigateUp();
         }
     }
@@ -165,7 +165,7 @@ public class MainActivity extends AppCompatActivity implements NavControllerProv
 
     private void showErrorAndLog(String message) {
         Toast.makeText(this, "An error occurred. Please restart the app.", Toast.LENGTH_LONG).show();
-        Log.e(TAG, message);
+        Timber.e(message);
     }
 
     // ------------------Theme Management
@@ -189,7 +189,7 @@ public class MainActivity extends AppCompatActivity implements NavControllerProv
 
     private void updateStatusBarAndUi(boolean isNightMode) {
         Window window = getWindow();
-        int statusBarColor = isNightMode ? com.adrian.ui.R.color.dark_status_bar_color : com.adrian.ui.R.color.light_status_bar_color;
+        int statusBarColor = isNightMode ? com.audioquiz.designsystem.R.color.dark_status_bar_color : com.audioquiz.designsystem.R.color.light_status_bar_color;
         int uiVisibility = isNightMode ? (View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR | View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR) : 0;
         window.setStatusBarColor(ContextCompat.getColor(this, statusBarColor));
         window.getDecorView().setSystemUiVisibility(uiVisibility);

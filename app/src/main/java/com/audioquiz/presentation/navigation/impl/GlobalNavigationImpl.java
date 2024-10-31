@@ -1,6 +1,6 @@
 package com.audioquiz.presentation.navigation.impl;
 
-import com.adrian.audioquiz.presentation.navigation.GlobalNavigation;
+import com.audioquiz.presentation.navigation.GlobalNavigation;
 
 import javax.inject.Inject;
 

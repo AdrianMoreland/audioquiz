@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_nav_graph"
+    app:startDestination="@id/testFragment">
+
+    <fragment
+        android:id="@+id/testFragment"
+        android:name="com.audioquiz.ui.WelcomeFragment"
+        android:label="Test Fragment" />
+
+    <fragment
+        android:id="@+id/welcomeFragment"
+        android:name="com.audioquiz.ui.WelcomeFragment"
+        android:label="WelcomeFragment"
+        tools:layout="@layout/fragment_welcome">
+        <action
+            android:id="@+id/action_welcome_to_login"
+            app:destination="@id/login_nav_graph" >
+
+            <argument
+                android:name="isLoggedIn"
+                app:argType="boolean" />
+        </action>
+        <action
+            android:id="@+id/action_welcome_to_home"
+            app:destination="@id/home_nav_graph" />
+
+    </fragment>
+
+
+    <action android:id="@+id/action_welcome_to_login"
+        app:destination="@+id/login_nav_graph"
+        app:popUpTo="@id/welcomeFragment"
+        app:popUpToInclusive="true">
+
+        <argument
+            android:name="isLoggedIn"
+            app:argType="boolean" />
+    </action>
+
+    <action android:id="@+id/action_welcome_to_home"
+        app:destination="@+id/home_nav_graph"
+        app:popUpTo="@id/welcomeFragment"
+        app:popUpToInclusive="true"/>
+
+    <action android:id="@+id/action_login_to_home"
+        app:destination="@+id/home_nav_graph"
+        app:popUpTo="@id/welcomeFragment"
+        app:popUpToInclusive="true"/>
+
+    <action android:id="@+id/action_home_to_settings"
+        app:destination="@+id/settings_nav_graph"
+        app:popUpTo="@id/home_nav_graph"
+        app:popUpToInclusive="true"/>
+
+    <include app:graph="@navigation/login_nav_graph" />
+    <include app:graph="@navigation/home_nav_graph" />
+    <include app:graph="@navigation/stats_navigation" />
+    <include app:graph="@navigation/quiz_nav_graph" />
+    <include app:graph="@navigation/rank_nav_graph" />
+    <include app:graph="@navigation/settings_nav_graph" />
+
+</navigation>

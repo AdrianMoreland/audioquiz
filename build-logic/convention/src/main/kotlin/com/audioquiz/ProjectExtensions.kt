@@ -4,7 +4,6 @@ package com.audioquiz
 import com.android.build.api.dsl.ApplicationExtension
 import com.android.build.api.dsl.CommonExtension
 import com.android.build.gradle.LibraryExtension
-import io.gitlab.arturbosch.detekt.extensions.DetektExtension
 import org.gradle.api.Project
 import org.gradle.api.artifacts.VersionCatalog
 import org.gradle.api.artifacts.VersionCatalogsExtension
@@ -19,11 +18,6 @@ val Project.libs
 
 inline fun Project.androidGradle(crossinline configure: LibraryExtension.() -> Unit) =
     extensions.configure<LibraryExtension> {
-        configure()
-    }
-
-inline fun Project.detektGradle(crossinline configure: DetektExtension.() -> Unit) =
-    extensions.configure<DetektExtension> {
         configure()
     }
 

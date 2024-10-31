@@ -7,9 +7,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 
-import com.adrian.audioquiz.R;
-import com.adrian.audioquiz.presentation.navigation.NavControllerProvider;
-import com.adrian.audioquiz.presentation.viewmodel.MainViewModel;
+import com.audioquiz.R;
+import com.audioquiz.presentation.navigation.NavControllerProvider;
+import com.audioquiz.ui.MainViewModel;
 
 import javax.inject.Inject;
 

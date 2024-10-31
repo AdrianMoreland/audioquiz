@@ -1,17 +1,20 @@
 plugins {
     id("audioquiz.android.library")
+    id("audioquiz.android.hilt")
 }
 
 android {
-    namespace = "com.audioquiz.extensions"
+    namespace = "com.audioquiz.core.extensions"
 
-    defaultConfig {
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    }
+
 }
 
 dependencies {
-    projects.apply {
-        testImplementation(core.test)
+    libs.apply {
+      //  implementation(gson)
+        implementation(rxjava)
+        implementation(lifecycle.reactivestreams)
+        implementation(rxandroid)
+        implementation(modelmapper)
     }
 }

@@ -15,20 +15,54 @@
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.ComposeNews"
-        tools:targetApi="31">
+        android:theme="@style/Theme.AudioQuiz"
+        tools:targetApi="35">
         <activity
             android:name="com.audioquiz.ui.MainActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize|uiMode"
             android:exported="true"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.ComposeNews">
+            android:theme="@style/Theme.App.Starting">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <provider
+            android:name="androidx.startup.InitializationProvider"
+            android:authorities="${applicationId}.androidx-startup"
+            android:exported="false"
+            android:multiprocess="true"
+            tools:node="merge">
+
+            <meta-data
+                android:name="com.audioquiz.sync.initializer.DependencyGraphInitializer"
+                android:value="androidx.startup" />
+
+            <meta-data
+                android:name="com.audioquiz.sync.initializer.WorkManagerInitializer"
+                android:value="androidx.startup" />
+
+            <meta-data
+                android:name="com.audioquiz.sync.initializer.SyncWorkerInitializer"
+                android:value="androidx.startup" />
+
+            <meta-data
+                android:name="com.audioquiz.sync.initializer.DatabaseInitializer"
+                android:value="androidx.startup" />
+
+            <meta-data
+                android:name="androidx.work.WorkManagerInitializer"
+                android:value="androidx.startup"
+                tools:node="remove" />
+        </provider>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

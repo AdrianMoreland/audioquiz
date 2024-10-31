@@ -1,10 +1,11 @@
 package com.audioquiz.di.singleton.database;
+/*
 
 import android.content.Context;
 
 import androidx.room.Room;
 
-import com.adrian.database.provider.AppDatabase;
+import com.audioquiz.data.local.provider.AppDatabase;
 
 import javax.inject.Singleton;
 
@@ -27,4 +28,5 @@ public class DatabaseModule {
     }
 
 }
+*/
 

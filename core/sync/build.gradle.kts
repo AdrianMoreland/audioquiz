@@ -5,13 +5,40 @@ plugins {
 
 android {
     namespace = "com.audioquiz.sync"
+
+
+    lint {
+        checkReleaseBuilds = false
+        abortOnError = false
+    }
 }
 
 dependencies {
-    api(projects.domain.market)
+
+    projects.core.apply {
+        implementation(model)
+        implementation(domain)
+        implementation(extensions)
+    }
+
+    projects.data.apply {
+        implementation(api)
+     //   implementation(repository)
+        implementation(remote)
+        implementation(local)
+    }
+
     libs.apply {
-        implementation(hilt.work)
-        implementation(startup.runtime)
+        implementation("com.google.guava:guava:31.1-android")
+        implementation(room.runtime)
+        ksp(room.compiler)
         implementation(work.runtime)
+        implementation(hilt.work)
+        implementation(work.rxjava3)
+        ksp(work.compiler)
+        implementation(gson)
+        implementation(startup.runtime)
+        implementation(rxjava)
+        implementation(rxandroid)
     }
 }

@@ -1,28 +1,28 @@
 package com.audioquiz.di.singleton.repository;
 
-import com.adrian.audioquiz.di.singleton.ExecutorModule;
-import com.adrian.data.repository.auth.AuthRepositoryImpl;
-import com.adrian.data.repository.question.FrequenciesDataRepository_impl;
-import com.adrian.data.repository.question.QuestionRepository_Impl;
-import com.adrian.data.repository.quiz.QuizRepository_impl;
-import com.adrian.data.repository.rank.RankRepository_Impl;
-import com.adrian.data.repository.stats.CategoryStatsRepository_Impl;
-import com.adrian.data.repository.stats.FrequencyStatsRepository_Impl;
-import com.adrian.data.repository.stats.GeneralStatsRepositoryImpl;
-import com.adrian.data.repository.stats.StatsRepository_Impl;
-import com.adrian.data.repository.stats.UserProfileRepository_Impl;
-import com.adrian.data.repository.stats.WeeklyScoresRepositoryImpl;
-import com.adrian.domain.auth.AuthRepository;
-import com.adrian.domain.question.FrequenciesDataRepository;
-import com.adrian.domain.question.QuestionRepository;
-import com.adrian.domain.quiz.QuizRepository;
-import com.adrian.domain.rank.RankRepository;
-import com.adrian.domain.user.FrequencyStatsRepository;
-import com.adrian.domain.user.GeneralStatsRepository;
-import com.adrian.domain.user.StatsRepository;
-import com.adrian.domain.user.CategoryStatsRepository;
-import com.adrian.domain.user.UserProfileRepository;
-import com.adrian.domain.user.WeeklyScoresRepository;
+import com.audioquiz.core.domain.repository.auth.AuthRepository;
+import com.audioquiz.core.domain.repository.quiz.FrequenciesDataRepository;
+import com.audioquiz.core.domain.repository.quiz.QuestionRepository;
+import com.audioquiz.core.domain.repository.quiz.QuizRepository;
+import com.audioquiz.core.domain.repository.rank.RankRepository;
+import com.audioquiz.core.domain.repository.user.CategoryStatsRepository;
+import com.audioquiz.core.domain.repository.user.FrequencyStatsRepository;
+import com.audioquiz.core.domain.repository.user.GeneralStatsRepository;
+import com.audioquiz.core.domain.repository.user.StatsRepository;
+import com.audioquiz.core.domain.repository.user.UserProfileRepository;
+import com.audioquiz.core.domain.repository.user.WeeklyScoresRepository;
+import com.audioquiz.core.extensions.di.ExecutorModule;
+import com.audioquiz.data.repository.auth.AuthRepositoryImpl;
+import com.audioquiz.data.repository.question.FrequenciesDataRepository_impl;
+import com.audioquiz.data.repository.question.QuestionRepository_Impl;
+import com.audioquiz.data.repository.quiz.QuizRepository_impl;
+import com.audioquiz.data.repository.rank.RankRepository_Impl;
+import com.audioquiz.data.repository.stats.CategoryStatsRepository_Impl;
+import com.audioquiz.data.repository.stats.FrequencyStatsRepository_Impl;
+import com.audioquiz.data.repository.stats.GeneralStatsRepositoryImpl;
+import com.audioquiz.data.repository.stats.StatsRepository_Impl;
+import com.audioquiz.data.repository.stats.UserProfileRepository_Impl;
+import com.audioquiz.data.repository.stats.WeeklyScoresRepositoryImpl;
 
 import javax.inject.Singleton;
 
@@ -49,7 +49,7 @@ public abstract class RepositoryModule {
 
     @Binds
     @Singleton
-    abstract UserProfileRepository bindUserProfileRepository(UserProfileRepository_Impl userProfileRepository);
+    public abstract UserProfileRepository bindUserProfileRepository(UserProfileRepository_Impl userProfileRepository);
 
     @Binds
     @Singleton

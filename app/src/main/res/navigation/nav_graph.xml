@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/welcomeFragment">
+
+    <fragment android:id="@+id/welcomeFragment"
+        android:name="com.audioquiz.ui.WelcomeFragment"
+        android:label="WelcomeFragment"
+        tools:layout="@layout/fragment_welcome">
+
+        <action android:id="@+id/navigateFromWelcomeToNotAuthorizedGraph"
+            app:destination="@id/notAuthorizedGraph"  />
+
+        <action android:id="@+id/navigateFromWelcomeToAuthorizedGraph"
+            app:destination="@id/authorizedGraph"  />
+
+    </fragment>
+
+    <navigation android:id="@+id/notAuthorizedGraph"
+        android:label="Not authorized graph"
+        app:startDestination="@id/login_nav_graph">
+
+        <include app:graph="@navigation/login_nav_graph" />
+
+    </navigation>
+
+    <navigation android:id="@+id/authorizedGraph"
+        android:label="Authorized graph"
+        app:startDestination="@id/home_nav_graph">
+
+        <include app:graph="@navigation/home_nav_graph" />
+        <include app:graph="@navigation/settings_nav_graph" />
+        <include app:graph="@navigation/stats_navigation" />
+
+
+        <action
+            android:id="@+id/navigateFromHomeToStats"
+            app:destination="@+id/statsFragment" />
+
+        <action
+            android:id="@+id/navigateFromHomeToRank"
+            app:destination="@id/rankFragment" />
+
+        <action
+            android:id="@+id/navigateFromHomeToQuestion"
+            app:destination="@id/questionFragment" />
+
+    </navigation>
+
+    <action android:id="@+id/navigateToAuthorizedGraph"
+        app:destination="@id/authorizedGraph"
+        app:popUpTo="@id/welcomeFragment"
+        app:popUpToInclusive="true"/>
+
+    <action android:id="@+id/navigateToUnauthorizedGraph"
+        app:destination="@+id/notAuthorizedGraph"  />
+
+    <action
+        android:id="@+id/navigateFromHomeToSettings"
+        app:destination="@id/settings_nav_graph" />
+
+    <action
+        android:id="@+id/navigateFromSettingsToWelcome"
+        app:destination="@id/welcomeFragment" />
+
+</navigation>

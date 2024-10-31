@@ -1,3 +1,5 @@
+import com.audioquiz.configurePackagingOptions
+
 plugins {
     id("audioquiz.android.library")
     id("audioquiz.android.hilt")
@@ -8,12 +10,12 @@ android {
     defaultConfig {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
+
+    configurePackagingOptions(this)
 }
 
 dependencies {
     libs.apply {
-        api(bundles.kotest)
-        api(coroutines.test)
         api(mockk)
     }
 }

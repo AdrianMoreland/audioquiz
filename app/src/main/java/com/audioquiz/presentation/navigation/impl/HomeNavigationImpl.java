@@ -4,8 +4,8 @@ import android.util.Log;
 
 import androidx.navigation.NavController;
 
-import com.adrian.audioquiz.R;
-import com.adrian.audioquiz.presentation.navigation.NavControllerProvider;
+import com.audioquiz.R;
+import com.audioquiz.presentation.navigation.NavControllerProvider;
 
 import javax.inject.Inject;
 

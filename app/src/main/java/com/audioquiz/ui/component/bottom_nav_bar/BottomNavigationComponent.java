@@ -1,12 +1,10 @@
 package com.audioquiz.ui.component.bottom_nav_bar;
 
 import android.os.Handler;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
-import com.adrian.audioquiz.presentation.navigation.GlobalNavigation;
-import com.adrian.home.R;
+import com.audioquiz.presentation.navigation.GlobalNavigation;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,6 +12,7 @@ import java.util.Map;
 import javax.inject.Inject;
 
 import dagger.hilt.android.scopes.ActivityScoped;
+import timber.log.Timber;
 
 
 @ActivityScoped
@@ -25,7 +24,7 @@ public class BottomNavigationComponent implements BottomNavigationComponentApi {
 
     @Inject
     public BottomNavigationComponent() {
-         Log.d("BottomNavigationComponent", "BottomNavigationComponent called");
+        Timber.tag("BottomNavigationComponent").d("BottomNavigationComponent called");
     }
 
     @Override
@@ -39,11 +38,11 @@ public class BottomNavigationComponent implements BottomNavigationComponentApi {
     }
 
     public void initButtonActions() {
-        buttonActions.put(com.adrian.ui.R.id.btn_learn, () -> navigation.navigateToHome());
+        buttonActions.put(com.audioquiz.designsystem.R.id.btn_learn, () -> navigation.navigateToHome());
 
-        buttonActions.put(com.adrian.ui.R.id.btn_stats, () -> navigation.navigateToStats());
+        buttonActions.put(com.audioquiz.designsystem.R.id.btn_stats, () -> navigation.navigateToStats());
 
-        buttonActions.put(com.adrian.ui.R.id.btn_rank, () -> navigation.navigateToRank());
+        buttonActions.put(com.audioquiz.designsystem.R.id.btn_rank, () -> navigation.navigateToRank());
     }
 
     private void setupNavButton(Runnable action, Button button) {

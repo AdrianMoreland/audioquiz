@@ -6,8 +6,8 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import androidx.navigation.NavController;
 
-import com.adrian.audioquiz.presentation.component.toolbar.ToolbarConfiguration;
-import com.adrian.audioquiz.presentation.events.Event;
+import com.audioquiz.presentation.events.Event;
+import com.audioquiz.ui.component.toolbar.ToolbarConfiguration;
 
 import javax.inject.Inject;
 
@@ -21,10 +21,11 @@ public class MainViewModel extends ViewModel {
     private final MutableLiveData<Boolean> bottomNavigationVisibility = new MutableLiveData<>(true); // Initially visible
     private final MutableLiveData<Event<String>> errorMessage = new MutableLiveData<>();
 
-    private MutableLiveData<NavController> navControllerLiveData = new MutableLiveData<>();
+    private final MutableLiveData<NavController> navControllerLiveData = new MutableLiveData<>();
 
     @Inject
     public MainViewModel() {
+        // Required empty public constructor
     }
 
     public LiveData<NavController> getNavControllerLiveData() {

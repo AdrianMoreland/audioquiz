@@ -1,10 +1,10 @@
 package com.audioquiz.presentation.navigation;
 
-import android.util.Log;
-
-import com.adrian.audioquiz.presentation.events.MainCoordinatorEvent;
+import com.audioquiz.presentation.events.MainCoordinatorEvent;
 
 import javax.inject.Inject;
+
+import timber.log.Timber;
 
 /**
  * MainFlowCoordinator
@@ -20,21 +20,21 @@ public class MainFlowCoordinator {
     @Inject
     public MainFlowCoordinator(StartNavigation startNavigation) {
         this.startNavigation = startNavigation;
-        Log.d(TAG, "MainFlowCoordinator initialized");
+        Timber.tag(TAG).d("MainFlowCoordinator initialized");
     }
 
     public boolean onEvent(MainCoordinatorEvent event) {
-        Log.d(TAG, "onEvent Called with: " + event);
+        Timber.tag(TAG).d("onEvent Called with: %s", event);
         if (event instanceof MainCoordinatorEvent.OnContinueNotLoggedIn) {
-            Log.d(TAG, "onEvent: OnContinueNotLoggedIn");
+            Timber.tag(TAG).d("onEvent: OnContinueNotLoggedIn");
             startNavigation.navigateToUnauthorizedGraph();
             return true;
         } else if (event instanceof MainCoordinatorEvent.OnContinueLoggedIn) {
-            Log.d(TAG, "onEvent: OnContinueLoggedIn");
+            Timber.tag(TAG).d("onEvent: OnContinueLoggedIn");
             startNavigation.navigateToAuthorizedGraph();
             return true;
         } else {
-            Log.d(TAG, "No event found for: " + event);
+            Timber.tag(TAG).d("No event found for: %s", event);
             return false;
         }
     }

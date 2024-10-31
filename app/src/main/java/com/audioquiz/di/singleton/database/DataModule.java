@@ -1,9 +1,10 @@
 package com.audioquiz.di.singleton.database;
+/*
 
 import android.content.Context;
 
-import com.adrian.api.data.datasources.session.SessionLocal;
-import com.adrian.database.cache.SessionCache;
+import com.audioquiz.api.datasources.session.SessionLocal;
+import com.audioquiz.data.local.cache.SessionCache;
 
 import javax.inject.Singleton;
 
@@ -25,3 +26,4 @@ public class DataModule {
     }
 
 }
+*/

@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "295069124840",
+    "project_id": "audioquiz-e0318",
+    "storage_bucket": "audioquiz-e0318.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:295069124840:android:6df70fee9011004e90215d",
+        "android_client_info": {
+          "package_name": "com.audioquiz"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "295069124840-1l7e96oekb6b9fc7igve8eoj6epse1hv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.audioquiz",
+            "certificate_hash": "1e09ab92649f8d7fa0e12a6ba2d18bd175a59c9a"
+          }
+        },
+        {
+          "client_id": "295069124840-u9s5hb9uri4r9ancvvrqr7i2r9q62foj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKHc_W3RlZgDtLQF3S-kG8nCVw_PzMx4A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "295069124840-u9s5hb9uri4r9ancvvrqr7i2r9q62foj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

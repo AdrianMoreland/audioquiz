@@ -1,22 +1,23 @@
 package com.audioquiz.presentation.navigation;
 
 import android.content.Context;
-import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 
-import com.adrian.audioquiz.R;
-import com.adrian.audioquiz.presentation.viewmodel.MainViewModel;
-import com.adrian.home.presentation.navigation.HomeNavigation;
-import com.adrian.login.presentation.navigation.LoginNavigation;
+import com.audioquiz.R;
+import com.audioquiz.feature.home.navigation.HomeNavigation;
+import com.audioquiz.feature.login.presentation.navigation.LoginNavigation;
+import com.audioquiz.feature.settings.presentation.navigation.SettingsNavigation;
+import com.audioquiz.ui.MainViewModel;
 
 import javax.inject.Inject;
 
 import dagger.hilt.android.qualifiers.ActivityContext;
+import timber.log.Timber;
 
-public class Navigator implements GlobalNavigation, StartNavigation, LoginNavigation, HomeNavigation {
+public class Navigator implements GlobalNavigation, StartNavigation, LoginNavigation, HomeNavigation, SettingsNavigation {
     private static final String TAG = "Navigator";
 
     private NavController navController;
@@ -30,7 +31,7 @@ public class Navigator implements GlobalNavigation, StartNavigation, LoginNaviga
     }
 
     private void init (@ActivityContext Context context) {
-        Log.d(TAG, "Navigator initialized with NavController: " + navController);
+        Timber.d("Navigator initialized with NavController: %s", navController);
         AppCompatActivity activity = (AppCompatActivity) context;
         mainViewModel = new ViewModelProvider(activity).get(MainViewModel.class);
         observeNavigationChanges();
@@ -39,7 +40,7 @@ public class Navigator implements GlobalNavigation, StartNavigation, LoginNaviga
     private void observeNavigationChanges() {
         mainViewModel.getNavControllerLiveData().observeForever(controller -> {
             if (controller != null) {
-                Log.d(TAG, "NavController updated: " + controller);
+                Timber.tag(TAG).d("NavController updated: %s", controller);
                 navController = controller;
             }
         });
@@ -47,27 +48,28 @@ public class Navigator implements GlobalNavigation, StartNavigation, LoginNaviga
 
     @Override
     public NavController getNavController() {
+        Timber.d("getNavController: %s", navController);
         return navController;
     }
 
     private void navigate (int actionId) {
         if (navController != null) {
-            Log.d(TAG, "Navigating to actionId: " + actionId + " with NavController: " + navController);
+            Timber.d("Navigating to actionId: " + actionId + " with NavController: " + navController);
             navController.navigate(actionId);
             return;
         }
-        Log.e(TAG, "NavController is null when trying to navigate");
+        Timber.e("NavController is null when trying to navigate");
     }
 
     @Override
     public void navigateToAuthorizedGraph() {
-        Log.d(TAG, "navigateToAuthorizedGraph");
+        Timber.d("navigateToAuthorizedGraph");
          navigate(R.id.navigateToAuthorizedGraph);
     }
 
     @Override
     public void navigateToUnauthorizedGraph() {
-        Log.d(TAG, "navigateToUnauthorizedGraph");
+        Timber.d("navigateToUnauthorizedGraph");
         navigate(R.id.navigateToUnauthorizedGraph);
     }
 
@@ -78,13 +80,13 @@ public class Navigator implements GlobalNavigation, StartNavigation, LoginNaviga
 
     @Override
     public void navigateToHome() {
-        Log.d(TAG, "navigateToHome");
+        Timber.d("navigateToHome");
         navigate(R.id.navigateToAuthorizedGraph);
     }
 
     @Override
     public void navigateToPlay() {
-        navigate(R.id.navigateFromHomeToPlay);
+//        navigate(R.id.navigateFromHomeToPlay);
     }
 
     @Override
@@ -95,5 +97,10 @@ public class Navigator implements GlobalNavigation, StartNavigation, LoginNaviga
     @Override
     public void navigateToRank() {
         navigate(R.id.navigateFromHomeToRank);
+    }
+
+    @Override
+    public void navigateFromSettingsToWelcome() {
+        navigate(R.id.navigateFromSettingsToWelcome);
     }
 }

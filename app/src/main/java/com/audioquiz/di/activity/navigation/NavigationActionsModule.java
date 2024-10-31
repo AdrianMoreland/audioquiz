@@ -1,11 +1,12 @@
 package com.audioquiz.di.activity.navigation;
 
-import com.adrian.audioquiz.presentation.navigation.GlobalNavigation;
-import com.adrian.audioquiz.presentation.navigation.Navigator;
-import com.adrian.audioquiz.presentation.navigation.StartNavigation;
-import com.adrian.audioquiz.presentation.navigation.impl.GlobalNavigationImpl;
-import com.adrian.home.presentation.navigation.HomeNavigation;
-import com.adrian.login.presentation.navigation.LoginNavigation;
+import com.audioquiz.feature.home.navigation.HomeNavigation;
+import com.audioquiz.feature.login.presentation.navigation.LoginNavigation;
+import com.audioquiz.feature.settings.presentation.navigation.SettingsNavigation;
+import com.audioquiz.presentation.navigation.GlobalNavigation;
+import com.audioquiz.presentation.navigation.Navigator;
+import com.audioquiz.presentation.navigation.StartNavigation;
+import com.audioquiz.presentation.navigation.impl.GlobalNavigationImpl;
 
 import dagger.Binds;
 import dagger.Module;
@@ -27,5 +28,8 @@ public abstract class NavigationActionsModule {
 
     @Binds
     abstract HomeNavigation bindHomeNavigation(Navigator navigator);
+
+    @Binds
+    abstract SettingsNavigation bindSettingsNavigation(Navigator navigator);
 
 }

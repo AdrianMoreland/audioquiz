@@ -1,11 +1,11 @@
 package com.audioquiz.di.activity.navigation;
 
-import com.adrian.audioquiz.presentation.navigation.StartNavigation;
-import com.adrian.home.presentation.navigation.HomeFlowCoordinator;
-import com.adrian.home.presentation.navigation.HomeNavigation;
-import com.adrian.login.presentation.navigation.LoginFlowCoordinator;
-import com.adrian.login.presentation.navigation.LoginNavigation;
-import com.adrian.audioquiz.presentation.navigation.MainFlowCoordinator;
+import com.audioquiz.feature.home.navigation.HomeFlowCoordinator;
+import com.audioquiz.feature.home.navigation.HomeNavigation;
+import com.audioquiz.feature.login.presentation.navigation.LoginFlowCoordinator;
+import com.audioquiz.feature.login.presentation.navigation.LoginNavigation;
+import com.audioquiz.presentation.navigation.MainFlowCoordinator;
+import com.audioquiz.presentation.navigation.StartNavigation;
 
 import dagger.Module;
 import dagger.Provides;

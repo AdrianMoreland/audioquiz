@@ -19,22 +19,31 @@ dependencyResolutionManagement {
     }
 }
 
+
+gradle.startParameter.excludedTaskNames.addAll([':build-logic:convention:testClasses'])
+
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 rootProject.name = "AudioQuiz"
 
+//include ':admin'
 include ':library:designsystem'
 include ':library:navigation'
+include ':library:util'
+include ':core:domain'
+include ':core:model'
 include ':core:sync'
 include ':core:test'
-include ':core:base'
-include ':core:uimarket'
+include ':core:ui'
 include ':core:extensions'
-include ':core:network:ktor'
-include ':domain:market'
-include ':data:market-remote'
-include ':data:market-local'
-include ':data:market-repository'
-include ':feature:marketlist'
-include ':feature:marketdetail'
+include ':data:api'
+include ':data:remote'
+include ':data:local'
+include ':data:repository'
+include ':feature:home'
+include ':feature:login'
+include ':feature:quiz'
+include ':feature:rank'
+include ':feature:settings'
+include ':feature:stats'
 include ':app'

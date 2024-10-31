@@ -1,6 +1,7 @@
 package com.audioquiz.permission.manager
 
 import android.content.Context
+import androidx.activity.ComponentActivity
 //import androidx.activity.ComponentActivity
 import com.audioquiz.permission.enum.PermissionType
 
@@ -12,13 +13,13 @@ interface PermissionManager {
 
     fun requestPermission(
         permission: PermissionType,
-        activity: null,
+        activity: ComponentActivity,
         callback: (isGranted: Boolean) -> Unit,
     ): Unit?
 
     fun performPermission(
         permission: PermissionType,
-        activity: null,
+        activity: ComponentActivity,
         callback: (isGranted: Boolean) -> Unit = {},
     ): Unit?
 }

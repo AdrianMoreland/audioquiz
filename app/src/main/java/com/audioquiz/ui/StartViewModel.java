@@ -1,18 +1,17 @@
 package com.audioquiz.ui;
 
-import android.util.Log;
-
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.adrian.api.data.datasources.firebase_auth.AuthApi;
+import com.audioquiz.api.datasources.firebase_auth.AuthApi;
 
 import javax.inject.Inject;
 
 import dagger.hilt.android.lifecycle.HiltViewModel;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
+import timber.log.Timber;
 
 @HiltViewModel
 public class StartViewModel extends ViewModel {
@@ -23,30 +22,30 @@ public class StartViewModel extends ViewModel {
 
     @Inject
     public StartViewModel(AuthApi authApi) {
-        Log.d(TAG, "StartViewModel initialized");
+        Timber.tag(TAG).d("StartViewModel initialized");
         this.authApi = authApi;
         checkAuthorization();
     }
 
     private void checkAuthorization() {
-        Log.d(TAG, "checkAuthorization called");
+        Timber.tag(TAG).d("checkAuthorization called");
         disposables.add(
                 authApi.isAuthorized()
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(isUserAuthorizedLiveData::postValue, throwable -> Log.e(TAG, "Error checking authorization", throwable))
+                        .subscribe(isUserAuthorizedLiveData::postValue, throwable -> Timber.tag(TAG).e(throwable, "Error checking authorization"))
         );
     }
 
     public LiveData<Boolean> getIsUserAuthorizedLiveData() {
         Boolean value = isUserAuthorizedLiveData.getValue();
         if (value == null || !value) {
-            Log.d(TAG, "getIsUserAuthorizedLiveData: false");
+            Timber.tag(TAG).d("getIsUserAuthorizedLiveData: false");
             isUserAuthorizedLiveData.setValue(false);
         } else {
-            Log.d(TAG, "getIsUserAuthorizedLiveData: true");
+            Timber.tag(TAG).d("getIsUserAuthorizedLiveData: true");
             isUserAuthorizedLiveData.setValue(true);
         }
-        Log.d(TAG, "getIsUserAuthorizedLiveData: " + isUserAuthorizedLiveData.getValue());
+        Timber.tag(TAG).d("getIsUserAuthorizedLiveData: %s", isUserAuthorizedLiveData.getValue());
         return isUserAuthorizedLiveData;
     }
 

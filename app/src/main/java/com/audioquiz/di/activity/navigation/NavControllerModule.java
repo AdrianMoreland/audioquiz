@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
-import com.adrian.audioquiz.R;
+import com.audioquiz.R;
 
 import dagger.Module;
 import dagger.Provides;

@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <style name="Theme.ComposeNews" parent="android:Theme.Material.Light.NoActionBar">
-        <item name="android:statusBarColor">@color/status_bar</item>
+    <style name="Theme.App.Starting" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/md_theme_background</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_logo_bw</item>
+        <item name="postSplashScreenTheme">@style/Theme.AudioQuiz</item>
     </style>
+
 </resources>

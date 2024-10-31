@@ -1,104 +1,114 @@
+import com.audioquiz.AndroidConfig
+
 plugins {
     id("audioquiz.android.application")
-//    alias(libs.plugins.audioquiz.android.application)
+    id("audioquiz.android.hilt")
+    id("audioquiz.dependency.versions")
+    id("audioquiz.modules.graph.assert")
 }
 
 android {
-    namespace = libs.versions.projectApplicationId.get()
     defaultConfig {
-        applicationId = libs.versions.projectApplicationId.get()
-        versionCode = libs.versions.projectVersionCode.get().toInt()
-        versionName = libs.versions.projectVersionName.get()
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        namespace = AndroidConfig.NAMESPACE
+        applicationId = AndroidConfig.APP_ID
+        versionCode = AndroidConfig.VERSION_CODE
+        versionName = AndroidConfig.VERSION_NAME
+
         vectorDrawables {
             useSupportLibrary = true
         }
+
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
-    buildTypes {
-        getByName("debug") {
-            isMinifyEnabled = false
-            isShrinkResources = false
-            applicationIdSuffix = ".debug"
-            versionNameSuffix = "-debug"
+
+    buildFeatures {
+        buildConfig = true
+    }
+
+// Define a custom property
+    val isProdFlavor by extra {
+        findProperty("isProdFlavor")?.toString()?.toBoolean() ?: false
+    }
+
+}
+
+allprojects {
+    android {
+        lint {
+            checkReleaseBuilds = false
+            abortOnError = false
         }
-        getByName("release") {
-            isMinifyEnabled = true
-            isShrinkResources = true
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro",
-            )
+        hilt {
+            enableAggregatingTask = true
         }
     }
 }
 
+
 dependencies {
     projects.library.apply {
-        implementation(navigation)
         implementation(designsystem)
     }
     projects.core.apply {
+        implementation(domain)
+        implementation(model)
+        implementation(extensions)
         implementation(sync)
-        implementation(base)
-        implementation(uimarket)
+        implementation(ui)
     }
+    projects.feature.apply {
+        implementation(login)
+        implementation(home)
+        implementation(rank)
+        implementation(quiz)
+        implementation(settings)
+        implementation(stats)
+    }
+    projects.data.apply {
+        implementation(api)
+        implementation(repository)
+    }
+
+    if (gradle.startParameter.taskNames.none { it.contains("Demo") }) {
+        libs.apply {
+            implementation(play.services.base)
+            implementation(play.services.auth)
+            implementation(googleid)
+            implementation(credentials)
+            implementation(credentials.play.services.auth)
+        }
+    }
+
     libs.apply {
+        implementation(timber)
+
+        implementation(kotlin.stdlib.jdk8)
+        implementation(startup.runtime)
+        implementation(androidx.core.splashscreen)
+        implementation(dagger)
+        ksp(dagger.compiler)
+        implementation(work.runtime)
+        ksp(work.compiler)
         implementation(hilt.work)
-        implementation(lifecycle.runtime.ktx)
-        implementation(libs.espresso.core)
-        // Kotlin
-        implementation(libs.kotlin.stdlib.jdk8)
+        implementation(work.rxjava3)
 
-        //Splash
-        implementation (libs.androidx.core.splashscreen)
 
-        // Hilt
-        implementation(libs.hilt.android)
-        implementation(libs.hilt.navigation.fragment)
-        implementation(libs.annotation)
-        implementation(libs.constraintlayout)
-        implementation(libs.livedata.ktx)
-        implementation(libs.viewmodel)
-
-        implementation (libs.startup.runtime)
-        ksp(libs.hilt.compiler)
-
-        //WorkManager
-        implementation(libs.work.runtime)
-        implementation(libs.work.rxjava2)
-        implementation(libs.hilt.work)
-        ksp(libs.work.compiler)
-        //Room
-        implementation(libs.room.runtime)
-        ksp(libs.room.compiler)
-        //RxJava
-        implementation(libs.room.rxjava3)
-        implementation(libs.rxandroid)
         // Navigation
-        implementation(libs.navigation.fragment)
-        implementation(libs.navigation.ui)
+        implementation(navigation.fragment)
+        implementation(navigation.ui)
+        implementation(hilt.navigation.fragment)
+        //RxJava
+        implementation(room.rxjava3)
+        implementation(rxandroid)
 
-        // External libraries
-        implementation(libs.play.services.base)
-        implementation(platform(libs.firebase.bom))
-        implementation(libs.firebase.auth)
-        implementation(libs.firebase.firestore)
-        implementation(libs.firebase.storage)
-        implementation(libs.firebase.appcheck)
-        implementation(libs.firebase.analytics)
-        //  implementation(libs.bundles.firebase)
-        implementation(libs.play.services.auth)
-        implementation(libs.credentials)
-        implementation(libs.credentials.play.services.auth)
-        implementation(libs.googleid)
-
-        implementation(libs.gson)
-        implementation(libs.fragment)
-        implementation(libs.viewmodel)
-        implementation(libs.livedata)
-        implementation(libs.appcompat)
-        implementation(libs.material)
-        implementation(libs.ucrop)
-        implementation(libs.blurview)
+        implementation(gson)
+        implementation(annotation)
+        implementation(appcompat)
+        implementation(fragment)
+        implementation(material)
+        implementation(viewmodel)
+        implementation(livedata)
+        implementation(constraintlayout)
+        implementation(blurview)
     }
 }
