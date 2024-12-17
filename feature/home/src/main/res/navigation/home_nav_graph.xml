@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/home_nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.audioquiz.feature.home.view.HomeFragment"
+        android:label="Home"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_bottomSheetCategoryFragment"
+            app:destination="@id/bottomSheetCategoryFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/bottomSheetCategoryFragment"
+        android:name="com.audioquiz.feature.home.view.BottomSheetCategoryFragment"
+        android:label="Category"
+        tools:layout="@layout/bottom_sheet_category">
+    </fragment>
+
+</navigation>

@@ -9,7 +9,7 @@ import com.audioquiz.core.model.auth.Session;
 public class SessionCache implements SessionLocal {
 
 
-    private static final String PREFERENCES_FILE_NAME = "com.jpp.moviespreview.preferences.session";
+    private static final String PREFERENCES_FILE_NAME = "com.audioquiz.preferences.session";
     private static final String KEY_SESSION_STORED = "session_stored";
 
     private final SharedPreferences preferences;

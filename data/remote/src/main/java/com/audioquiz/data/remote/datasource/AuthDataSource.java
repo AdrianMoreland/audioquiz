@@ -7,9 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
 import com.audioquiz.core.model.auth.LoggedInUser;
-import com.audioquiz.core.model.auth.util.Result;
-import com.audioquiz.data.remote.dto.UserStatsDto;
-import com.audioquiz.data.remote.util.mapper.NetworkMapper;
+import com.audioquiz.core.model.util.Result;
 import com.audioquiz.data.remote.provider.AuthProvider;
 import com.audioquiz.data.remote.provider.FirestoreProvider;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -20,21 +18,13 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.auth.UserInfo;
 import com.google.firebase.auth.UserProfileChangeRequest;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.Source;
 
 import java.util.Objects;
-import java.util.Observable;
-import java.util.concurrent.Executors;
 
 import javax.inject.Inject;
-
-import io.reactivex.rxjava3.core.Single;
-import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class AuthDataSource {
     private static final String TAG = "AuthDataSource";
@@ -82,8 +72,14 @@ public class AuthDataSource {
         }
     }
 
-    public Task<AuthResult> login(String email, String password) {
+    public Task<AuthResult> signInWithEmailAndPassword(String email, String password) {
         return getAuth().signInWithEmailAndPassword(email, password);
+    }
+
+    public Task<AuthResult> signInWithCredential(String idToken) {
+        Log.d(TAG, "Auth with Google called: " + idToken);
+        AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
+        return getAuth().signInWithCredential(credential);
     }
 
     public Task<AuthResult> signUp(String email, String password) {
@@ -93,14 +89,24 @@ public class AuthDataSource {
     public Task<Void> sendVerificationEmail() {
         FirebaseUser user = authProvider.getAuth().getCurrentUser();
         if (user != null) {
-            return user.sendEmailVerification();
+            return user.sendEmailVerification()
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            Log.d(TAG, "Email sent.");
+                        }
+                    });
         } else {
             return Tasks.forException(new Exception("User not logged in"));
         }
     }
 
     public Task<Void> sendPasswordResetEmail(String email) {
-        return authProvider.getAuth().sendPasswordResetEmail(email);
+        return authProvider.getAuth().sendPasswordResetEmail(email)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Log.d(TAG, "Email sent.");
+                    }
+                });
     }
 
     public void handleRegistrationError(Exception exception) {
@@ -124,7 +130,7 @@ public class AuthDataSource {
                 if (task.isSuccessful()) {
                     return user.updatePassword(newPassword);
                 } else {
-                    throw task.getException();
+                    throw Objects.requireNonNull(task.getException());
                 }
             });
         } else {
@@ -135,7 +141,12 @@ public class AuthDataSource {
     public void deleteUserAccount() {
         FirebaseUser user = getCurrentUser();
         if (user != null) {
-            user.delete();
+            user.delete()
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            Log.d(TAG, "User account deleted.");
+                        }
+                    });
         }
     }
 
@@ -186,12 +197,9 @@ public class AuthDataSource {
 
         if (user != null) {
             user.verifyBeforeUpdateEmail("user@example.com")
-                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()) {
-                                Log.d(TAG, "User email address updated.");
-                            }
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            Log.d(TAG, "User email address updated.");
                         }
                     });
         }
@@ -213,9 +221,6 @@ public class AuthDataSource {
 
     public void reauthenticate() {
         FirebaseUser user = authProvider.getAuth().getCurrentUser();
-// Get auth credentials from the user for re-authentication. The example below shows
-// email and password credentials but there are multiple possible providers,
-// such as GoogleAuthProvider or FacebookAuthProvider.
 
 // Prompt the user to re-provide their sign-in credentials
         if (user != null) {

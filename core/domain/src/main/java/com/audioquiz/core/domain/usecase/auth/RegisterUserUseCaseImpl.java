@@ -1,8 +1,6 @@
 package com.audioquiz.core.domain.usecase.auth;
 
 import com.audioquiz.core.domain.repository.auth.AuthRepository;
-import com.audioquiz.core.model.auth.LoginType;
-import com.audioquiz.core.model.auth.util.Result;
 
 import javax.inject.Inject;
 

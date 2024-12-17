@@ -1,0 +1,558 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.audioquiz.feature.home.presentation.viewmodel.BottomSheetCategoryViewModel" />
+
+        <variable
+            name="category"
+            type="String" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_transparency"
+        android:transitionName="card_transition">
+
+        <LinearLayout
+            android:id="@+id/expanded_category_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_rounded_top_32dp"
+            android:backgroundTint="@color/md_theme_surface"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="20dp"
+                android:text="@{category}"
+                android:textAppearance="@style/TextAppearance.Reply.Headline2"
+                android:textColor="@color/md_theme_onSurface"
+                android:textSize="20sp" />
+
+            <com.google.android.material.progressindicator.LinearProgressIndicator
+                android:id="@+id/progress_category"
+                style="@style/Custom.Material.ProgressBarCategory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="20dp"
+                android:progress="66"
+                app:indicatorColor="@color/md_theme_secondaryContainer" />
+
+            <LinearLayout
+                android:id="@+id/frame_category_stats"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="8dp"
+                android:baselineAligned="false"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="7dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_stroke_2dp_rounded_12dp"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="11dp">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginEnd="8dp"
+                            android:src="@drawable/ic_accuracy" />
+
+                        <TextView
+                            android:id="@+id/tv_accuracy"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="1dp"
+                            android:text="@{viewModel.getAccuracy(category)}"
+                            android:textColor="@color/md_theme_onSurface"
+                            android:textSize="16sp" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Accuracy"
+                        android:textColor="#A2A2A2"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="7dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_stroke_2dp_rounded_12dp"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="12dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginEnd="8dp"
+                            android:src="@drawable/ic_average" />
+
+                        <TextView
+                            android:id="@+id/tv_quizzes_taken"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:text="@{viewModel.getQuizzesTaken(category)}"
+                            android:textColor="@color/md_theme_onSurface"
+                            android:textSize="16sp" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:maxLines="1"
+                        android:text="Quizzes"
+                        android:textColor="#A2A2A2"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="7dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_stroke_2dp_rounded_12dp"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingVertical="12dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="8dp"
+                            android:src="@drawable/ic_star" />
+
+                        <TextView
+                            android:id="@+id/tv_lives_earned"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="2dp"
+                            android:gravity="center"
+                            android:text="@{viewModel.getLivesEarned(category)}"
+                            android:textColor="@color/md_theme_onSurface"
+                            android:textSize="16sp" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="Lives Earned"
+                        android:textColor="#A2A2A2"
+                        android:textSize="14sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <FrameLayout
+                android:id="@+id/container_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
+
+                <ImageView
+                    android:id="@+id/image_arrow_down"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginVertical="8dp"
+                    android:src="@drawable/ic_arrow_down_home" />
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="26dp"
+                android:layout_marginBottom="8dp"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:orientation="horizontal">
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fillViewport="true">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/container_text_chapters"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="8dp"
+                        android:paddingVertical="8dp">
+
+                        <Button
+                            android:id="@+id/btn_chapter_1"
+                            style="@style/Custom.Material.StartChapterButton"
+                            android:layout_width="44dp"
+                            android:layout_height="44dp"
+                            android:text="Start"
+                            android:textColor="@color/md_theme_onPrimary"
+                            android:textSize="11sp"
+                            app:backgroundTint="@color/md_theme_primary"
+                            app:layout_constraintBottom_toBottomOf="@+id/container_chapter_1"
+                            app:layout_constraintEnd_toStartOf="@+id/guideline_chapters"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/container_chapter_1" />
+
+                        <FrameLayout
+                            android:id="@+id/linear_shape_1"
+                            android:layout_width="4dp"
+                            android:layout_height="0dp"
+                            android:layout_marginVertical="4dp"
+                            android:background="@drawable/bg_rounded_8dp"
+                            android:backgroundTint="@color/md_theme_surfaceVariant"
+                            app:layout_constraintBottom_toTopOf="@+id/btn_chapter_2"
+                            app:layout_constraintEnd_toEndOf="@+id/btn_chapter_1"
+                            app:layout_constraintStart_toStartOf="@+id/btn_chapter_1"
+                            app:layout_constraintTop_toBottomOf="@id/btn_chapter_1" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btn_chapter_2"
+                            style="@style/Custom.Material.StartChapterButton"
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:layout_marginBottom="4dp"
+                            android:text=""
+                            android:textColor="@color/md_theme_onPrimary"
+                            app:backgroundTint="@color/md_theme_surfaceVariant"
+                            app:icon="@null"
+                            app:layout_constraintBottom_toBottomOf="@id/container_chapter_2"
+                            app:layout_constraintEnd_toStartOf="@+id/guideline_chapters"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/container_chapter_2" />
+
+                        <FrameLayout
+                            android:id="@+id/linear_shape_2"
+                            android:layout_width="4dp"
+                            android:layout_height="0dp"
+                            android:layout_marginVertical="4dp"
+                            android:background="@drawable/bg_rounded_8dp"
+                            android:backgroundTint="@color/md_theme_surfaceVariant"
+                            app:layout_constraintBottom_toTopOf="@id/btn_chapter_3"
+                            app:layout_constraintEnd_toEndOf="@+id/btn_chapter_2"
+                            app:layout_constraintStart_toStartOf="@+id/btn_chapter_2"
+                            app:layout_constraintTop_toBottomOf="@id/btn_chapter_2" />
+
+                        <Button
+                            android:id="@+id/btn_chapter_3"
+                            style="@style/Custom.Material.StartChapterButton"
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:layout_marginBottom="4dp"
+                            android:text=""
+                            android:textColor="@color/md_theme_onPrimary"
+                            app:backgroundTint="@color/md_theme_surfaceVariant"
+                            app:layout_constraintBottom_toBottomOf="@+id/container_chapter_3"
+                            app:layout_constraintEnd_toStartOf="@+id/guideline_chapters"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/container_chapter_3" />
+
+                        <FrameLayout
+                            android:id="@+id/linear_shape_3"
+                            android:layout_width="4dp"
+                            android:layout_height="0dp"
+                            android:layout_marginVertical="4dp"
+                            android:background="@drawable/bg_rounded_8dp"
+                            android:backgroundTint="@color/md_theme_surfaceVariant"
+                            app:layout_constraintBottom_toTopOf="@id/btn_test"
+                            app:layout_constraintEnd_toEndOf="@+id/btn_chapter_3"
+                            app:layout_constraintStart_toStartOf="@id/btn_chapter_3"
+                            app:layout_constraintTop_toBottomOf="@id/btn_chapter_3" />
+
+                        <Button
+                            android:id="@+id/btn_test"
+                            style="@style/Custom.Material.StartChapterButton"
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:text=""
+                            android:textColor="@color/md_theme_onPrimary"
+                            app:backgroundTint="@color/md_theme_surfaceVariant"
+                            app:layout_constraintBottom_toBottomOf="@+id/container_test"
+                            app:layout_constraintEnd_toStartOf="@+id/guideline_chapters"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/container_test" />
+
+                        <FrameLayout
+                            android:id="@+id/linear_shape_4"
+                            android:layout_width="4dp"
+                            android:layout_height="0dp"
+                            android:layout_marginVertical="4dp"
+                            android:background="@drawable/bg_rounded_8dp"
+                            android:backgroundTint="@color/md_theme_surfaceVariant"
+                            app:layout_constraintBottom_toTopOf="@id/btn_finish_quiz"
+                            app:layout_constraintEnd_toEndOf="@+id/btn_test"
+                            app:layout_constraintStart_toStartOf="@id/btn_test"
+                            app:layout_constraintTop_toBottomOf="@id/btn_test" />
+
+                        <Button
+                            android:id="@+id/btn_finish_quiz"
+                            style="@style/Custom.Material.StartChapterButton"
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            app:backgroundTint="@color/white"
+                            app:layout_constraintBottom_toBottomOf="@+id/container_category_end"
+                            app:layout_constraintEnd_toStartOf="@+id/guideline_chapters"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/container_category_end" />
+
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/guideline_chapters"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:paddingHorizontal="16dp"
+                            app:layout_constraintGuide_percent="0.21" />
+
+
+                        <LinearLayout
+                            android:id="@+id/container_chapter_1"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/shape_frame_rounded_chapter"
+                            android:orientation="vertical"
+                            android:paddingHorizontal="16dp"
+                            android:paddingVertical="12dp"
+                            app:layout_constraintBottom_toTopOf="@+id/container_chapter_2"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/guideline_chapters"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <TextView
+                                android:id="@+id/tv_chapter_1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/nunito_extrabold"
+                                android:text="@string/string_chapter_1"
+                                android:textAppearance="@style/TextAppearance.Reply.Headline5"
+                                android:textColor="@color/md_theme_inversePrimary"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:id="@+id/tv_name_chapter_1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="8dp"
+                                android:text="@{viewModel.getChapterTitle(category, 1)}"
+                                android:textAppearance="@style/TextAppearance.Reply.Headline5"
+                                android:textColor="@color/md_theme_onTertiary"
+                                android:textSize="16sp" />
+
+
+                            <TextView
+                                android:id="@+id/tv_description_chapter_1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@{viewModel.getChapterDescription(category, 2)}"
+                                android:textAppearance="@style/TextAppearance.Reply.Headline5"
+                                android:textColor="@color/md_theme_onTertiaryContainer"
+                                android:textSize="14sp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/container_chapter_2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@color/md_theme_surface"
+                            android:orientation="vertical"
+                            android:paddingHorizontal="16dp"
+                            android:paddingVertical="12dp"
+                            app:layout_constraintBottom_toTopOf="@+id/container_chapter_3"
+                            app:layout_constraintStart_toStartOf="@+id/guideline_chapters">
+
+                            <TextView
+                                android:id="@+id/tv_chapter_2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/nunito_extrabold"
+                                android:text="@string/string_chapter_2"
+                                android:textAppearance="@style/TextAppearance.Reply.Headline5"
+                                android:textColor="@color/md_theme_onSurfaceVariant"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:id="@+id/tv_name_chapter_2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="8dp"
+                                android:text="@{viewModel.getChapterTitle(category, 2)}"
+                                android:textAppearance="@style/TextAppearance.Reply.Headline5"
+                                android:textColor="@color/md_theme_onSurface"
+                                android:textSize="16sp" />
+
+                            <TextView
+                                android:id="@+id/tv_description_chapter_2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@{viewModel.getChapterDescription(category, 2)}"
+                                android:textAppearance="@style/TextAppearance.Reply.Headline5"
+                                android:textColor="#6F6F6F"
+                                android:textSize="14sp"
+                                android:visibility="gone" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/container_chapter_3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@color/md_theme_surface"
+                            android:orientation="vertical"
+                            android:paddingHorizontal="16dp"
+                            android:paddingVertical="16dp"
+                            app:layout_constraintBottom_toTopOf="@+id/container_test"
+                            app:layout_constraintStart_toStartOf="@+id/guideline_chapters">
+
+
+                            <TextView
+                                android:id="@+id/tv_chapter_3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/nunito_extrabold"
+                                android:text="@string/string_chapter_3"
+                                android:textAppearance="@style/TextAppearance.Reply.Headline5"
+                                android:textColor="@color/md_theme_onSurfaceVariant"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:id="@+id/tv_name_chapter_3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="8dp"
+                                android:text="@{viewModel.getChapterTitle(category, 2)}"
+                                android:textAppearance="@style/TextAppearance.Reply.Headline5"
+                                android:textColor="@color/md_theme_onSurface"
+                                android:textSize="16sp" />
+
+                            <TextView
+                                android:id="@+id/tv_description_chapter_3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/string_description_chapter_3"
+                                android:textAppearance="@style/TextAppearance.Reply.Headline5"
+                                android:textColor="#6F6F6F"
+                                android:textSize="14sp"
+                                android:visibility="gone" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/container_test"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@color/md_theme_surface"
+                            android:orientation="vertical"
+                            android:paddingHorizontal="16dp"
+                            android:paddingTop="4dp"
+                            android:paddingBottom="16dp"
+                            app:layout_constraintBottom_toTopOf="@+id/container_category_end"
+                            app:layout_constraintStart_toStartOf="@+id/guideline_chapters">
+
+                            <TextView
+                                android:id="@+id/tv_test"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/string_name_exam"
+                                android:textAppearance="@style/TextAppearance.Reply.Headline5"
+                                android:textColor="@color/md_theme_onSurface"
+                                android:textSize="16sp" />
+
+                            <TextView
+                                android:id="@+id/tv_test_description"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/string_description_exam"
+                                android:textAppearance="@style/TextAppearance.Reply.Headline5"
+                                android:textColor="@color/md_theme_onSurfaceVariant"
+                                android:textSize="11sp"
+                                android:visibility="gone" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/container_category_end"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@color/md_theme_surface"
+                            android:orientation="vertical"
+                            android:paddingHorizontal="16dp"
+                            android:paddingVertical="4dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/guideline_chapters">
+
+                            <TextView
+                                android:id="@+id/tv_category_end_title"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/string_done"
+                                android:textAppearance="@style/TextAppearance.Reply.Headline5"
+                                android:textColor="@color/md_theme_onSurface"
+                                android:textSize="16sp" />
+
+                            <TextView
+                                android:id="@+id/tv_category_end_description"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="11dp"
+                                android:text="@string/string_description_done"
+                                android:textColor="@color/md_theme_onSurfaceVariant"
+                                android:textSize="10sp"
+                                android:visibility="gone"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="@+id/guideline_chapters" />
+
+                        </LinearLayout>
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </ScrollView>
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

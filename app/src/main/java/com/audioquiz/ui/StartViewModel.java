@@ -29,6 +29,7 @@ public class StartViewModel extends ViewModel {
 
     private void checkAuthorization() {
         Timber.tag(TAG).d("checkAuthorization called");
+        authApi.logout();
         disposables.add(
                 authApi.isAuthorized()
                         .observeOn(AndroidSchedulers.mainThread())

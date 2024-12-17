@@ -2,13 +2,17 @@ package com.audioquiz.data.remote.util;
 
 public class FirestoreConstants {
 
+    public static final String USER_ID = "userId";
     public static final String USER_DATA_COLLECTION = "user_data";
-    public static final String RANK_COLLECTION = "rank_data";
-    public static final String USER_PROFILE_DOCUMENT = "user_profile";
+    public static final String USER_PROFILE_COLLECTION = "user_profile";
     public static final String GENERAL_STATS_COLLECTION = "general_stats";
-    public static final String CATEGORY_STATS_DOCUMENT = "category_stats";
+    public static final String CATEGORY_STATS_COLLECTION = "category_stats";
     public static final String FREQUENCY_STATS_COLLECTION = "frequency_stats";
     public static final String WEEKLY_SCORES_COLLECTION = "weekly_scores";
+    public static final String RANK_COLLECTION = "rank_data";
+    public static final String USER_PROFILE_DOCUMENT = "user_profile";
+    public static final String GENERAL_STATS_DOCUMENT = "user_profile";
+    public static final String CATEGORY_STATS_DOCUMENT = "category_stats";
 
 
     // UserStatistics fields

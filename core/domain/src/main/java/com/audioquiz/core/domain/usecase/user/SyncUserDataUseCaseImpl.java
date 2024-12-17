@@ -32,7 +32,7 @@ public class SyncUserDataUseCaseImpl implements SyncUserDataUseCase {
 
     public Completable execute() {
         return Completable.fromAction(() -> {
-            userProfileRepository.init();
+            userProfileRepository.sync();
             generalStatsRepository.init();
             categoryStatsRepository.init();
             weeklyScoresRepository.init();

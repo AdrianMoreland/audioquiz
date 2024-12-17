@@ -14,6 +14,7 @@ public class UserProfileEntity {
     public String username;
     public String profileImage;
     public long dateCreated;
+    public long lastUpdated;
 
     // Getters and setters
     public int getId() {
@@ -27,6 +28,12 @@ public class UserProfileEntity {
     }
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+    public void setLastUpdated(long lastUpdated) {
+        this.lastUpdated = lastUpdated;
+    }
+    public long getLastUpdated() {
+        return lastUpdated;
     }
     public String getUsername() {
         return username;

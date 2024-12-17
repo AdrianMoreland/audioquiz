@@ -1,0 +1,116 @@
+<resources>
+
+    <string name="com_google_android_gms_fonts_certs_dev">MIIEqDCCA5CgAwIBAgIJANWFuGx90071MA0GCSqGSIb3DQEBBAUAMIGUMQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNTW91bnRhaW4gVmlldzEQMA4GA1UEChMHQW5kcm9pZDEQMA4GA1UECxMHQW5kcm9pZDEQMA4GA1UEAxMHQW5kcm9pZDEiMCAGCSqGSIb3DQEJARYTYW5kcm9pZEBhbmRyb2lkLmNvbTAeFw0wODA0MTUyMzM2NTZaFw0zNTA5MDEyMzM2NTZaMIGUMQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNTW91bnRhaW4gVmlldzEQMA4GA1UEChMHQW5kcm9pZDEQMA4GA1UECxMHQW5kcm9pZDEQMA4GA1UEAxMHQW5kcm9pZDEiMCAGCSqGSIb3DQEJARYTYW5kcm9pZEBhbmRyb2lkLmNvbTCCASAwDQYJKoZIhvcNAQEBBQADggENADCCAQgCggEBANbOLggKv+IxTdGNs8/TGFy0PTP6DHThvbbR24kT9ixcOd9W+EaBPWW+wPPKQmsHxajtWjmQwWfna8mZuSeJS48LIgAZlKkpFeVyxW0qMBujb8X8ETrWy550NaFtI6t9+u7hZeTfHwqNvacKhp1RbE6dBRGWynwMVX8XW8N1+UjFaq6GCJukT4qmpN2afb8sCjUigq0GuMwYXrFVee74bQgLHWGJwPmvmLHC69EH6kWr22ijx4OKXlSIx2xT1AsSHee70w5iDBiK4aph27yH3TxkXy9V89TDdexAcKk/cVHYNnDBapcavl7y0RiQ4biu8ymM8Ga/nmzhRKya6G0cGw8CAQOjgfwwgfkwHQYDVR0OBBYEFI0cxb6VTEM8YYY6FbBMvAPyT+CyMIHJBgNVHSMEgcEwgb6AFI0cxb6VTEM8YYY6FbBMvAPyT+CyoYGapIGXMIGUMQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNTW91bnRhaW4gVmlldzEQMA4GA1UEChMHQW5kcm9pZDEQMA4GA1UECxMHQW5kcm9pZDEQMA4GA1UEAxMHQW5kcm9pZDEiMCAGCSqGSIb3DQEJARYTYW5kcm9pZEBhbmRyb2lkLmNvbYIJANWFuGx90071MAwGA1UdEwQFMAMBAf8wDQYJKoZIhvcNAQEEBQADggEBABnTDPEF+3iSP0wNfdIjIz1AlnrPzgAIHVvXxunW7SBrDhEglQZBbKJEk5kT0mtKoOD1JMrSu1xuTKEBahWRbqHsXclaXjoBADb0kkjVEJu/Lh5hgYZnOjvlba8Ld7HCKePCVePoTJBdI4fvugnL8TsgK05aIskyY0hKI9L8KfqfGTl1lzOv2KoWD0KWwtAWPoGChZxmQ+nBli+gwYMzM1vAkP+aayLe0a1EQimlOalO762r0GXO0ks+UeXde2Z4e+8S/pf7pITEI/tP+MxJTALw9QUWEv9lKTk+jkbqxbsh8nfBUapfKqYn0eidpwq2AzVp3juYl7//fKnaPhJD9gs=</string>
+    <string name="com_google_android_gms_fonts_certs_prod">MIIEQzCCAyugAwIBAgIJAMLgh0ZkSjCNMA0GCSqGSIb3DQEBBAUAMHQxCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlhMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRQwEgYDVQQKEwtHb29nbGUgSW5jLjEQMA4GA1UECxMHQW5kcm9pZDEQMA4GA1UEAxMHQW5kcm9pZDAeFw0wODA4MjEyMzEzMzRaFw0zNjAxMDcyMzEzMzRaMHQxCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlhMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRQwEgYDVQQKEwtHb29nbGUgSW5jLjEQMA4GA1UECxMHQW5kcm9pZDEQMA4GA1UEAxMHQW5kcm9pZDCCASAwDQYJKoZIhvcNAQEBBQADggENADCCAQgCggEBAKtWLgDYO6IIrgqWbxJOKdoR8qtW0I9Y4sypEwPpt1TTcvZApxsdyxMJZ2JORland2qSGT2y5b</string>
+
+    <string name="string_chapter_1">Chapter 1</string>
+    <string name="string_chapter_2">Chapter 2</string>
+    <string name="string_chapter_3">Chapter 3</string>
+
+    <string name="string_category_1">Soundwaves</string>
+    <string name="string_category_2">Synthesis</string>
+    <string name="string_category_3">Production</string>
+    <string name="string_category_4">Mixing</string>
+    <string name="string_category_5">Processing</string>
+    <string name="string_category_6">MusicTheory</string>
+
+    <!-- CategoryUi 1: Soundwaves -->
+    <string name="string_chapter_1_soundwaves">Wave Characteristics</string>
+    <string name="string_chapter_2_soundwaves">Wave Behaviour</string>
+    <string name="string_chapter_3_soundwaves"><![CDATA[Wave Measurement \n& Analysis]]></string>
+
+    <!-- CategoryUi 2: Synthesis -->
+    <string name="string_chapter_1_synthesis">Sound Design Principles</string>
+    <string name="string_chapter_2_synthesis">Synthesis Techniques</string>
+    <string name="string_chapter_3_synthesis">Effects Processing in Sound Design</string>
+
+    <!-- CategoryUi 3: Production -->
+    <string name="string_chapter_1_production">Track Layering</string>
+    <string name="string_chapter_2_production">Beat Making</string>
+    <string name="string_chapter_3_production">Song Structure</string>
+
+    <!-- CategoryUi 4: Mixing -->
+    <string name="string_chapter_1_mixing">Volume and Dynamics</string>
+    <string name="string_chapter_2_mixing">Depth and Space</string>
+    <string name="string_chapter_3_mixing">Balance and Immersion</string>
+
+    <!-- CategoryUi 5: Processing -->
+    <string name="string_chapter_1_processing">Recording</string>
+    <string name="string_chapter_2_processing">DSP</string>
+    <string name="string_chapter_3_processing">Sound Analysis and Synthesis</string>
+
+    <!-- CategoryUi 6: Music Theory -->
+    <string name="string_chapter_1_musictheory">Notes</string>
+    <string name="string_chapter_2_musictheory">Harmony</string>
+    <string name="string_chapter_3_musictheory">Rhythm</string>
+
+    <string name="string_description_chapter_1">Learn about how a sound wave behaves \nand the science behind the vibration \nof air molecules in a medium</string>
+    <string name="string_description_chapter_2">Learn about how a sound wave behaves \nand the science behind the vibration \nof air molecules in a medium</string>
+    <string name="string_description_chapter_3">Learn about how a sound wave behaves \nand the science behind the vibration \nof air molecules in a medium</string>
+
+
+    <string name="string_achievement_completionist">Completionist</string>
+    <string name="string_achievement_pitch_master">Pitch Master</string>
+    <string name="string_achievement_intervals_master">Intervals Master</string>
+
+    <string name="string_achievement_category_1_description">Complete the Soundwaves category</string>
+    <string name="string_achievement_category_2_description">Complete the Synthesis category</string>
+    <string name="string_achievement_category_3_description">Complete the Production category</string>
+    <string name="string_achievement_category_4_description">Complete the Mixing category</string>
+    <string name="string_achievement_category_5_description">Complete the Processing category</string>
+    <string name="string_achievement_category_6_description">Complete the MusicTheory category</string>
+    <string name="string_achievement_completionist_description">Complete all learning categories</string>
+    <string name="string_achievement_pitch_master_description">Score over 90% on 100 Pitch quizzes.</string>
+    <string name="string_achievement_intervals_master_description">Score over 90% on 100 Interval quizzes.</string>
+
+    <string name="string_badge_1">imageBadge1</string>
+    <string name="string_badge_2">imageBadge2</string>
+    <string name="string_badge_3">imageBadge3</string>
+    <string name="string_badge_4">imageBadge4</string>
+    <string name="string_badge_5">imageBadge5</string>
+    <string name="string_badge_6">imageBadge6</string>
+
+
+    <string name="string_interval_button_name_1">Root</string>
+    <string name="string_interval_button_name_2">Second</string>
+    <string name="string_interval_button_name_3">Third</string>
+    <string name="string_interval_button_name_4">Fourth</string>
+    <string name="string_interval_button_name_5">Fifth</string>
+    <string name="string_interval_button_name_6">Sixth</string>
+    <string name="string_interval_button_name_7">Seventh</string>
+    <string name="string_interval_button_name_8">Octave</string>
+    <string name="string_interval_button_name_9">Perfect</string>
+    <string name="string_interval_button_name_10">Major</string>
+    <string name="string_interval_button_name_11">Minor</string>
+    <string name="string_interval_button_name_12">Augmented</string>
+    <string name="string_interval_button_name_13">Diminished</string>
+
+    <string name="string_name_exam">Exam</string>
+    <string name="string_done">Done!</string>
+    <string name="string_description_exam">Complete the category by scoring above 80% \nin this 20 question exam</string>
+    <string name="string_description_done">You finished this category. \nWe’ll let you know when we add new chapters.</string>
+
+
+    <string name="app_name">audioquiz</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="next">Next</string>
+    <string name="submit">Submit</string>
+    <string name="answer_placeholder_string">Answer</string>
+    <string name="settings">Settings</string>
+    <string name="average_score_format">%1$.3f  /10</string>
+    <string name="score_format">%1$d points</string>
+    <string name="score_text">%d XP</string>
+    <string name="default_web_client_id">295069124840-u9s5hb9uri4r9ancvvrqr7i2r9q62foj.apps.googleusercontent.com</string>
+    <string name="end_quiz">End Quiz</string>
+    <string name="total_points">%d POINTS</string>
+    <string name="username">Username</string>
+    <string name="level">Level</string>
+    <string name="user_level">Level %d</string>
+    <string name="question_text_example">What audio effect pushes the sound wave until it reaches the ceiling, flattening the wave´s peak ?</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_question">question</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_email">Not a valid email</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+
+</resources>

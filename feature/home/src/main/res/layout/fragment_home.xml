@@ -1,0 +1,690 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".homeFragment">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.audioquiz.feature.home.presentation.viewmodel.HomeViewModel" />
+        <import type="com.audioquiz.feature.home.domain.HomeViewContract"/>
+        <import type="android.view.View" />
+        <variable
+            name="toolbarData"
+            type="com.audioquiz.designsystem.model.ToolbarData" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/md_theme_background"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:orientation="vertical">
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/scrollview_home"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:fillViewport="true"
+            android:paddingBottom="88dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="19dp"
+                    android:layout_marginBottom="8dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/text_title_screen"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="4dp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/quicksand_bold"
+                        android:text="Learn"
+                        android:textColor="@color/md_theme_onBackground"
+                        android:textSize="30sp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_settings"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="2dp"
+                        android:background="@drawable/ic_settings" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginBottom="4dp"
+                    android:background="@drawable/bg_rounded_12dp"
+                    android:orientation="vertical"
+                    android:paddingVertical="24dp">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginBottom="24dp"
+                        android:background="@drawable/bg_rounded_12dp"
+                        android:clipChildren="true">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/image_learn_cover"
+                            android:layout_width="match_parent"
+                            android:layout_height="104dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/image_learn" />
+
+                    </FrameLayout>
+
+                    <TextView
+                        android:id="@+id/tv_title_learn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:includeFontPadding="false"
+                        android:text="Develop Your Audio Skills"
+                        android:textAppearance="@style/TextAppearance.Reply.Headline5"
+                        android:textColor="@color/md_theme_onSurface"
+                        android:textSize="26sp" />
+
+                    <TextView
+                        android:id="@+id/r3v84xjtko2m"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginBottom="8dp"
+                        android:includeFontPadding="false"
+                        android:text="One Quiz at a Time"
+                        android:textAppearance="@style/TextAppearance.Reply.Headline6"
+                        android:textColor="#66FAFAFA"
+                        android:textSize="21sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginVertical="8dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_view_badges"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:insetTop="0dp"
+                        android:insetBottom="0dp"
+                        android:paddingVertical="8dp"
+                        android:text="View Badges"
+                        android:textAppearance="@style/TextAppearance.Reply.Button"
+                        app:cornerRadius="8dp"
+                        app:iconGravity="textStart" />
+
+                    <LinearLayout
+                        android:id="@+id/frame_icons_completed"
+                        app:categoryBadges="@{viewModel.viewState}"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginVertical="8dp"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:visibility="@{viewModel.viewState.showBadges ? View.VISIBLE : View.GONE}">
+
+                        <ImageView
+                            android:id="@+id/image_badge_1"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:layout_marginEnd="4dp"
+                            android:background="@drawable/ic_badge_empty" />
+
+
+                        <ImageView
+                            android:id="@+id/image_badge_2"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:layout_marginHorizontal="4dp"
+                            android:background="@drawable/ic_badge_empty" />
+
+                        <ImageView
+                            android:id="@+id/image_badge_3"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:layout_marginHorizontal="4dp"
+                            android:background="@drawable/ic_badge_empty" />
+
+                        <ImageView
+                            android:id="@+id/image_badge_4"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:layout_marginHorizontal="4dp"
+                            android:background="@drawable/ic_badge_empty" />
+
+                        <ImageView
+                            android:id="@+id/image_badge_5"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:layout_marginHorizontal="4dp"
+                            android:background="@drawable/ic_badge_empty" />
+
+                        <ImageView
+                            android:id="@+id/image_badge_6"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:layout_marginStart="4dp"
+                            android:background="@drawable/ic_badge_empty" />
+                    </LinearLayout>
+                </LinearLayout>
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false"/>
+
+                <GridLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:columnCount="2"
+                    android:rowCount="3">
+
+                    <include
+                        layout="@layout/card_category"
+                        app:category="@{viewModel.categoryListLiveData.size() > 0 ? viewModel.categoryListLiveData.get(0) : null}" />
+
+                    <include
+                        layout="@layout/card_category"
+                        app:category="@{viewModel.categoryListLiveData.size() > 1 ? viewModel.categoryListLiveData.get(1) : null}" />
+
+                    <include
+                        layout="@layout/card_category"
+                        app:category="@{viewModel.categoryListLiveData.size() > 2 ? viewModel.categoryListLiveData.get(2) : null}" />
+
+                    <include
+                        layout="@layout/card_category"
+                        app:category="@{viewModel.categoryListLiveData.size() > 3 ? viewModel.categoryListLiveData.get(3) : null}" />
+
+                    <include
+                        layout="@layout/card_category"
+                        app:category="@{viewModel.categoryListLiveData.size() > 4 ? viewModel.categoryListLiveData.get(4) : null}" />
+
+                    <include
+                        layout="@layout/card_category"
+                        app:category="@{viewModel.categoryListLiveData.size() > 5 ? viewModel.categoryListLiveData.get(5) : null}" />
+
+                <!--
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/card1"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_rowSpan="1"
+                        android:layout_rowWeight="1"
+                        android:layout_columnSpan="1"
+                        android:layout_columnWeight="1"
+                        android:layout_marginEnd="4dp"
+                        android:layout_marginBottom="8dp"
+                        android:transitionName="card_transition"
+                        app:cardBackgroundColor="@color/md_theme_surfaceContainer"
+                        app:cardCornerRadius="12dp"
+                        app:rippleColor="@color/md_theme_primary">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:clickable="true"
+                            android:clipChildren="false"
+                            android:clipToPadding="false"
+                            android:focusable="true"
+                            android:orientation="vertical"
+                            android:paddingTop="18dp"
+                            android:paddingBottom="16dp">
+
+                            <ImageView
+                                android:layout_width="64dp"
+                                android:layout_height="64dp"
+                                android:layout_marginHorizontal="21dp"
+                                android:layout_marginBottom="20dp"
+                                android:clipChildren="false"
+                                android:clipToPadding="false"
+                                android:src="@drawable/ic_soundwave" />
+
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginHorizontal="12dp"
+                                android:layout_marginTop="12dp"
+                                android:backgroundTint="#242B31"
+                                android:orientation="vertical">
+
+
+                                <com.google.android.material.progressindicator.LinearProgressIndicator
+                                    android:id="@+id/progress_sound_waves"
+                                    style="@style/Custom.Material.ProgressBarButton"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:progress="75"
+                                    app:indicatorColor="@color/md_theme_surfaceContainerHighest"
+                                    app:trackColor="@color/md_theme_surfaceContainerHigh"
+                                    app:trackStopIndicatorSize="0dp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="12dp"
+                                    android:text="Sound \nWaves"
+                                    android:textAppearance="@style/TextAppearance.Reply.Headline5"
+                                    android:textSize="16sp"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+                        </LinearLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/card2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_rowSpan="1"
+                        android:layout_rowWeight="1"
+                        android:layout_columnSpan="1"
+                        android:layout_columnWeight="1"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginBottom="8dp"
+                        android:transitionName="card_transition"
+                        app:cardBackgroundColor="@color/md_theme_surfaceContainer"
+                        app:cardCornerRadius="12dp"
+                        app:rippleColor="@color/md_theme_primary">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:clickable="true"
+                            android:clipChildren="false"
+                            android:clipToPadding="false"
+                            android:focusable="true"
+                            android:orientation="vertical"
+                            android:paddingTop="18dp"
+                            android:paddingBottom="16dp">
+
+                            <ImageView
+                                android:layout_width="64dp"
+                                android:layout_height="64dp"
+                                android:layout_marginHorizontal="21dp"
+                                android:layout_marginBottom="20dp"
+                                android:clipChildren="false"
+                                android:clipToPadding="false"
+                                android:src="@drawable/ic_synthesis" />
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginHorizontal="12dp"
+                                android:layout_marginTop="16dp"
+                                android:backgroundTint="#242B31"
+                                android:orientation="vertical">
+
+
+                                <com.google.android.material.progressindicator.LinearProgressIndicator
+                                    android:id="@+id/progress_synthesis"
+                                    style="@style/Custom.Material.ProgressBarButton"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:progress="75"
+                                    app:indicatorColor="@color/md_theme_surfaceContainerHighest"
+                                    app:trackColor="@color/md_theme_surfaceContainerHigh"
+                                    app:trackStopIndicatorSize="0dp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="12dp"
+                                    android:text="Sound Design\n&amp; Synthesis"
+                                    android:textAppearance="@style/TextAppearance.Reply.Headline5"
+                                    android:textSize="16sp"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+                        </LinearLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/card3"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_rowSpan="1"
+                        android:layout_rowWeight="1"
+                        android:layout_columnSpan="1"
+                        android:layout_columnWeight="1"
+                        android:layout_marginEnd="4dp"
+                        android:transitionName="card_transition"
+                        app:cardBackgroundColor="@color/md_theme_surfaceContainer"
+                        app:cardCornerRadius="12dp"
+                        app:rippleColor="@color/md_theme_primary">
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:clickable="true"
+                            android:clipChildren="false"
+                            android:clipToPadding="false"
+                            android:focusable="true"
+                            android:orientation="vertical"
+                            android:paddingTop="18dp"
+                            android:paddingBottom="16dp">
+
+                            <ImageView
+                                android:layout_width="64dp"
+                                android:layout_height="64dp"
+                                android:layout_marginHorizontal="21dp"
+                                android:layout_marginBottom="20dp"
+                                android:clipChildren="false"
+                                android:clipToPadding="false"
+                                android:src="@drawable/ic_production" />
+
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginHorizontal="12dp"
+                                android:layout_marginTop="16dp"
+                                android:backgroundTint="#242B31"
+                                android:orientation="vertical">
+
+
+                                <com.google.android.material.progressindicator.LinearProgressIndicator
+                                    android:id="@+id/progress_production"
+                                    style="@style/Custom.Material.ProgressBarButton"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:progress="75"
+                                    app:indicatorColor="@color/md_theme_surfaceContainerHighest"
+                                    app:trackColor="@color/md_theme_surfaceContainerHigh"
+                                    app:trackStopIndicatorSize="0dp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="12dp"
+                                    android:text="Production"
+                                    android:textAppearance="@style/TextAppearance.Reply.Headline5"
+                                    android:textSize="16sp"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/card4"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_rowSpan="1"
+                        android:layout_rowWeight="1"
+                        android:layout_columnSpan="1"
+                        android:layout_columnWeight="1"
+                        android:layout_marginStart="4dp"
+                        android:transitionName="card_transition"
+                        app:cardBackgroundColor="@color/md_theme_surfaceContainer"
+                        app:cardCornerRadius="12dp"
+                        app:rippleColor="@color/md_theme_primary">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:clickable="true"
+                            android:clipChildren="false"
+                            android:clipToPadding="false"
+                            android:focusable="true"
+                            android:orientation="vertical"
+                            android:paddingTop="18dp"
+                            android:paddingBottom="16dp">
+
+                            <ImageView
+                                android:layout_width="64dp"
+                                android:layout_height="64dp"
+                                android:layout_marginHorizontal="21dp"
+                                android:layout_marginBottom="20dp"
+                                android:clipChildren="false"
+                                android:clipToPadding="false"
+                                android:src="@drawable/ic_mixing" />
+
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginHorizontal="12dp"
+                                android:layout_marginTop="16dp"
+                                android:backgroundTint="#242B31"
+                                android:orientation="vertical">
+
+
+                                <com.google.android.material.progressindicator.LinearProgressIndicator
+                                    android:id="@+id/progress_mixing"
+                                    style="@style/Custom.Material.ProgressBarButton"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:progress="75"
+                                    app:indicatorColor="@color/md_theme_surfaceContainerHighest"
+                                    app:trackColor="@color/md_theme_surfaceContainerHigh"
+                                    app:trackStopIndicatorSize="0dp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="12dp"
+                                    android:text="Mixing \n&amp; Mastering"
+                                    android:textAppearance="@style/TextAppearance.Reply.Headline5"
+                                    android:textSize="16sp"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+                        </LinearLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/card5"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_rowSpan="1"
+                        android:layout_rowWeight="1"
+                        android:layout_columnSpan="1"
+                        android:layout_columnWeight="1"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="4dp"
+                        android:transitionName="card_transition"
+                        app:cardBackgroundColor="@color/md_theme_surfaceContainer"
+                        app:cardCornerRadius="12dp"
+                        app:rippleColor="@color/md_theme_primary">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:clickable="true"
+                            android:clipChildren="false"
+                            android:clipToPadding="false"
+                            android:focusable="true"
+                            android:orientation="vertical"
+                            android:paddingTop="18dp"
+                            android:paddingBottom="16dp">
+
+                            <ImageView
+                                android:layout_width="64dp"
+                                android:layout_height="64dp"
+                                android:layout_marginHorizontal="21dp"
+                                android:layout_marginBottom="20dp"
+                                android:clipChildren="false"
+                                android:clipToPadding="false"
+                                android:src="@drawable/ic_processing" />
+
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginHorizontal="12dp"
+                                android:layout_marginTop="16dp"
+                                android:backgroundTint="#242B31"
+                                android:orientation="vertical">
+
+
+                                <com.google.android.material.progressindicator.LinearProgressIndicator
+                                    android:id="@+id/progress_processing"
+                                    style="@style/Custom.Material.ProgressBarButton"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:progress="75"
+                                    app:indicatorColor="@color/md_theme_surfaceContainerHighest"
+                                    app:trackColor="@color/md_theme_surfaceContainerHigh"
+                                    app:trackStopIndicatorSize="0dp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="12dp"
+                                    android:text="Sound \nProcessing"
+                                    android:textAppearance="@style/TextAppearance.Reply.Headline5"
+                                    android:textSize="16sp"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+                        </LinearLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/card6"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_rowSpan="1"
+                        android:layout_rowWeight="1"
+                        android:layout_columnSpan="1"
+                        android:layout_columnWeight="1"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginTop="8dp"
+                        android:transitionName="card_transition"
+                        app:cardBackgroundColor="@color/md_theme_surfaceContainer"
+                        app:cardCornerRadius="12dp"
+                        app:rippleColor="@color/md_theme_primary">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:clickable="true"
+                            android:clipChildren="false"
+                            android:clipToPadding="false"
+                            android:focusable="true"
+                            android:orientation="vertical"
+                            android:paddingTop="18dp"
+                            android:paddingBottom="16dp">
+
+                            <ImageView
+                                android:layout_width="64dp"
+                                android:layout_height="64dp"
+                                android:layout_marginHorizontal="21dp"
+                                android:layout_marginBottom="20dp"
+                                android:clipChildren="false"
+                                android:clipToPadding="false"
+                                android:src="@drawable/ic_music_theory" />
+
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginHorizontal="12dp"
+                                android:layout_marginTop="16dp"
+                                android:backgroundTint="#242B31"
+                                android:orientation="vertical">
+
+
+                                <com.google.android.material.progressindicator.LinearProgressIndicator
+                                    android:id="@+id/progress_music_theory"
+                                    style="@style/Custom.Material.ProgressBarButton"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:progress="75"
+                                    app:indicatorColor="@color/md_theme_surfaceContainerHighest"
+                                    app:trackColor="@color/md_theme_surfaceContainerHigh"
+                                    app:trackStopIndicatorSize="0dp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="12dp"
+                                    android:text="Music \nTheory"
+                                    android:textAppearance="@style/TextAppearance.Reply.Headline5"
+                                    android:textSize="16sp"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+                        </LinearLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+-->
+                </GridLayout>
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+<!--
+        <FrameLayout
+            android:id="@+id/bottom_navbar_frame"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginBottom="24dp"
+            android:paddingHorizontal="8dp">
+
+            <eightbitlab.com.blurview.BlurView
+                android:id="@+id/blurView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_navbar_active"
+                app:blurOverlayColor="#33FFFFFF">
+
+                <include
+                    android:id="@+id/bottom_navbar"
+                    layout="@layout/bottom_navbar2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </eightbitlab.com.blurview.BlurView>
+        </FrameLayout>
+-->
+    </LinearLayout>
+</layout>

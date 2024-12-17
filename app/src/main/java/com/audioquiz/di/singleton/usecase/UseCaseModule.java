@@ -29,8 +29,7 @@ import dagger.hilt.components.SingletonComponent;
 public abstract class UseCaseModule {
 
     @Binds
-    public abstract SyncUserDataUseCase bindSyncUserDataUseCase(
-            SyncUserDataUseCaseImpl impl);
+    public abstract SyncUserDataUseCase bindSyncUserDataUseCase(SyncUserDataUseCaseImpl impl);
 
     @Provides
     static UserAuthUseCaseFacade provideUserAuthUseCaseFacade(UserAuthUseCaseFacadeImpl userAuthUseCaseFacadeImpl) {

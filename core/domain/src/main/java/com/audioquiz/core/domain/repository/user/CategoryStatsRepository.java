@@ -8,14 +8,9 @@ import io.reactivex.rxjava3.core.Single;
 
 public interface CategoryStatsRepository {
     Completable init();
-
-    Single<CategoryStats> getCategoryStats();
-
-    Completable deleteCategoryStats();
-
-    Completable saveCategoryStats(CategoryStats frequencyStats);
-
-    Single<CategoryStatsData> getCategoryStatsData(String category);
-
     void sync();
+    Single<CategoryStats> getCategoryStats();
+    Completable deleteCategoryStats();
+    Completable saveCategoryStats(CategoryStats frequencyStats);
+    Single<CategoryStatsData> getCategoryStatsData(String category);
 }

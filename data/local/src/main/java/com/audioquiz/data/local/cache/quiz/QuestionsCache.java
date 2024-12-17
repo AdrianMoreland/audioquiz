@@ -1,6 +1,6 @@
 package com.audioquiz.data.local.cache.quiz;
 
-import com.audioquiz.api.datasources.question.QuestionLocal;
+import com.audioquiz.api.datasources.question.QuestionDataSource;
 import com.audioquiz.core.model.quiz.Question;
 import com.audioquiz.data.local.dao.quiz.QuestionDao;
 import com.audioquiz.data.local.entity.QuestionEntity;
@@ -11,7 +11,7 @@ import javax.inject.Inject;
 
 import io.reactivex.rxjava3.core.Single;
 
-public class QuestionsCache implements QuestionLocal {
+public class QuestionsCache implements QuestionDataSource.Local {
     private final QuestionDao questionDao;
 
     @Inject

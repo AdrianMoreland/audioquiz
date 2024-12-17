@@ -2,15 +2,15 @@ package com.audioquiz.di.singleton.database;
 /*
 
 import com.audioquiz.api.datasources.quiz_result.QuizLocal;
-import com.audioquiz.api.datasources.rank.RankAllTimeLocal;
-import com.audioquiz.api.datasources.rank_weekly.RankWeeklyLocal;
+import com.audioquiz.api.datasources.rank.RankAllTimeDataSource;
+import com.audioquiz.api.datasources.rank.RankWeeklyDataSource;
 import com.audioquiz.api.datasources.user.UserProfileLocal;
 import com.audioquiz.api.datasources.user_stats.stats.UserDataLocal;
-import com.audioquiz.api.datasources.user_stats.stats_category.CategoryStatsLocal;
-import com.audioquiz.api.datasources.user_stats.stats_frequency.StatsFrequencyLocal;
+import com.audioquiz.api.datasources.user_stats.CategoryStatsDataSource;
+import com.audioquiz.api.datasources.user_stats.FrequencyStatsDataSource;
 import com.audioquiz.api.datasources.user_stats.stats_general.GeneralStatsLocal;
 import com.audioquiz.api.datasources.user_stats.stats_weekly_scores.WeeklyStatsLocal;
-import com.audioquiz.api.datasources.question.QuestionLocal;
+import com.audioquiz.api.datasources.question.QuestionDataSource;
 import com.audioquiz.data.local.cache.user_data.CategoryStatsCache;
 import com.audioquiz.data.local.cache.user_data.FrequencyStatsCache;
 import com.audioquiz.data.local.cache.user_data.GeneralStatsCache;
@@ -46,10 +46,10 @@ public abstract class CacheModule {
     abstract GeneralStatsLocal bindGeneralStatsDb(GeneralStatsCache generalStatsCache);
 
     @Binds
-    abstract CategoryStatsLocal bindCategoryStatsDb(CategoryStatsCache categoryStatsCache);
+    abstract CategoryStatsDataSource bindCategoryStatsDb(CategoryStatsCache categoryStatsCache);
 
     @Binds
-    abstract StatsFrequencyLocal bindStatsFrequencyDb(FrequencyStatsCache frequencyStatsCache);
+    abstract FrequencyStatsDataSource bindStatsFrequencyDb(FrequencyStatsCache frequencyStatsCache);
 
     @Binds
     abstract WeeklyStatsLocal bindWeeklyStatsDb(WeeklyStatsCache weeklyStatsCache);
@@ -60,7 +60,7 @@ public abstract class CacheModule {
      **********************************//*
 
     @Binds
-    abstract QuestionLocal bindQuestionDb(QuestionsCache questionsCache);
+    abstract QuestionDataSource bindQuestionDb(QuestionsCache questionsCache);
 
     */
 /**********************************
@@ -76,10 +76,10 @@ public abstract class CacheModule {
      **********************************//*
 
     @Binds
-    abstract RankAllTimeLocal bindRankAllTimeDb(RankAllTimeCache rankAllTimeCache);
+    abstract RankAllTimeDataSource bindRankAllTimeDb(RankAllTimeCache rankAllTimeCache);
 
     @Binds
-    abstract RankWeeklyLocal bindRankWeeklyDb(RankWeeklyCache rankWeeklyCache);
+    abstract RankWeeklyDataSource bindRankWeeklyDb(RankWeeklyCache rankWeeklyCache);
 
 }
 */

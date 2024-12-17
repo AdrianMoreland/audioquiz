@@ -1,5 +1,6 @@
 package com.audioquiz.data.remote.datasource.auth;
 
+import android.content.Context;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -31,6 +32,8 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
+import io.reactivex.rxjava3.core.Observable;
+
 @Singleton
 public class GoogleSignInDataSource implements GoogleSignInHelper {
     private static final String TAG = "GoogleSignInDataSource";
@@ -57,23 +60,70 @@ public class GoogleSignInDataSource implements GoogleSignInHelper {
     }
 
     @Override
+    public Observable<String> fetchToken(Context appContext, String webClientId) {
+        return Observable.create(emitter -> {
+            // Get the CredentialManager instance
+            CredentialManager credentialManager = CredentialManager.create(appContext.getApplicationContext());
+
+            try {
+                credentialManager.getCredentialAsync(appContext.getApplicationContext(), getCredentialRequest(webClientId), null, executor,
+                        new CredentialManagerCallback<GetCredentialResponse, GetCredentialException>() {
+                            @Override
+                            public void onResult(GetCredentialResponse result) {
+                                Credential credential = result.getCredential();
+                                if ((credential).getType().equals(GoogleIdTokenCredential.TYPE_GOOGLE_ID_TOKEN_CREDENTIAL)) {
+                                    try {
+                                        GoogleIdTokenCredential googleIdTokenCredential = GoogleIdTokenCredential.createFrom((credential).getData());
+                                        String idToken = googleIdTokenCredential.getIdToken();
+                                        emitter.onNext(idToken); // Emit the token
+                                        emitter.onComplete(); // Signal completion
+                                    } catch (Exception e) {
+                                        Log.e(TAG, "Received an invalid google id token response", e);
+                                        emitter.onError(e); // Emit the error
+                                    }
+                                } else {
+                                    // Catch any unrecognized custom credential type here.
+                                    Log.e(TAG, "Unexpected type of credential");
+                                    emitter.onError(new Exception("Unexpected credential type")); // Emit the error
+                                }
+                            }
+
+                            @Override
+                            public void onError(@NonNull GetCredentialException e) {
+                                Log.e(TAG, "Error getting credential", e);
+                                emitter.onError(e); // Emit the error
+                            }
+                        }
+                );
+            } catch (Exception e) {
+                Log.e(TAG, "Error getting credential2", e);
+                emitter.onError(e); // Emit the error
+            }
+        });
+    }
+
+    private GetCredentialRequest getCredentialRequest(String webClientId) {
+        return new GetCredentialRequest.Builder()
+                .addCredentialOption(getGoogleIdTokenOption(webClientId))
+                .build();
+    }
+
+    private GetGoogleIdOption getGoogleIdTokenOption(String webClientId) {
+        return new GetGoogleIdOption.Builder()
+                .setServerClientId(webClientId)
+                .setFilterByAuthorizedAccounts(true) // Only show accounts previously used to sign in
+                .setAutoSelectEnabled(true) // Automatically sign in when exactly one credential is retrieved
+                .build();
+    }
+
+    @Override
     public void signIn(FragmentActivity activity, GoogleSignInCallback callback) {
         Log.d(TAG, "Credentials API: signIn " + activity.getPackageName() );
         CredentialManager credentialManager = CredentialManager.create(activity);
-        GetGoogleIdOption googleIdOption = new GetGoogleIdOption.Builder()
-                .setFilterByAuthorizedAccounts(true)
-                .setServerClientId(webClientId)
-                .setAutoSelectEnabled(true)
-                .setNonce(generateNonce())
-                .build();
-
-        GetCredentialRequest credentialRequest = new GetCredentialRequest.Builder()
-                .addCredentialOption(googleIdOption)
-                .build();
 
         executor.execute(() -> {
             try {
-                credentialManager.getCredentialAsync(activity, credentialRequest, null, executor,
+                credentialManager.getCredentialAsync(activity, getCredentialRequest2(), null, executor,
                         new CredentialManagerCallback<GetCredentialResponse, GetCredentialException>() {
                             @Override
                             public void onResult(GetCredentialResponse result) {
@@ -94,13 +144,25 @@ public class GoogleSignInDataSource implements GoogleSignInHelper {
         });
     }
 
+    private GetCredentialRequest getCredentialRequest2() {
+        return new GetCredentialRequest.Builder()
+                .addCredentialOption(getGoogleIdOption())
+                .build();
+    }
+
+    private GetGoogleIdOption getGoogleIdOption() {
+        return new GetGoogleIdOption.Builder()
+                .setFilterByAuthorizedAccounts(true)
+                .setServerClientId(webClientId)
+                .setAutoSelectEnabled(true)
+                .setNonce(generateNonce())
+                .build();
+    }
+
     public void handleSignIn(GetCredentialResponse result, GoogleSignInCallback callback) {
         // Handle the successfully returned credential.
         Credential credential = result.getCredential();
-        if (credential instanceof PublicKeyCredential) {
-            String responseJson = ((PublicKeyCredential) credential).getAuthenticationResponseJson();
-            // Share responseJson i.e. a GetCredentialResponse on your server to validate and authenticate
-        } else if (credential instanceof PasswordCredential) {
+        if (credential instanceof PasswordCredential) {
             String username = ((PasswordCredential) credential).getId();
             String password = ((PasswordCredential) credential).getPassword();
             // Use id and password to send to your server to validate and authenticate
@@ -110,7 +172,6 @@ public class GoogleSignInDataSource implements GoogleSignInHelper {
                 try {
                     GoogleIdTokenCredential googleIdTokenCredential = GoogleIdTokenCredential.createFrom((credential).getData());
                     callback.onSignInSuccess(googleIdTokenCredential.getIdToken());
-                    // Send googleIdTokenCredential to your server for validation and authentication
                 } catch (Exception e) {
                     callback.onSignInError(e);
                     Log.e(TAG, "Received an invalid google id token response", e);
@@ -133,50 +194,6 @@ public class GoogleSignInDataSource implements GoogleSignInHelper {
     private String generateNonce() {
         return null;
     }
-    /*
-    public void firebaseAuthWithGoogle(String idToken) {
-        GetGoogleIdOption googleIdOption = new GetGoogleIdOption.Builder()
-                .setFilterByAuthorizedAccounts(true)
-                .setServerClientId(webClientId)
-                .setAutoSelectEnabled(true)
-                .setNonce("<nonce string to use when generating a Google ID token>").build();
 
-    }
-
-
-    GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(transport, jsonFactory)
-            // Specify the CLIENT_ID of the app that accesses the backend:
-            .setAudience(Collections.singletonList(CLIENT_ID))
-            // Or, if multiple clients access the backend:
-            //.setAudience(Arrays.asList(CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3))
-            .build();
-
-// (Receive idTokenString by HTTPS POST)
-
-    GoogleIdToken idToken = verifier.verify(idTokenString);
-if (idToken != null) {
-        Payload payload = idToken.getPayload();
-
-        // Print user identifier
-        String userId = payload.getSubject();
-        System.out.println("User ID: " + userId);
-
-        // Get profile information from payload
-        String email = payload.getEmail();
-        boolean emailVerified = Boolean.valueOf(payload.getEmailVerified());
-        String name = (String) payload.get("name");
-        String pictureUrl = (String) payload.get("picture");
-        String locale = (String) payload.get("locale");
-        String familyName = (String) payload.get("family_name");
-        String givenName = (String) payload.get("given_name");
-
-        // Use or store profile information
-        // ...
-
-    } else {
-        System.out.println("Invalid ID token.");
-    }
-
-*/
 
 }

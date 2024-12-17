@@ -5,12 +5,12 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.audioquiz.api.datasources.user.UserProfileLocal;
+import com.audioquiz.api.datasources.user.UserProfileDataSource;
+import com.audioquiz.core.model.user.UserProfile;
 import com.audioquiz.data.local.dao.user_data.UserProfileDao;
 import com.audioquiz.data.local.entity.user_data.UserProfileEntity;
 import com.audioquiz.data.local.mapper.DatabaseMapper;
 import com.audioquiz.data.local.provider.AppDatabase;
-import com.audioquiz.core.model.user.UserProfile;
 
 import javax.inject.Inject;
 
@@ -20,7 +20,7 @@ import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
 
-public class UserProfileCache implements UserProfileLocal {
+public class UserProfileCache implements UserProfileDataSource.Local {
     private static final String TAG = "UserProfileCache";
     private final UserProfileDao userDao;
 

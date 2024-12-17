@@ -3,7 +3,7 @@ package com.audioquiz.data.local.cache.user_data;
 import android.util.Log;
 
 import com.audioquiz.api.datasources.firebase_auth.AuthApi;
-import com.audioquiz.api.datasources.user_stats.stats_category.CategoryStatsLocal;
+import com.audioquiz.api.datasources.user_stats.CategoryStatsDataSource;
 import com.audioquiz.data.local.dao.user_data.CategoryStatsDao;
 import com.audioquiz.data.local.entity.user_data.CategoryStatsEntity;
 import com.audioquiz.data.local.mapper.DatabaseMapper;
@@ -20,7 +20,7 @@ import io.reactivex.rxjava3.core.Completable;
 import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
-public class CategoryStatsCache implements CategoryStatsLocal {
+public class CategoryStatsCache implements CategoryStatsDataSource.Local {
     private static final String TAG = "CategoryStatsCache";
     private final CategoryStatsDao categoryStatsDao;
     private final AuthApi authApi;

@@ -1,0 +1,207 @@
+<resources>
+    <!--    HOME  MODULE -->
+    <!-- -->
+    <!--    CATEGORY-IMAGES DATA   -->
+    <!--    Collection of images for each badge   -->
+    <array name="badgeResources">
+        <item>@drawable/ic_badge_soundwaves</item>
+        <item>@drawable/ic_badge_synthesis</item>
+        <item>@drawable/ic_badge_production</item>
+        <item>@drawable/ic_badge_mixing</item>
+        <item>@drawable/ic_badge_processing</item>
+        <item>@drawable/ic_badge_music_theory</item>
+        <item>@drawable/ic_badge_learner</item>
+        <item>@drawable/ic_badge_pitch</item>
+        <item>@drawable/ic_badge_intervals</item>
+    </array>
+    <!--    Collection of images for each categoryUi   -->
+    <array name="categoryImageResourceIds">
+        <item>@drawable/ic_soundwaves</item>
+        <item>@drawable/ic_synthesis</item>
+        <item>@drawable/ic_production</item>
+        <item>@drawable/ic_mixing</item>
+        <item>@drawable/ic_processing</item>
+        <item>@drawable/ic_music_theory</item>
+    </array>
+
+    <!--    CATEGORY MAIN DATA   -->
+    <!--    Material Card name in layout file   -->
+    <string-array name="cardNamesArray">
+        <item>@string/string_badge_1</item>
+        <item>@string/string_badge_2</item>
+        <item>@string/string_badge_3</item>
+        <item>@string/string_badge_4</item>
+        <item>@string/string_badge_5</item>
+        <item>@string/string_badge_6</item>
+    </string-array>
+    <!--    Names of the home  quiz categories   -->
+    <string-array name="categoriesArray">
+        <item>@string/string_category_1</item>
+        <item>@string/string_category_2</item>
+        <item>@string/string_category_3</item>
+        <item>@string/string_category_4</item>
+        <item>@string/string_category_5</item>
+        <item>@string/string_category_6</item>
+    </string-array>
+
+    <!--    BOTTOM-SHEET CATEGORY-CHAPTERS   -->
+    <!--    Collection of chapters for each categoryUi   -->
+    <array name="categoryChapters">
+        <item>soundwaves_chapters</item>
+        <item>synthesis_chapters</item>
+        <item>production_chapters</item>
+        <item>mixing_chapters</item>
+        <item>processing_chapters</item>
+        <item>musictheory_chapters</item>
+    </array>
+    <!--    Collection of descriptions for each categoryUi   -->
+    <array name="categoryDescriptions">
+        <item>soundwaves_descriptions</item>
+        <item>synthesis_descriptions</item>
+        <item>production_descriptions</item>
+        <item>mixing_descriptions</item>
+        <item>processing_descriptions</item>
+        <item>musictheory_descriptions</item>
+    </array>
+    <!--    Chapters names for each categoryUi   -->
+    <string-array name="soundwaves_chapters">
+        <item>@string/string_chapter_1_soundwaves</item>
+        <item>@string/string_chapter_2_soundwaves</item>
+        <item>@string/string_chapter_3_soundwaves</item>
+    </string-array>
+    <string-array name="synthesis_chapters">
+        <item>@string/string_chapter_1_synthesis</item>
+        <item>@string/string_chapter_2_synthesis</item>
+        <item>@string/string_chapter_3_synthesis</item>
+    </string-array>
+    <string-array name="production_chapters">
+        <item>@string/string_chapter_1_production</item>
+        <item>@string/string_chapter_2_production</item>
+        <item>@string/string_chapter_3_production</item>
+    </string-array>
+    <string-array name="mixing_chapters">
+        <item>@string/string_chapter_1_mixing</item>
+        <item>@string/string_chapter_2_mixing</item>
+        <item>@string/string_chapter_3_mixing</item>
+    </string-array>
+    <string-array name="processing_chapters">
+        <item>@string/string_chapter_1_processing</item>
+        <item>@string/string_chapter_2_processing</item>
+        <item>@string/string_chapter_3_processing</item>
+    </string-array>
+    <string-array name="musictheory_chapters">
+        <item>@string/string_chapter_1_musictheory</item>
+        <item>@string/string_chapter_2_musictheory</item>
+        <item>@string/string_chapter_3_musictheory</item>
+    </string-array>
+    <!--    Description texts for each categoryUi   -->
+    <string-array name="soundwaves_descriptions">
+        <item> @string/string_description_chapter_1</item>
+        <item>@string/string_description_chapter_2</item>
+        <item>@string/string_description_chapter_3</item>
+        <item>@string/string_description_exam</item>
+        <item>@string/string_description_done</item>
+    </string-array>
+    <string-array name="synthesis_descriptions">
+        <item>@string/string_description_chapter_1</item>
+        <item>@string/string_description_chapter_2</item>
+        <item>@string/string_description_chapter_3</item>
+        <item>@string/string_description_exam</item>
+        <item>@string/string_description_done</item>
+    </string-array>
+    <string-array name="production_descriptions">
+        <item>@string/string_description_chapter_1</item>
+        <item>@string/string_description_chapter_2</item>
+        <item>@string/string_description_chapter_3</item>
+        <item>@string/string_description_exam</item>
+        <item>@string/string_description_done</item>
+    </string-array>
+    <string-array name="mixing_descriptions">
+        <item>@string/string_description_chapter_1</item>
+        <item>@string/string_description_chapter_2</item>
+        <item>@string/string_description_chapter_3</item>
+        <item>@string/string_description_exam</item>
+        <item>@string/string_description_done</item>
+    </string-array>
+    <string-array name="processing_descriptions">
+        <item>@string/string_description_chapter_1</item>
+        <item>@string/string_description_chapter_2</item>
+        <item>@string/string_description_chapter_3</item>
+        <item>@string/string_description_exam</item>
+        <item>@string/string_description_done</item>
+    </string-array>
+    <string-array name="musictheory_descriptions">
+        <item>@string/string_description_chapter_1</item>
+        <item>@string/string_description_chapter_2</item>
+        <item>@string/string_description_chapter_3</item>
+        <item>@string/string_description_exam</item>
+        <item>@string/string_description_done</item>
+    </string-array>
+
+    <!--///////////////////////////////////////////////////////////////////////////////-->
+    <!--   STATS MODULE    -->
+    <!--    achievement names-->
+    <string-array name="achievement_names">
+        <item>@string/string_category_1</item>
+        <item>@string/string_category_2</item>
+        <item>@string/string_category_3</item>
+        <item>@string/string_category_4</item>
+        <item>@string/string_category_5</item>
+        <item>@string/string_category_6</item>
+        <item>@string/string_achievement_completionist</item>
+        <item>@string/string_achievement_pitch_master</item>
+        <item>@string/string_achievement_intervals_master</item>
+    </string-array>
+    <!--    Achievement descriptions-->
+    <string-array name="achievement_descriptions">
+        <item>@string/string_achievement_category_1_description</item>
+        <item>@string/string_achievement_category_2_description</item>
+        <item>@string/string_achievement_category_3_description</item>
+        <item>@string/string_achievement_category_4_description</item>
+        <item>@string/string_achievement_category_5_description</item>
+        <item>@string/string_achievement_category_6_description</item>
+        <item>@string/string_achievement_completionist_description</item>
+        <item>@string/string_achievement_pitch_master_description</item>
+        <item>@string/string_achievement_intervals_master_description</item>
+    </string-array>
+
+    <!--/////////////////////////////////////////////////////////////////////////////////////////////////-->
+    <!--    QUIZ MODULE     -->
+    <!--    frequencies names -->
+    <integer-array name="graph_frequencies">
+        <item>0</item>
+        <item>80</item>
+        <item>100</item>
+        <item>200</item>
+        <item>300</item>
+        <item>400</item>
+        <item>500</item>
+        <item>700</item>
+        <item>1000</item>
+        <item>2000</item>
+        <item>3000</item>
+        <item>4000</item>
+        <item>5000</item>
+        <item>7000</item>
+        <item>10000</item>
+        <item>12000</item>
+        <item>15000</item>
+    </integer-array>
+    <!--    Interval buttons names -->
+    <string-array name="intervalButtonsNamesArray">
+        <item>@string/string_interval_button_name_1</item>
+        <item>@string/string_interval_button_name_2</item>
+        <item>@string/string_interval_button_name_3</item>
+        <item>@string/string_interval_button_name_4</item>
+        <item>@string/string_interval_button_name_5</item>
+        <item>@string/string_interval_button_name_6</item>
+        <item>@string/string_interval_button_name_7</item>
+        <item>@string/string_interval_button_name_8</item>
+        <item>@string/string_interval_button_name_9</item>
+        <item>@string/string_interval_button_name_10</item>
+        <item>@string/string_interval_button_name_11</item>
+        <item>@string/string_interval_button_name_12</item>
+        <item>@string/string_interval_button_name_13</item>
+    </string-array>
+
+</resources>

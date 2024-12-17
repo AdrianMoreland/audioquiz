@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="21dp"
+        android:background="@drawable/bg_rounded_8dp"
+        android:backgroundTint="#A38E8E8E"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="8dp"
+        android:paddingVertical="9dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:baselineAligned="false">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/container_notes"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_marginHorizontal="4dp"
+            android:background="@drawable/bg_rounded_8dp"
+            android:backgroundTint="#A3323232"
+            android:orientation="horizontal"
+            android:padding="8dp"
+            android:baselineAligned="false">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_root"
+                style="@style/Custom.Material.AnswerOptionButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                android:padding="0dp"
+                android:text="Root"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/btn_second"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_third"
+                style="@style/Custom.Material.AnswerOptionButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                android:padding="0dp"
+                android:text="3rd"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/btn_fourth"
+                app:layout_constraintTop_toBottomOf="@+id/btn_root" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_fifth"
+                style="@style/Custom.Material.AnswerOptionButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                android:padding="0dp"
+                android:text="5th"
+                app:layout_constraintEnd_toStartOf="@id/btn_sixth"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_third" />
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_seventh"
+                style="@style/Custom.Material.AnswerOptionButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="0dp"
+                android:layout_margin="2dp"
+                android:text="7th"
+                app:layout_constraintEnd_toStartOf="@id/btn_octave"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_fifth" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_second"
+                style="@style/Custom.Material.AnswerOptionButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                android:padding="0dp"
+                android:text="2nd"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/btn_root"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_fourth"
+                style="@style/Custom.Material.AnswerOptionButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                android:padding="0dp"
+                android:text="4th"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/btn_third"
+                app:layout_constraintTop_toBottomOf="@+id/btn_second" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_sixth"
+                style="@style/Custom.Material.AnswerOptionButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                android:padding="0dp"
+                android:text="6th"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/btn_fifth"
+                app:layout_constraintTop_toBottomOf="@+id/btn_fourth" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_octave"
+                style="@style/Custom.Material.AnswerOptionButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                android:padding="0dp"
+                android:text="Oct"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/btn_seventh"
+                app:layout_constraintTop_toBottomOf="@+id/btn_sixth" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/container_qualities"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_marginHorizontal="4dp"
+            android:background="@drawable/bg_rounded_8dp"
+            android:backgroundTint="#A3323232"
+            android:orientation="vertical"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="9dp">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_perfect"
+                style="@style/Custom.Material.AnswerOptionButton"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:padding="0dp"
+                android:text="Perfect"
+                app:layout_constraintWidth_percent="0.5"
+                app:layout_constraintHeight_percent="0.33"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_major"
+                style="@style/Custom.Material.AnswerOptionButton"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:padding="0dp"
+                android:layout_marginEnd="2dp"
+                android:text="Maj"
+                app:layout_constraintHeight_percent="0.33"
+                app:layout_constraintBottom_toTopOf="@id/btn_augmented"
+                app:layout_constraintEnd_toStartOf="@+id/btn_minor"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_perfect" />
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_minor"
+                style="@style/Custom.Material.AnswerOptionButton"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:padding="0dp"
+                android:layout_marginStart="2dp"
+                android:text="Min"
+                app:layout_constraintHeight_percent="0.33"
+                app:layout_constraintBottom_toTopOf="@id/btn_diminished"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/btn_major"
+                app:layout_constraintTop_toBottomOf="@+id/btn_perfect" />
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_augmented"
+                style="@style/Custom.Material.AnswerOptionButton"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:padding="0dp"
+                android:text="Aug"
+                android:layout_marginEnd="2dp"
+                app:layout_constraintHeight_percent="0.33"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/btn_diminished"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_major" />
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_diminished"
+                style="@style/Custom.Material.AnswerOptionButton"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:padding="0dp"
+                android:text="Dim"
+                android:layout_marginStart="2dp"
+                app:layout_constraintHeight_percent="0.33"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/btn_augmented"
+                app:layout_constraintTop_toBottomOf="@+id/btn_minor" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

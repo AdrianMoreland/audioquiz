@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/md_theme_background"
+    android:maxWidth="1000dp"
+    android:layout_gravity="center">
+
+
+    <LinearLayout android:id="@+id/quiz_top_container"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_percent="0.05"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/quiz_question_container"
+        app:layout_constraintEnd_toEndOf="@id/guideline_right"
+        app:layout_constraintStart_toStartOf="@id/guideline_left"
+        app:layout_constraintTop_toTopOf="@id/guideline_top">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_back_question"
+            style="@style/Custom.Material.IconButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.12"
+            app:icon="@drawable/ic_arrow_back"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:id="@+id/quiz_progress_indicator"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.76"
+            android:layout_gravity="center"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            app:indicatorColor="@color/md_theme_primary"
+            app:showAnimationBehavior="inward"
+            app:trackColor="@color/md_theme_surfaceVariant"
+            app:trackCornerRadius="20dp"
+            app:trackThickness="10dp" />
+
+        <TextView
+            android:id="@+id/text_lives"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.13"
+            android:gravity="center"
+            android:padding="0dp"
+            android:backgroundTint="@color/md_theme_error"
+            android:background="@drawable/ic_heart"
+            android:text="1"
+            android:textSize="16sp"
+            android:textColor="@color/md_theme_background"
+            android:textAppearance="@style/TextAppearance.Reply.Headline6"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/container_play_button"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:elevation="6dp"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/quiz_question_container"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="@id/guideline_right"
+        app:layout_constraintHeight_percent="0.08"
+        app:layout_constraintTop_toBottomOf="@+id/quiz_question_container">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_play_sound"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:background="@drawable/shape_lesson_end_circle"
+            android:backgroundTint="@color/md_theme_onBackground"
+            app:icon="@drawable/ic_play_sound"
+            app:iconGravity="textStart" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/quiz_question_container"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_percent="0.28"
+        android:background="@drawable/bg_quiz_question_box"
+        android:elevation="4dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="@id/guideline_right"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@id/guideline_left"
+        app:layout_constraintTop_toBottomOf="@+id/quiz_top_container">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/container_speaker"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:elevation="6dp"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="16dp"
+                android:src="@drawable/image_pitch_question_speaker"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/question_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/quicksand_bold"
+            android:gravity="center"
+            android:paddingHorizontal="25dp"
+            android:text="@string/question_text_example"
+            android:textColor="@color/md_theme_onSurface"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+
+    <FrameLayout
+        android:id="@+id/answer_container"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/submit_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.42"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/quiz_question_container"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/submit_button"
+        style="@style/Custom.Material.SubmitButton"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="Submit"
+        android:textAppearance="@style/TextAppearance.Reply.Button"
+        app:layout_constraintHeight_percent="0.06"
+        app:layout_constraintWidth_percent="0.7"
+        app:layout_constraintWidth_max="400dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/guideline_right"
+        app:layout_constraintStart_toStartOf="@id/guideline_left"
+        app:layout_constraintTop_toBottomOf="@+id/answer_container" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.05" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.95" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.04" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_chapters"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.96" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -2,13 +2,14 @@ package com.audioquiz.core.domain.usecase.auth;
 
 
 import com.audioquiz.core.model.auth.LoginType;
-import com.audioquiz.core.model.auth.util.Result;
+import com.audioquiz.core.model.util.Result;
 import com.audioquiz.core.model.user.UserProfile;
 
 import javax.inject.Inject;
 
 import io.reactivex.rxjava3.core.Completable;
 import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.core.Single;
 
 public class UserAuthUseCaseFacadeImpl implements UserAuthUseCaseFacade {
     private static final String TAG = "UserAuthUseCaseFacadeImpl";
@@ -34,7 +35,7 @@ public class UserAuthUseCaseFacadeImpl implements UserAuthUseCaseFacade {
         return registerUserUseCaseImpl.execute(email, password, username);
     }
 
-    public Observable<Result<?>> login(String username, String password, LoginType loginType) {
+    public Single<Result<?>> login(String username, String password, LoginType loginType) {
         return loginUserUseCaseImpl.execute(username, password, loginType);
     }
 

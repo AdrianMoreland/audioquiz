@@ -1,23 +1,21 @@
 package com.audioquiz.data.remote.di;
 
 import com.audioquiz.api.datasources.firebase_auth.AuthApi;
-import com.audioquiz.api.datasources.question.QuestionApi;
-import com.audioquiz.api.datasources.rank.RankAllTimeApi;
-import com.audioquiz.api.datasources.rank_weekly.RankWeeklyApi;
-import com.audioquiz.api.datasources.user.UserProfileApi;
+import com.audioquiz.api.datasources.question.QuestionDataSource;
+import com.audioquiz.api.datasources.rank.RankAllTimeDataSource;
+import com.audioquiz.api.datasources.rank.RankWeeklyDataSource;
+import com.audioquiz.api.datasources.user.UserProfileDataSource;
+import com.audioquiz.api.datasources.user_stats.CategoryStatsDataSource;
+import com.audioquiz.api.datasources.user_stats.DailyScoresDataSource;
+import com.audioquiz.api.datasources.user_stats.FrequencyStatsDataSource;
+import com.audioquiz.api.datasources.user_stats.GeneralStatsDataSource;
 import com.audioquiz.api.datasources.user_stats.stats.UserStatsApi;
-import com.audioquiz.api.datasources.user_stats.stats_category.CategoryStatsApi;
-import com.audioquiz.api.datasources.user_stats.stats_frequency.FrequencyStatsApi;
-import com.audioquiz.api.datasources.user_stats.stats_general.GeneralStatsApi;
-import com.audioquiz.api.datasources.user_stats.stats_weekly_scores.WeeklyStatsApi;
 import com.audioquiz.api.util.AuthorizationGateway;
-import com.audioquiz.api.util.GoogleSignInHelper;
-import com.audioquiz.data.remote.datasource.auth.GoogleSignInDataSource;
 import com.audioquiz.data.remote.service.auth.AuthService;
 import com.audioquiz.data.remote.service.auth.AuthorizationGatewayImpl;
 import com.audioquiz.data.remote.service.quiz.QuestionServiceImpl;
-import com.audioquiz.data.remote.service.rank.RankAllTimeService_Impl;
-import com.audioquiz.data.remote.service.rank.RankWeeklyService_Impl;
+import com.audioquiz.data.remote.service.rank.RankAllTimeServiceImpl;
+import com.audioquiz.data.remote.service.rank.RankWeeklyServiceImpl;
 import com.audioquiz.data.remote.service.user_data.CategoryStatsService;
 import com.audioquiz.data.remote.service.user_data.FrequencyStatsService;
 import com.audioquiz.data.remote.service.user_data.GeneralStatsService;
@@ -41,11 +39,7 @@ public abstract class ApiModule {
      **********************************/
 
     @Binds
-    abstract AuthApi bindAuthApi(AuthService authService_impl);
-
-    @Binds
-    @Singleton
-    abstract GoogleSignInHelper bindGoogleSignInHelper(GoogleSignInDataSource googleSignInDataSource);
+    abstract AuthApi bindAuthApi(AuthService authServiceImpl);
 
     @Binds
     @Singleton
@@ -58,34 +52,34 @@ public abstract class ApiModule {
     abstract UserStatsApi bindStatsApi(UserStatsService userStatsService);
 
     @Binds
-    abstract UserProfileApi bindUserProfileApi(UserProfileService userProfileService);
+    abstract UserProfileDataSource.Remote bindUserProfileApi(UserProfileService userProfileService);
 
     @Binds
-    abstract GeneralStatsApi bindGeneralStatsApi(GeneralStatsService generalStatsService);
+    abstract GeneralStatsDataSource.Remote bindGeneralStatsApi(GeneralStatsService generalStatsService);
 
     @Binds
-    abstract CategoryStatsApi bindCategoryStatsApi(CategoryStatsService categoryStatsServiceImpl);
+    abstract CategoryStatsDataSource.Remote bindCategoryStatsApi(CategoryStatsService categoryStatsServiceImpl);
 
     @Binds
-    abstract FrequencyStatsApi bindFrequencyStatsApi(FrequencyStatsService frequencyStatsServiceImpl);
+    abstract FrequencyStatsDataSource.Remote bindFrequencyStatsApi(FrequencyStatsService frequencyStatsServiceImpl);
 
     @Binds
-    abstract WeeklyStatsApi bindWeeklyStatsApi(WeeklyStatsService weeklyStatsService);
+    abstract DailyScoresDataSource.Remote bindWeeklyStatsApi(WeeklyStatsService weeklyStatsService);
 
 
     /**********************************
      ****** QUESTIONS ******
      **********************************/
     @Binds
-    abstract QuestionApi bindQuestionApi(QuestionServiceImpl questionService_impl);
+    abstract QuestionDataSource.Remote bindQuestionApi(QuestionServiceImpl questionServiceImpl);
 
     /**********************************
      ****** RANKS ******
      **********************************/
     @Binds
-    abstract RankAllTimeApi bindRankAllTimeApi(RankAllTimeService_Impl rankAllTimeService_impl);
+    abstract RankAllTimeDataSource.Remote bindRankAllTimeApi(RankAllTimeServiceImpl rankAllTimeServiceImpl);
 
     @Binds
-    abstract RankWeeklyApi bindRankWeeklyApi(RankWeeklyService_Impl rankWeeklyService_impl);
+    abstract RankWeeklyDataSource.Remote bindRankWeeklyApi(RankWeeklyServiceImpl rankWeeklyServiceImpl);
 
 }

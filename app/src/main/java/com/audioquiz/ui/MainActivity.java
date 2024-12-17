@@ -2,13 +2,19 @@
 package com.audioquiz.ui;
 
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewOutlineProvider;
 import android.view.Window;
 import android.widget.Toast;
+import com.newrelic.agent.android.NewRelic;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -19,6 +25,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.audioquiz.BuildConfig;
 import com.audioquiz.R;
 import com.audioquiz.databinding.ActivityMainBinding;
 import com.audioquiz.presentation.events.ThemeEvents;
@@ -26,6 +33,9 @@ import com.audioquiz.presentation.navigation.NavControllerProvider;
 import com.audioquiz.ui.component.bottom_nav_bar.BottomNavigationComponentApi;
 import com.audioquiz.ui.component.toolbar.ToolbarComponent;
 
+import java.io.File;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Objects;
 
 import javax.inject.Inject;
@@ -57,12 +67,16 @@ public class MainActivity extends AppCompatActivity implements NavControllerProv
     BottomNavigationComponentApi bottomNavigationComponent;
 
     @Inject
-    public MainActivity() {}
+    public MainActivity() {
+        // Required empty public constructor
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         SplashScreen splashScreen = SplashScreen.installSplashScreen(this);
         super.onCreate(savedInstanceState);
+        logBuildData();
+
         setTheme(com.audioquiz.designsystem.R.style.Theme_AudioQuiz);
 
         // VIEW BINDING
@@ -80,11 +94,56 @@ public class MainActivity extends AppCompatActivity implements NavControllerProv
             if (navController2 != null) {
                 Timber.tag(TAG).d("NavController initialized successfully");
                 splashScreen.setOnExitAnimationListener(SplashScreenViewProvider::remove);
+                observeViewModel();
                 setupBottomNavigation();
                 setupToolbar();
                 applySavedTheme();
             } else {
                 showErrorAndLog("NavController not initialized. Cannot proceed.");
+            }
+        });
+        NewRelic.withApplicationToken(
+                "eu01xx5cacd6341f728003c614b383e806f60b50a8-NRMA"
+        ).start(this.getApplicationContext());
+
+    }
+
+    private void logBuildData() {
+        Timber.tag("BuildInfo").d("BuildConfig.VERSION_NAME: %s", BuildConfig.VERSION_NAME);
+        Timber.tag("BuildInfo").d("BuildConfig.VERSION_CODE: %s", BuildConfig.VERSION_CODE);
+        Timber.tag("BuildInfo").d("BuildConfig.BUILD_TYPE: %s", BuildConfig.BUILD_TYPE);
+        Timber.tag("BuildInfo").d("BuildConfig.APPLICATION_ID: %s", BuildConfig.APPLICATION_ID);
+        Timber.tag("BuildInfo").d("BuildConfig.FLAVOR: %s", BuildConfig.FLAVOR);
+//        Timber.tag("BuildInfo").d("Web Client ID: %s", BuildConfig.WEB_CLIENT_ID);
+        logSha1Key();
+        logGoogleServicesJson();
+    }
+
+    private void logGoogleServicesJson() {
+        File googleServicesJsonFile = new File(getFilesDir().getParentFile(), "google-services.json");
+        Timber.tag("BuildInfo").d("google-services.json Path: %s", googleServicesJsonFile.getAbsolutePath());
+    }
+
+    private void logSha1Key() {
+        try {
+            PackageInfo packageInfo = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_SIGNATURES);
+            for (Signature signature : packageInfo.signatures) {
+                MessageDigest md = MessageDigest.getInstance("SHA1");
+                md.update(signature.toByteArray());
+                String sha1Key = Base64.encodeToString(md.digest(), Base64.NO_WRAP);
+                Timber.tag("BuildInfo").d("SHA-1 Key: %s", sha1Key);
+            }
+        } catch (PackageManager.NameNotFoundException | NoSuchAlgorithmException e) {
+            Timber.tag("BuildInfo").e(e, "Error getting SHA-1 key");
+        }
+    }
+
+    private void observeViewModel() {
+        mainViewModel.getCurrentUser().observe(this, user -> {
+            if (user != null) {
+                Timber.tag(TAG).d("observeViewModel: User is logged in");
+            } else {
+                Timber.tag(TAG).d("observeViewModel: User is not logged in");
             }
         });
     }

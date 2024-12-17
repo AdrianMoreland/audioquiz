@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "719684506689",
+    "project_id": "audioquiz-501df",
+    "storage_bucket": "audioquiz-501df.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:719684506689:android:c9af86f84d9b3e6645e2c0",
+        "android_client_info": {
+          "package_name": "com.audioquiz"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD5b_99JD8Fxs-BiiLelvg7iZxIW28zGWE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

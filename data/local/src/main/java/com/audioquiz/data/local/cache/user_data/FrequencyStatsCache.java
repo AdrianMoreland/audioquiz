@@ -1,6 +1,6 @@
 package com.audioquiz.data.local.cache.user_data;
 
-import com.audioquiz.api.datasources.user_stats.stats_frequency.StatsFrequencyLocal;
+import com.audioquiz.api.datasources.user_stats.FrequencyStatsDataSource;
 import com.audioquiz.core.model.user.stats.FrequencyStats;
 import com.audioquiz.core.model.user.stats.IntervalStats;
 import com.audioquiz.core.model.user.stats.PitchStats;
@@ -22,7 +22,7 @@ import io.reactivex.rxjava3.core.Completable;
 import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
-public class FrequencyStatsCache implements StatsFrequencyLocal {
+public class FrequencyStatsCache implements FrequencyStatsDataSource.Local {
     private final FrequencyStatsDao frequencyStatsDao;
     private final IntervalStatsDao intervalStatsDao;
 

@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "32534188552",
+    "project_id": "audioquiz-dev",
+    "storage_bucket": "audioquiz-dev.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:32534188552:android:880eb96ba20093ba1f37bd",
+        "android_client_info": {
+          "package_name": "com.audioquiz.dev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "32534188552-netdhepe2vl69b8bgmjkdidns9b0e5q5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.audioquiz.dev",
+            "certificate_hash": "1e09ab92649f8d7fa0e12a6ba2d18bd175a59c9a"
+          }
+        },
+        {
+          "client_id": "32534188552-17i62eo3q97crk0t02u1pkqaobthvsfg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDeZTjSMZvwA4zgHOVuyvSwHG1dbtqg4wU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "32534188552-17i62eo3q97crk0t02u1pkqaobthvsfg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

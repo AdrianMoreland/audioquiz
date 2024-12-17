@@ -1,0 +1,1176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/md_theme_background"
+        android:orientation="vertical">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/md_theme_surface">
+
+            <!--TOP_TOOLBAR-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/top_navigation_frame"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <include layout="@layout/toolbar" />
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:text="Your Insights"
+                    android:textAppearance="@style/TextAppearance.Reply.Headline5"
+                    android:textColor="@color/md_theme_onSurface"
+                    android:textSize="30sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintWidth_max="600dp" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!--PROFILE_IMAGE-->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/container_profile_image"
+                android:layout_width="76dp"
+                android:layout_height="76dp"
+                android:gravity="center"
+                app:layout_constraintBottom_toTopOf="@+id/guideline"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/guideline"
+                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.CardView.Circle"
+                card_view:cardBackgroundColor="@color/md_theme_tertiary">
+
+                <RelativeLayout
+                    android:id="@+id/frame_profile_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="71dp"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:id="@+id/iv_profile_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_centerInParent="true"
+                        android:padding="8dp"
+                        android:scaleType="fitXY" />
+
+                    <TextView
+                        android:id="@+id/tv_user_initial"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:includeFontPadding="false"
+                        android:text="A"
+                        android:textColor="@color/md_theme_background"
+                        android:textSize="40sp"
+                        android:visibility="visible" />
+                </RelativeLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!--MAIN_CONTAINER-->
+            <LinearLayout
+                android:id="@+id/linearLayout4"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:background="@drawable/bg_top_rounded_16dp"
+                android:backgroundTint="@color/md_theme_background"
+                android:orientation="vertical"
+                android:paddingTop="40dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/guideline"
+                app:layout_constraintTop_toTopOf="@+id/guideline">
+
+                <!--USERNAME-->
+                    <TextView
+                        android:id="@+id/text_username"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                       android:layout_marginBottom="8dp"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="*username*"
+                        android:textAppearance="@style/TextAppearance.Reply.Headline5"
+                        android:textColor="@color/md_theme_onBackground" />
+
+                <!--TAB_NAVIGATION_BUTTONS-->
+                <LinearLayout
+                    android:id="@+id/container_buttons_rank"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_stats"
+                        style="@style/Widget.Material3.Button.TextButton.Dialog.Flush"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.8"
+                        android:backgroundTint="@color/color_transparency"
+                        android:gravity="center"
+                        android:insetTop="0dp"
+                        android:insetBottom="0dp"
+                        android:paddingVertical="8dp"
+                        android:text="Stats"
+                        android:textColor="@color/md_theme_primary"
+                        android:textSize="13sp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/button_achievements"
+                        style="@style/Widget.Material3.Button.TextButton.Dialog.Flush"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:backgroundTint="@color/color_transparency"
+                        android:gravity="center"
+                        android:insetTop="0dp"
+                        android:insetBottom="0dp"
+                        android:paddingHorizontal="0dp"
+                        android:paddingVertical="8dp"
+                        android:text="ACHIEVEMENTS"
+                        android:textColor="@color/md_theme_onBackground"
+                        android:textSize="13sp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/button_graphs"
+                        style="@style/Widget.Material3.Button.TextButton.Dialog.Flush"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.8"
+                        android:backgroundTint="@color/color_transparency"
+                        android:gravity="center"
+                        android:insetTop="0dp"
+                        android:insetBottom="0dp"
+                        android:paddingVertical="8dp"
+                        android:text="Graphs"
+                        android:textColor="@color/md_theme_onBackground"
+                        android:textSize="13sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/container_stats"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="32dp"
+                    android:orientation="vertical">
+
+                    <!--LEVEL_PROGRESS-->
+                    <LinearLayout
+                        android:id="@+id/container_level_progress"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginBottom="16dp"
+                        android:paddingHorizontal="16dp"
+                        android:paddingVertical="14dp"
+                        android:background="@drawable/bg_rounded_16dp"
+                        android:backgroundTint="@color/md_theme_surfaceContainerLowest"
+                        android:orientation="vertical"
+                        >
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="8dp"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <RelativeLayout
+                                android:id="@+id/re9kg3l69xr_rl"
+                                android:layout_width="34dp"
+                                android:layout_height="34dp"
+                                android:layout_marginEnd="18dp"
+                                android:gravity="center_horizontal">
+
+                                <ImageView
+                                    android:id="@+id/re9kg3l69xr"
+                                    android:layout_width="34dp"
+                                    android:layout_height="34dp"
+                                    android:scaleType="fitXY"
+                                    android:src="@drawable/ic_level_frame" />
+
+                                <TextView
+                                    android:id="@+id/text_current_level"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerInParent="true"
+                                    android:text="2"
+                                    android:textColor="#FCFCFCF7"
+                                    android:textSize="16sp" />
+                            </RelativeLayout>
+
+                            <LinearLayout
+                                android:id="@+id/rrf1z6amq0s"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/text_level"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="2dp"
+                                    android:text="Level 2 "
+                                    android:textAppearance="@style/TextAppearance.Reply.Body1"
+                                    android:textColor="@color/md_theme_onBackground"
+                                    android:textSize="16sp" />
+
+                                <TextView
+                                    android:id="@+id/roa311uveri"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="500 Points to next level"
+                                    android:textAppearance="@style/TextAppearance.Reply.Subtitle2"
+                                    android:textColor="@color/md_theme_onSurfaceVariant"
+                                    android:letterSpacing="0.1"
+                                    android:textSize="12sp" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/linearLayout13"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg_rounded_level_track"
+                            android:orientation="vertical">
+
+                            <com.google.android.material.progressindicator.LinearProgressIndicator
+                                android:id="@+id/progress_level"
+                                style="@style/Custom.Material.ProgressBarCategory"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginHorizontal="4dp"
+                                android:progress="50"
+                                app:indicatorColor="@color/md_theme_secondary"
+                                app:indicatorTrackGapSize="0dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="@+id/image_level_right"
+                                app:layout_constraintStart_toStartOf="@+id/image_level_left"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:trackStopIndicatorSize="0dp"
+                                app:trackThickness="24dp" />
+
+                            <RelativeLayout
+                                android:id="@+id/image_level_left"
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:layout_margin="4dp"
+                                android:background="@drawable/shape_level_circle_left"
+                                android:gravity="center_horizontal"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent">
+
+                                <TextView
+                                    android:id="@+id/text_level_left"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerInParent="true"
+                                    android:text="2"
+                                    android:textAppearance="@style/TextAppearance.Reply.Body2"
+                                    android:textColor="#302950" />
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:id="@+id/image_level_right"
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:layout_margin="4dp"
+                                android:background="@drawable/shape_level_circle_right"
+                                android:gravity="center_horizontal"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent">
+
+                                <TextView
+                                    android:id="@+id/text_level_right"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerInParent="true"
+                                    android:text="3"
+                                    android:textAppearance="@style/TextAppearance.Reply.Body2"
+                                    android:textColor="#302950" />
+                            </RelativeLayout>
+
+
+                            <ImageView
+                                android:layout_width="12dp"
+                                android:layout_height="12dp"
+                                android:layout_marginHorizontal="8dp"
+                                android:scaleType="fitXY"
+                                android:src="@drawable/ic_star"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toStartOf="@+id/rmrqsclobwt"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/rmrqsclobwt"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginHorizontal="16dp"
+                                android:text="5200/6000"
+                                android:textAppearance="@style/TextAppearance.Reply.Body2"
+                                android:textColor="@color/md_theme_onSecondaryContainer"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toStartOf="@+id/image_level_right"
+                                app:layout_constraintStart_toEndOf="@+id/image_level_left"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </LinearLayout>
+
+                    <!-- STATS_CONTAINER -->
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/stats_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="10dp"
+                        android:orientation="vertical"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <!-- TOP -->
+                        <LinearLayout
+                            android:id="@+id/stats_top"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="12dp"
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <!-- XP -->
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="6dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/bg_rounded_16dp"
+                                android:backgroundTint="@color/md_theme_surfaceContainerLowest"
+                                android:elevation="4dp"
+                                android:gravity="center_vertical|start"
+                                android:orientation="horizontal"
+                                android:paddingHorizontal="12dp"
+                                android:paddingVertical="10dp">
+
+                                <ImageView
+                                    android:layout_width="35dp"
+                                    android:layout_height="35dp"
+                                    android:layout_gravity="center"
+                                    android:contentDescription="Quizzes icon"
+                                    android:src="@drawable/ic_score" />
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="16dp"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:id="@+id/text_total_xp"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/quicksand_bold"
+                                        android:gravity="center"
+                                        android:text="0"
+                                        android:textColor="@color/md_theme_onSurface"
+                                        android:textSize="20sp" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/quicksand_bold"
+                                        android:gravity="center"
+                                        android:layout_marginBottom="4dp"
+                                        android:text="Score"
+                                        android:textColor="@color/md_theme_onSurfaceVariant"
+                                        android:textSize="16sp" />
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <!-- QUZZES -->
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="6dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/bg_rounded_16dp"
+                                android:backgroundTint="@color/md_theme_surfaceContainerLowest"
+                                android:elevation="4dp"
+                                android:gravity="center_vertical|start"
+                                android:orientation="horizontal"
+                                android:paddingHorizontal="12dp"
+                                android:paddingVertical="10dp">
+
+                                <ImageView
+                                    android:layout_width="35dp"
+                                    android:layout_height="35dp"
+                                    android:layout_gravity="center"
+                                    android:contentDescription="Rank icon"
+                                    android:src="@drawable/ic_quizzes_amount" />
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="16dp"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:id="@+id/text_quizzes_amount"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/quicksand_bold"
+                                        android:gravity="center"
+                                        android:text="0"
+                                        android:textColor="@color/md_theme_onSurface"
+                                        android:textSize="20sp" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/quicksand_bold"
+                                        android:gravity="center"
+                                        android:text="Quizzes"
+                                        android:textColor="@color/md_theme_onSurfaceVariant"
+                                        android:textSize="16sp"
+                                        android:layout_marginBottom="4dp"/>
+
+                                </LinearLayout>
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <!-- BOTTOM -->
+                        <LinearLayout
+                            android:id="@+id/stats_bottom"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/stats_top">
+
+                            <!-- PRECISION -->
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="6dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/bg_rounded_16dp"
+                                android:backgroundTint="@color/md_theme_surfaceContainerLowest"
+                                android:elevation="5dp"
+                                android:gravity="center_vertical|start"
+                                android:orientation="horizontal"
+                                android:paddingHorizontal="12dp"
+                                android:paddingVertical="10dp">
+
+                                <ImageView
+                                    android:layout_width="35dp"
+                                    android:layout_height="35dp"
+                                    android:layout_gravity="center"
+                                    android:contentDescription="Accuracy icon"
+                                    android:src="@drawable/ic_accuracy1" />
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="16dp"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:id="@+id/text_average_score"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/quicksand_bold"
+                                        android:gravity="center"
+                                        android:text="0%"
+                                        android:textColor="@color/md_theme_onSurface"
+                                        android:textSize="20sp" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/quicksand_medium"
+                                        android:gravity="center"
+                                        android:text="Accuracy"
+                                        android:textColor="@color/md_theme_onSurfaceVariant"
+                                        android:textSize="16sp"
+                                        android:layout_marginBottom="4dp"/>
+                                </LinearLayout>
+                            </LinearLayout>
+
+                            <!-- LONGEST_STREAK -->
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="6dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/bg_rounded_16dp"
+                                android:backgroundTint="@color/md_theme_surfaceContainerLowest"
+                                android:elevation="5dp"
+                                android:gravity="center_vertical|start"
+                                android:orientation="horizontal"
+                                android:paddingHorizontal="12dp"
+                                android:paddingVertical="10dp">
+
+                                <ImageView
+                                    android:layout_width="35dp"
+                                    android:layout_height="35dp"
+                                    android:layout_gravity="center"
+                                    android:contentDescription="Quizzes icon"
+                                    android:src="@drawable/ic_streak" />
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="16dp"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:id="@+id/text_longest_streak"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/quicksand_bold"
+                                        android:gravity="center"
+                                        android:text="0"
+                                        android:textColor="@color/md_theme_onSurface"
+                                        android:textSize="20sp" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/quicksand_medium"
+                                        android:gravity="center"
+                                        android:text="Streak"
+                                        android:textColor="@color/md_theme_onSurfaceVariant"
+                                        android:textSize="16sp"
+                                        android:layout_marginBottom="4dp"/>
+                                </LinearLayout>
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/chart_container1"
+                            android:layout_width="0dp"
+                            android:layout_height="250dp"
+                            android:layout_marginHorizontal="4dp"
+                            android:layout_marginVertical="8dp"
+                            android:background="@drawable/bg_rounded_16dp"
+                            android:backgroundTint="@color/md_theme_surfaceContainerLowest"
+                            android:orientation="vertical"
+                            android:paddingVertical="16dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/stats_bottom"
+                            app:layout_constraintWidth_max="600dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/text_graph_title1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginVertical="8dp"
+                                    android:layout_marginStart="16dp"
+                                    android:text="LAST WEEK"
+                                    android:textAppearance="@style/TextAppearance.Reply.Body1" />
+
+
+                                <com.github.mikephil.charting.charts.LineChart
+                                    android:id="@+id/chart2"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent" />
+                            </LinearLayout>
+
+                        </com.google.android.material.card.MaterialCardView>
+
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/chart_container"
+                            android:layout_width="0dp"
+                            android:layout_height="250dp"
+                            android:layout_marginHorizontal="4dp"
+                            android:layout_marginVertical="8dp"
+                            android:background="@drawable/bg_rounded_16dp"
+                            android:backgroundTint="@color/md_theme_surfaceContainerLowest"
+                            android:orientation="vertical"
+                            android:paddingVertical="16dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/chart_container1"
+                            app:layout_constraintWidth_max="600dp">
+
+                            <TextView
+                                android:id="@+id/text_graph_title"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginVertical="8dp"
+                                android:layout_marginStart="16dp"
+                                android:text="IMPROVEMENT"
+                                android:textAppearance="@style/TextAppearance.Reply.Body1" />
+
+
+                            <com.github.mikephil.charting.charts.BarChart
+                                android:id="@+id/chart1"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent" />
+                        </com.google.android.material.card.MaterialCardView>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <!-- GRAPHS -->
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1">
+                        <!--
+                                            <com.google.android.material.card.MaterialCardView
+                                                android:id="@+id/container_total_score"
+                                                android:layout_width="0dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginHorizontal="4dp"
+                                                android:layout_marginVertical="8dp"
+                                                app:layout_constraintBottom_toTopOf="@id/container_average_score1"
+                                                app:layout_constraintEnd_toStartOf="@id/guidelineVertical"
+                                                app:layout_constraintStart_toStartOf="parent"
+                                                app:layout_constraintTop_toTopOf="parent">
+
+                                                <LinearLayout
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:orientation="vertical"
+                                                    android:paddingHorizontal="16dp"
+                                                    android:paddingVertical="20dp">
+
+                                                    <TextView
+                                                        android:id="@+id/text_rank_title"
+                                                        android:layout_width="wrap_content"
+                                                        android:layout_height="wrap_content"
+                                                        android:maxLines="1"
+                                                        android:text="TOTAL XP"
+                                                        android:textAppearance="@style/TextAppearance.Reply.Body1"
+                                                        android:textSize="16sp" />
+
+                                                    <TextView
+                                                        android:layout_width="wrap_content"
+                                                        android:layout_height="wrap_content"
+                                                        android:text="null"
+                                                        android:textColor="@color/md_theme_onSurface"
+                                                        android:textSize="38sp" />
+                                                </LinearLayout>
+                                            </com.google.android.material.card.MaterialCardView>
+
+
+                                            <com.google.android.material.card.MaterialCardView
+                                                android:id="@+id/container_level"
+                                                android:layout_width="0dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginHorizontal="4dp"
+                                                android:layout_marginVertical="8dp"
+                                                app:layout_constraintEnd_toEndOf="parent"
+                                                app:layout_constraintStart_toStartOf="@id/guidelineVertical"
+                                                app:layout_constraintTop_toTopOf="parent">
+
+                                                <LinearLayout
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:orientation="vertical"
+                                                    android:paddingHorizontal="16dp"
+                                                    android:paddingVertical="20dp">
+
+                                                    <TextView
+                                                        android:id="@+id/text_user_level_title"
+                                                        android:layout_width="wrap_content"
+                                                        android:layout_height="wrap_content"
+                                                        android:text="LEVEL"
+                                                        android:textAppearance="@style/TextAppearance.Reply.Body1"
+                                                        android:textSize="16sp" />
+
+                                                    <TextView
+                                                        android:layout_width="wrap_content"
+                                                        android:layout_height="wrap_content"
+                                                        android:text="null"
+                                                        android:textColor="@color/md_theme_onSurface"
+                                                        android:textSize="38sp" />
+                                                </LinearLayout>
+
+                                            </com.google.android.material.card.MaterialCardView>
+
+                                            <com.google.android.material.card.MaterialCardView
+                                                android:id="@+id/container_average_score1"
+                                                android:layout_width="0dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginHorizontal="4dp"
+                                                android:layout_marginVertical="8dp"
+                                                app:layout_constraintEnd_toStartOf="@+id/guidelineVertical"
+                                                app:layout_constraintStart_toStartOf="parent"
+                                                app:layout_constraintTop_toBottomOf="@+id/container_total_score">
+
+                                                <LinearLayout
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:orientation="vertical"
+                                                    android:padding="16dp">
+
+                                                    <TextView
+                                                        android:layout_width="wrap_content"
+                                                        android:layout_height="wrap_content"
+                                                        android:text="PRECISION"
+                                                        android:textAppearance="@style/TextAppearance.Reply.Body1"
+                                                        android:textSize="16sp" />
+
+                                                    <TextView
+                                                        android:layout_width="wrap_content"
+                                                        android:layout_height="wrap_content"
+                                                        android:maxLines="1"
+                                                        android:text="null"
+                                                        android:textColor="@color/md_theme_onSurface"
+                                                        android:textSize="38sp" />
+                                                </LinearLayout>
+
+                                            </com.google.android.material.card.MaterialCardView>
+
+                                            <com.google.android.material.card.MaterialCardView
+                                                android:id="@+id/container_quizzes_amount"
+                                                android:layout_width="0dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginHorizontal="4dp"
+                                                android:layout_marginVertical="8dp"
+                                                app:layout_constraintEnd_toEndOf="parent"
+                                                app:layout_constraintStart_toStartOf="@+id/guidelineVertical"
+                                                app:layout_constraintTop_toBottomOf="@+id/container_total_score">
+
+                                                <LinearLayout
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:orientation="vertical"
+                                                    android:padding="16dp">
+
+                                                    <TextView
+                                                        android:layout_width="wrap_content"
+                                                        android:layout_height="wrap_content"
+                                                        android:text="PRECISION"
+                                                        android:textAppearance="@style/TextAppearance.Reply.Body1"
+                                                        android:textSize="16sp" />
+
+                                                    <TextView
+                                                        android:layout_width="wrap_content"
+                                                        android:layout_height="wrap_content"
+                                                        android:maxLines="1"
+                                                        android:text="null"
+                                                        android:textColor="@color/md_theme_onSurface"
+                                                        android:textSize="38sp" />
+                                                </LinearLayout>
+
+                                            </com.google.android.material.card.MaterialCardView>
+                                            <com.google.android.material.card.MaterialCardView
+                                                android:id="@+id/container_current_streak"
+                                                android:layout_width="0dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginHorizontal="4dp"
+                                                android:layout_marginVertical="8dp"
+                                                app:layout_constraintEnd_toEndOf="parent"
+                                                app:layout_constraintStart_toStartOf="@id/guidelineVertical"
+                                                app:layout_constraintTop_toBottomOf="@+id/container_longest_streak">
+
+                                                <LinearLayout
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:orientation="vertical"
+                                                    android:padding="16dp">
+
+                                                    <TextView
+                                                        android:layout_width="wrap_content"
+                                                        android:layout_height="wrap_content"
+                                                        android:text="CURRENT STREAK"
+                                                        android:textAppearance="@style/TextAppearance.Reply.Body1"
+                                                        android:textSize="16sp" />
+
+                                                    <TextView
+                                                        android:id="@+id/text_curdrent_streak"
+                                                        android:layout_width="wrap_content"
+                                                        android:layout_height="wrap_content"
+                                                        android:text="null"
+                                                        android:textColor="@color/md_theme_onSurface"
+                                                        android:textSize="38sp" />
+
+                                                </LinearLayout>
+
+                                            </com.google.android.material.card.MaterialCardView>
+
+
+                                            <com.google.android.material.card.MaterialCardView
+                                                android:id="@+id/container_rank"
+                                                android:layout_width="0dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginHorizontal="4dp"
+                                                android:layout_marginVertical="8dp"
+                                                app:layout_constraintEnd_toEndOf="@id/guidelineVertical"
+                                                app:layout_constraintStart_toStartOf="parent"
+                                                app:layout_constraintTop_toBottomOf="@+id/chart_container">
+
+                                                <LinearLayout
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:orientation="vertical"
+                                                    android:padding="16dp">
+
+                                                    <TextView
+                                                        android:layout_width="wrap_content"
+                                                        android:layout_height="wrap_content"
+                                                        android:text="Rank"
+                                                        android:textAppearance="@style/TextAppearance.Reply.Body1"
+                                                        android:textSize="16sp" />
+
+                                                    <TextView
+                                                        android:id="@+id/text_rank"
+                                                        android:layout_width="wrap_content"
+                                                        android:layout_height="wrap_content"
+                                                        android:text="null"
+                                                        android:textColor="@color/md_theme_onSurface"
+                                                        android:textSize="38sp" />
+                                                </LinearLayout>
+
+                                            </com.google.android.material.card.MaterialCardView>
+
+                                            <com.google.android.material.card.MaterialCardView
+                                                android:id="@+id/container_longest_streak"
+                                                android:layout_width="0dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginHorizontal="4dp"
+                                                android:layout_marginVertical="8dp"
+                                                app:layout_constraintEnd_toEndOf="parent"
+                                                app:layout_constraintStart_toStartOf="@+id/guidelineVertical"
+                                                app:layout_constraintTop_toBottomOf="@+id/chart_container1">
+
+                                                <LinearLayout
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:orientation="vertical"
+                                                    android:padding="16dp">
+
+                                                    <TextView
+                                                        android:layout_width="wrap_content"
+                                                        android:layout_height="wrap_content"
+                                                        android:text="LONGEST STREAK"
+                                                        android:textAppearance="@style/TextAppearance.Reply.Body1"
+                                                        android:textSize="16sp" />
+
+                                                    <TextView
+                                                        android:layout_width="wrap_content"
+                                                        android:layout_height="wrap_content"
+                                                        android:text="null"
+                                                        android:textColor="@color/md_theme_onSurface"
+                                                        android:textSize="38sp" />
+
+                                                    <TextView
+                                                        android:layout_width="wrap_content"
+                                                        android:layout_height="wrap_content"
+                                                        android:layout_marginTop="16dp"
+                                                        android:text="CURRENT STREAK"
+                                                        android:textAppearance="@style/TextAppearance.Reply.Body1"
+                                                        android:textSize="16sp" />
+
+                                                    <TextView
+                                                        android:id="@+id/text_current_streak"
+                                                        android:layout_width="wrap_content"
+                                                        android:layout_height="wrap_content"
+                                                        android:text="null"
+                                                        android:textColor="@color/md_theme_onSurface"
+                                                        android:textSize="38sp" />
+                                                </LinearLayout>
+                                            </com.google.android.material.card.MaterialCardView>
+                        -->
+
+
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/guidelineVertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            app:layout_constraintGuide_percent="0.5" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                    <!-- fragment_stats.xml -->
+                    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                        xmlns:tools="http://schemas.android.com/tools"
+                        android:layout_width="match_parent"
+                        android:layout_height="250dp"
+                        tools:context=".StatsFragment">
+
+                        <com.github.mikephil.charting.charts.LineChart
+                            android:id="@+id/lineChartFrequencies"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <!--ACHIEVEMENTS-->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/container_achievements"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:visibility="gone">
+
+                    <!--MEDALS-->
+                    <TextView
+                        android:id="@+id/text_title_medals"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="32dp"
+                        android:layout_marginBottom="16dp"
+                        android:text="MEDALS"
+                        android:textSize="14.862714767456055sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <LinearLayout
+                        android:id="@+id/container_medals"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="24dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/text_title_medals">
+
+                        <LinearLayout
+                            android:id="@+id/container_gold"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="4dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_rounded_16dp"
+                            android:backgroundTint="@color/md_theme_surfaceContainerLowest"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical"
+                            android:paddingVertical="16dp">
+
+                            <ImageView
+                                android:id="@+id/image_gold"
+                                android:layout_width="34dp"
+                                android:layout_height="34dp"
+                                android:layout_marginBottom="4dp"
+                                android:scaleType="fitXY"
+                                android:src="@drawable/ic_medal_gold2" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="4dp"
+                                android:maxLines="1"
+                                android:text="Gold"
+                                android:textColor="@color/md_theme_onSurface"
+                                android:textSize="16sp" />
+
+                            <LinearLayout
+                                android:layout_width="40dp"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/bg_rounded_8dp"
+                                android:backgroundTint="#26EDB552"
+                                android:gravity="center"
+                                android:paddingVertical="2dp">
+
+                                <TextView
+                                    android:id="@+id/text_gold_number"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:letterSpacing="0"
+                                    android:text="24"
+                                    android:textAppearance="@style/TextAppearance.Reply.Body1"
+                                    android:textColor="#EDB552" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/container_silver"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="4dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_rounded_16dp"
+                            android:backgroundTint="@color/md_theme_surfaceContainerLowest"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical"
+                            android:paddingVertical="16dp">
+
+                            <ImageView
+                                android:id="@+id/image_silver"
+                                android:layout_width="34dp"
+                                android:layout_height="34dp"
+                                android:layout_marginBottom="4dp"
+                                android:scaleType="fitXY"
+                                android:src="@drawable/ic_medal_silver2" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="4dp"
+                                android:maxLines="1"
+                                android:text="Silver"
+                                android:textColor="@color/md_theme_onSurface"
+                                android:textSize="16sp" />
+
+                            <LinearLayout
+                                android:layout_width="40dp"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/bg_rounded_8dp"
+                                android:backgroundTint="#26717484"
+                                android:gravity="center"
+                                android:paddingVertical="2dp">
+
+                                <TextView
+                                    android:id="@+id/text_number_silver"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:letterSpacing="0"
+                                    android:text="37"
+                                    android:textAppearance="@style/TextAppearance.Reply.Body1"
+                                    android:textColor="#717484" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/container_bronze"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="4dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_rounded_16dp"
+                            android:backgroundTint="@color/md_theme_surfaceContainerLowest"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical"
+                            android:paddingVertical="16dp">
+
+                            <ImageView
+                                android:id="@+id/image_bronze"
+                                android:layout_width="34dp"
+                                android:layout_height="34dp"
+                                android:layout_marginBottom="4dp"
+                                android:scaleType="fitXY"
+                                android:src="@drawable/ic_medal_bronze2" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="4dp"
+                                android:maxLines="1"
+                                android:text="Bronze"
+                                android:textColor="@color/md_theme_onSurface"
+                                android:textSize="16sp" />
+
+                            <LinearLayout
+                                android:layout_width="40dp"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/bg_rounded_8dp"
+                                android:backgroundTint="#26AA9083"
+                                android:gravity="center"
+                                android:paddingVertical="2dp">
+
+                                <TextView
+                                    android:id="@+id/text_number_bronze"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:letterSpacing="0"
+                                    android:text="41"
+                                    android:textAppearance="@style/TextAppearance.Reply.Body1"
+                                    android:textColor="#AA9083" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+
+
+                    <TextView
+                        android:id="@+id/text_title_achievements"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="32dp"
+                        android:text="BADGES"
+                        android:textColor="#9098A3"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/container_medals" />
+
+                    <LinearLayout
+                        android:id="@+id/container_recycler_view_achievements"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clipChildren="false"
+                        android:clipToPadding="false"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/text_title_achievements">
+
+                        <ProgressBar
+                            android:id="@+id/progressBar"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:visibility="gone" />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recyclerview_achievements"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:nestedScrollingEnabled="false"
+                            android:paddingVertical="8dp" />
+
+                    </LinearLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+
+            <!--TOP_GUIDELINE-->
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.16" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </LinearLayout>
+</ScrollView>
+</layout>

@@ -1,0 +1,27 @@
+<resources>
+    <array name="intervalButtonsIdArray">
+        <item>@id/btn_root</item>
+        <item>@id/btn_second</item>
+        <item>@id/btn_third</item>
+        <item>@id/btn_fourth</item>
+        <item>@id/btn_fifth</item>
+        <item>@id/btn_sixth</item>
+        <item>@id/btn_seventh</item>
+        <item>@id/btn_octave</item>
+        <item>@id/btn_perfect</item>
+        <item>@id/btn_major</item>
+        <item>@id/btn_minor</item>
+        <item>@id/btn_augmented</item>
+        <item>@id/btn_diminished</item>
+    </array>
+    <integer-array name="regularButtonsIdArray">
+        <item>@id/option_1_button</item>
+        <item>@id/option_2_button</item>
+        <item>@id/option_3_button</item>
+        <item>@id/option_4_button</item>
+    </integer-array>
+
+
+
+
+</resources>

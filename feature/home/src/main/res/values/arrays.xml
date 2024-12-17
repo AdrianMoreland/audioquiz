@@ -1,0 +1,28 @@
+<resources>
+<!--    <string-array name="cardViewIds">
+        <item>@id/card1</item>
+        <item>@id/card2</item>
+        <item>@id/card3</item>
+        <item>@id/card4</item>
+        <item>@id/card5</item>
+        <item>@id/card6</item>
+    </string-array>-->
+
+    <array name="imageBadgesIdArray">
+        <item>@id/image_badge_1</item>
+        <item>@id/image_badge_2</item>
+        <item>@id/image_badge_3</item>
+        <item>@id/image_badge_4</item>
+        <item>@id/image_badge_5</item>
+        <item>@id/image_badge_6</item>
+    </array>
+
+<!--    <array name="progressBarsIdArray">
+        <item>@id/progress_sound_waves</item>
+        <item>@id/progress_synthesis</item>
+        <item>@id/progress_production</item>
+        <item>@id/progress_mixing</item>
+        <item>@id/progress_processing</item>
+        <item>@id/progress_music_theory</item>
+    </array>-->
+</resources>

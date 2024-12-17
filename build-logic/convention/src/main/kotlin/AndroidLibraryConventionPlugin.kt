@@ -16,7 +16,8 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
         project.extensions.configure<LibraryExtension> {
             try {
                 configureCommonConfig(project)
-                configureFlavors(this as BaseExtension)
+                configureFlavors(project)
+                buildFeatures.buildConfig = true
             } catch (e: Exception) {
                 project.logger.error("Error occurred during configuration: ${e.message}")
             }

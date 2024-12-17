@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="category"
+            type="com.audioquiz.feature.home.domain.HomeViewContract.CategoryUi" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        app:cardBackgroundColor="@color/md_theme_surfaceContainer"
+        app:cardCornerRadius="12dp"
+        android:layout_margin="8dp"
+        app:rippleColor="@color/md_theme_primary">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:focusable="true"
+            android:orientation="vertical"
+            android:paddingTop="18dp"
+            android:paddingBottom="16dp">
+
+            <ImageView android:id="@+id/image_category"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_marginHorizontal="21dp"
+                android:layout_marginBottom="20dp"
+                android:src="@{category.imageResId}" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="12dp"
+                android:layout_marginTop="16dp"
+                android:backgroundTint="#242B31">
+
+                <com.google.android.material.progressindicator.LinearProgressIndicator
+                    android:id="@+id/progress_indicator"
+                    style="@style/Custom.Material.ProgressBarButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:progress="@{category.progress}"
+                    app:indicatorColor="@color/md_theme_surfaceContainerHighest"
+                    app:trackColor="@color/md_theme_surfaceContainerHigh"
+                    app:trackStopIndicatorSize="0dp" />
+
+                <TextView android:id="@+id/text_category_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:text="@{category.name}"
+                    android:textAppearance="@style/TextAppearance.Reply.Headline5"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import androidx.navigation.NavController;
 
+import com.audioquiz.designsystem.base.SingleLiveEvent;
 import com.audioquiz.presentation.events.Event;
 import com.audioquiz.ui.component.toolbar.ToolbarConfiguration;
 
@@ -22,6 +23,11 @@ public class MainViewModel extends ViewModel {
     private final MutableLiveData<Event<String>> errorMessage = new MutableLiveData<>();
 
     private final MutableLiveData<NavController> navControllerLiveData = new MutableLiveData<>();
+    private final SingleLiveEvent<Object> currentUser= new SingleLiveEvent<>();
+
+    public SingleLiveEvent<Object> getCurrentUser() {
+        return currentUser;
+    }
 
     @Inject
     public MainViewModel() {

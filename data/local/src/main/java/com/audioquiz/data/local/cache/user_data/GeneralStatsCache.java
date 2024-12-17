@@ -1,6 +1,6 @@
 package com.audioquiz.data.local.cache.user_data;
 
-import com.audioquiz.api.datasources.user_stats.stats_general.GeneralStatsLocal;
+import com.audioquiz.api.datasources.user_stats.GeneralStatsDataSource;
 import com.audioquiz.data.local.dao.user_data.GeneralStatsDao;
 import com.audioquiz.data.local.entity.user_data.GeneralStatsEntity;
 import com.audioquiz.data.local.mapper.DatabaseMapper;
@@ -14,7 +14,7 @@ import io.reactivex.rxjava3.core.Completable;
 import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
-public class GeneralStatsCache implements GeneralStatsLocal {
+public class GeneralStatsCache implements GeneralStatsDataSource.Local {
     private final GeneralStatsDao generalStatsDao;
 
     @Inject

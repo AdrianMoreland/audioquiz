@@ -1,13 +1,13 @@
 package com.audioquiz.presentation.navigation.impl;
 
-import android.util.Log;
-
 import androidx.navigation.NavController;
 
 import com.audioquiz.R;
 import com.audioquiz.presentation.navigation.NavControllerProvider;
 
 import javax.inject.Inject;
+
+import timber.log.Timber;
 
 public class HomeNavigationImpl {
 
@@ -16,7 +16,7 @@ public class HomeNavigationImpl {
 
     @Inject
     public HomeNavigationImpl() {
-        Log.d("HomeNavigationImpl", "HomeNavigationImpl initialized");
+        Timber.tag("HomeNavigationImpl").d("HomeNavigationImpl initialized");
     }
 
     public void navigateHomeToSettings() {

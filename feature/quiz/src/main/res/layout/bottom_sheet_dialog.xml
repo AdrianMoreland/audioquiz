@@ -1,0 +1,133 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <View
+        android:id="@+id/bg_dialog_background"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@drawable/bg_top_rounded_gradient"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RelativeLayout  android:id="@+id/bg_dialog_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/color_transparency"
+        app:strokeColor="@color/color_transparency"
+        app:layout_constraintBottom_toTopOf="@id/guideline2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <include   android:id="@+id/included_explanation_layout"
+            layout="@layout/bottom_sheet_explanation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:strokeColor="@color/color_transparency"
+            android:background="@color/color_transparency"
+            android:visibility="gone"
+             />
+
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/space"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:elevation="0dp"
+        android:visibility="visible"
+        app:layout_constraintTop_toTopOf="@id/next_button_container"
+        app:layout_constraintBottom_toTopOf="@id/next_button_container" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        app:fabCustomSize="32dp"
+        android:id="@+id/button_explanation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:backgroundTint="@color/md_theme_onBackground"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/space"
+        app:layout_constraintBottom_toBottomOf="@id/space"
+        app:srcCompat="@drawable/ic_explanation" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/next_button_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_top_rounded_16dp"
+        android:backgroundTint="@color/md_theme_surfaceContainer"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:strokeColor="@color/md_theme_primary"
+        app:strokeWidth="2dp">
+
+        <RelativeLayout
+            android:id="@+id/text_message_container"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="16dp"
+            android:gravity="center"
+            app:layout_constraintBottom_toTopOf="@+id/button_next_question"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_max="300dp"
+            app:layout_constraintWidth_percent="0.63">
+
+            <TextView
+                android:id="@+id/tv_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/icon"
+                android:textAppearance="@style/TextAppearance.Reply.Headline2"
+                android:textColor="@color/md_theme_onSurface"
+                android:gravity="bottom"
+                android:padding="0dp"
+                android:text="Placeholder Text"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
+                android:src="@drawable/ic_correct" />
+        </RelativeLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_next_question"
+            style="@style/Custom.Material.SubmitButton"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="16dp"
+            android:text="Next"
+            android:textAppearance="@style/TextAppearance.Reply.Button"
+            android:paddingTop="-8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.33"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_message_container"
+            app:layout_constraintWidth_max="400dp"
+            app:layout_constraintWidth_percent="0.66" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="100dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

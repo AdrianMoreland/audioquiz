@@ -1,7 +1,13 @@
+import com.android.build.api.variant.BuildConfigField
+import com.audioquiz.BuildProductFlavor
+import kotlin.text.uppercase
+import java.util.Properties
+import com.android.build.api.variant.LibraryVariant
+
 plugins {
     id("audioquiz.android.library")
     id("audioquiz.android.hilt")
-    id("audioquiz.firebase")
+  //  id("audioquiz.firebase")
 }
 
 android {
@@ -9,7 +15,23 @@ android {
 
     defaultConfig {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField("String", "WEB_CLIENT_ID", project.properties["WEB_CLIENT_ID"].toString())
     }
+
+
+      val localProperties = Properties()
+      localProperties.load(project.rootProject.file("local.properties").inputStream())
+
+      androidComponents {
+            onVariants(selector().all()) { variant: LibraryVariant ->
+                  val flavorName = variant.flavorName
+                  val webClientIdKey = BuildProductFlavor.valueOf(flavorName?.uppercase() ?: "main").webClientId
+                  val webClientId = localProperties.getProperty(webClientIdKey)
+                  webClientId?.let {
+                        val buildConfigField = BuildConfigField("String", "\"$it\"", "")
+                        variant.buildConfigFields.put("WEB_CLIENT_ID", buildConfigField)
+                  }
+            }
 }
 
 dependencies {
@@ -23,12 +45,19 @@ dependencies {
         implementation(gson)
         implementation(rxjava)
         implementation(rxandroid)
-        implementation(credentials)
-        implementation(credentials.play.services.auth)
-        implementation(play.services.auth)
+          implementation(platform(firebase.bom))
+          implementation(firebase.auth)
+          implementation(firebase.firestore)
+          implementation(firebase.storage)
+          implementation(firebase.appcheck)
+          implementation(firebase.analytics)
+          implementation(play.services.auth)
+          implementation(credentials)
+          implementation(credentials.play.services.auth)
         implementation(googleid)
         implementation(modelmapper)
 
         androidTestImplementation(runner)
     }
+}
 }

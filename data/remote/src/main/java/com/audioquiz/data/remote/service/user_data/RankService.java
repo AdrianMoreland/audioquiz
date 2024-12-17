@@ -2,8 +2,8 @@ package com.audioquiz.data.remote.service.user_data;
 
 import static com.audioquiz.data.remote.util.FirestoreConstants.RANK_COLLECTION;
 
-import com.audioquiz.api.datasources.rank.RankAllTimeApi;
-import com.audioquiz.api.datasources.rank_weekly.RankWeeklyApi;
+import com.audioquiz.api.datasources.rank.RankAllTimeDataSource;
+import com.audioquiz.api.datasources.rank.RankWeeklyDataSource;
 import com.audioquiz.core.model.rank.RankEntry;
 import com.audioquiz.data.remote.datasource.FirestoreDataSource;
 import com.audioquiz.data.remote.dto.RankEntryDto;
@@ -20,7 +20,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-public class RankService implements RankAllTimeApi, RankWeeklyApi {
+public class RankService implements RankAllTimeDataSource.Remote, RankWeeklyDataSource.Remote {
     private static final String TAG = "RankService";
     private final FirestoreDataSource<RankEntryDto> firestoreDataSource;
 

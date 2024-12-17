@@ -24,11 +24,13 @@ import timber.log.Timber;
 @AndroidEntryPoint
 public class WelcomeFragment extends Fragment {
     private static final String TAG = "WelcomeFragment";
-    @Inject
-    MainFlowCoordinator mainFlowCoordinator;
+
     private StartViewModel viewModel;
     private FragmentWelcomeBinding binding;
     private ThemeEvents themeEvents;
+
+    @Inject
+    MainFlowCoordinator mainFlowCoordinator;
 
     public WelcomeFragment() {
         Timber.tag(TAG).d("WelcomeFragment ");

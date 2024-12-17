@@ -8,15 +8,11 @@ import io.reactivex.rxjava3.core.Single;
 
 public interface UserProfileRepository {
     Completable init();
-
     Single<UserProfile> getUserProfileSingle();
-
     void uploadProfileImage(String imageUri, ImageUploadCallback listener);
-
-
     void updateUsername(String username, UsernameCompletionCallback completionCallback);
-
     String getUsernameLetter();
+    Single<Boolean> sync();
 
     interface CheckDocCompletionCallback {
         void onSuccess(boolean exists);

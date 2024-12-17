@@ -1,6 +1,6 @@
 package com.audioquiz.data.local.cache.rank;
 
-import com.audioquiz.api.datasources.rank.RankAllTimeLocal;
+import com.audioquiz.api.datasources.rank.RankAllTimeDataSource;
 import com.audioquiz.core.model.rank.RankEntry;
 import com.audioquiz.data.local.dao.rank.RankAllTimeDao;
 import com.audioquiz.data.local.entity.rank_stats.RankAllTimeEntity;
@@ -11,7 +11,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-public class RankAllTimeCache implements RankAllTimeLocal {
+public class RankAllTimeCache implements RankAllTimeDataSource.Local {
     private final RankAllTimeDao rankAllTimeDao;
 
     @Inject

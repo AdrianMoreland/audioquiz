@@ -1,16 +1,16 @@
 package com.audioquiz.data.local.di;
 
 
-import com.audioquiz.api.datasources.question.QuestionLocal;
+import com.audioquiz.api.datasources.question.QuestionDataSource;
 import com.audioquiz.api.datasources.quiz_result.QuizLocal;
-import com.audioquiz.api.datasources.rank.RankAllTimeLocal;
-import com.audioquiz.api.datasources.rank_weekly.RankWeeklyLocal;
-import com.audioquiz.api.datasources.user.UserProfileLocal;
+import com.audioquiz.api.datasources.rank.RankAllTimeDataSource;
+import com.audioquiz.api.datasources.rank.RankWeeklyDataSource;
+import com.audioquiz.api.datasources.user.UserProfileDataSource;
+import com.audioquiz.api.datasources.user_stats.CategoryStatsDataSource;
+import com.audioquiz.api.datasources.user_stats.DailyScoresDataSource;
+import com.audioquiz.api.datasources.user_stats.FrequencyStatsDataSource;
+import com.audioquiz.api.datasources.user_stats.GeneralStatsDataSource;
 import com.audioquiz.api.datasources.user_stats.stats.UserDataLocal;
-import com.audioquiz.api.datasources.user_stats.stats_category.CategoryStatsLocal;
-import com.audioquiz.api.datasources.user_stats.stats_frequency.StatsFrequencyLocal;
-import com.audioquiz.api.datasources.user_stats.stats_general.GeneralStatsLocal;
-import com.audioquiz.api.datasources.user_stats.stats_weekly_scores.WeeklyStatsLocal;
 import com.audioquiz.data.local.cache.quiz.QuestionsCache;
 import com.audioquiz.data.local.cache.quiz.QuizResultCache;
 import com.audioquiz.data.local.cache.rank.RankAllTimeCache;
@@ -32,53 +32,51 @@ import dagger.hilt.components.SingletonComponent;
 public abstract class CacheModule {
 
 
-/*********************************
+    /*********************************
      ****** USER DATA ******
      ********************************/
-/*
+
+
     @Binds
-    abstract SessionLocal bindSessionDb(SessionCache sessionCache);*/
+    abstract DailyScoresDataSource.Local bindDailyScoresDb(WeeklyStatsCache weeklyStatsCache);
+
+    @Binds
+    abstract GeneralStatsDataSource.Local bindGeneralStatsDb(GeneralStatsCache generalStatsCache);
+
+    @Binds
+    abstract UserProfileDataSource.Local bindUserProfileDb(UserProfileCache userProfileCache);
 
     @Binds
     abstract UserDataLocal bindUserStatsDb(UserDataCache userStatsCache);
 
     @Binds
-    abstract UserProfileLocal bindUserProfileDb(UserProfileCache userProfileCache);
+    abstract CategoryStatsDataSource.Local bindCategoryStatsDb(CategoryStatsCache categoryStatsCache);
 
     @Binds
-    abstract GeneralStatsLocal bindGeneralStatsDb(GeneralStatsCache generalStatsCache);
+    abstract FrequencyStatsDataSource.Local bindStatsFrequencyDb(FrequencyStatsCache frequencyStatsCache);
 
-    @Binds
-    abstract CategoryStatsLocal bindCategoryStatsDb(CategoryStatsCache categoryStatsCache);
-
-    @Binds
-    abstract StatsFrequencyLocal bindStatsFrequencyDb(FrequencyStatsCache frequencyStatsCache);
-
-    @Binds
-    abstract WeeklyStatsLocal bindWeeklyStatsDb(WeeklyStatsCache weeklyStatsCache);
-
-/*********************************
+    /*********************************
      ****** QUESTIONS ******
      *********************************/
 
     @Binds
-    abstract QuestionLocal bindQuestionDb(QuestionsCache questionsCache);
+    abstract QuestionDataSource.Local bindQuestionDb(QuestionsCache questionsCache);
 
-/*********************************
+    /*********************************
      ****** QUIZ RESULT ******
      *********************************/
 
     @Binds
     abstract QuizLocal bindQuizDb(QuizResultCache quizResultCache);
 
-/*********************************
+    /*********************************
      ****** RANKS ******
      *********************************/
 
     @Binds
-    abstract RankAllTimeLocal bindRankAllTimeDb(RankAllTimeCache rankAllTimeCache);
+    abstract RankAllTimeDataSource.Local bindRankAllTimeDb(RankAllTimeCache rankAllTimeCache);
 
     @Binds
-    abstract RankWeeklyLocal bindRankWeeklyDb(RankWeeklyCache rankWeeklyCache);
+    abstract RankWeeklyDataSource.Local bindRankWeeklyDb(RankWeeklyCache rankWeeklyCache);
 
 }

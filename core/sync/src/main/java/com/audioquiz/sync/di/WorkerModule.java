@@ -1,56 +1,30 @@
-/*
 package com.audioquiz.sync.di;
 
-import androidx.hilt.work.HiltWorkerFactory;
+import android.app.Application;
 
-import com.audioquiz.sync.worker.SyncWorker;
-import com.audioquiz.sync.worker.SyncWorkerFactory;
+import com.audioquiz.sync.worker.WorkScheduler;
+import com.audioquiz.sync.worker.factory.SyncAbstractFactory;
+import com.audioquiz.sync.worker.factory.SyncAbstractFactoryImpl;
+
+import javax.inject.Singleton;
 
 import dagger.Binds;
 import dagger.Module;
+import dagger.Provides;
 import dagger.hilt.InstallIn;
 import dagger.hilt.components.SingletonComponent;
-import dagger.multibindings.IntoMap;
-import dagger.multibindings.StringKey;
 
 @Module
 @InstallIn(SingletonComponent.class)
 public abstract class WorkerModule {
 
     @Binds
-    @IntoMap
-    @StringKey("SyncWorker")
-    public abstract HiltWorkerFactory bindSyncWorkerFactory(SyncWorkerFactory factory);
+    @Singleton
+    public abstract SyncAbstractFactory bindSyncAbstractFactory(SyncAbstractFactoryImpl impl);
 
-*/
-/*    @Binds
-    abstract WorkerFactory bindWorkerFactory(MyWorkerFactory factory);
-
-    // Worker factory implementation
-    public static class MyWorkerFactory extends WorkerFactory {
-        @Override
-        public ListenableWorker createWorker(@NonNull Context appContext,
-                                             @NonNull String workerClassName,
-                                             @NonNull WorkerParameters workerParameters) {
-            if (workerClassName.equals(SyncWorker.class.getName())) {
-                // Use Hilt to retrieve the SyncUserDataUseCase
-                SyncUserDataUseCase syncUserDataUseCase = EntryPointAccessors.fromApplication(
-                        appContext,
-                        WorkerEntryPoint.class
-                ).syncUserDataUseCase();
-                return new SyncWorker(appContext, workerParameters, syncUserDataUseCase);
-            }
-            return null; // Return null for unrecognized worker classes
-        }
+    @Provides
+    @Singleton
+    public static WorkScheduler provideWorkScheduler(Application application, SyncAbstractFactory syncAbstractFactory) {
+        return new WorkScheduler(application, syncAbstractFactory);
     }
-
-
-    // Define the entry point interface
-    @EntryPoint
-    @InstallIn(SingletonComponent.class)
-    public interface WorkerEntryPoint {
-        SyncUserDataUseCase syncUserDataUseCase();
-    }*//*
-
 }
-*/

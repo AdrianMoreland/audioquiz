@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <style name="Custom.Material.Toolbar" parent="Widget.Material3.LinearProgressIndicator">
+        <item name="android:padding">0dp</item>
+        <item name= "indicatorTrackGapSize">0dp</item>
+        <item name="trackThickness">72dp</item>
+        <item name="trackCornerRadius">16dp</item>
+    </style>
+
+    <style name="Custom.Material.ProgressBarButton" parent="Widget.Material3.LinearProgressIndicator">
+        <item name="android:padding">0dp</item>
+        <item name= "indicatorTrackGapSize">0dp</item>
+        <item name="trackThickness">72dp</item>
+        <item name="trackCornerRadius">16dp</item>
+    </style>
+
+    <style name="Custom.Material.ProgressBarCategory" parent="Widget.Material3.LinearProgressIndicator">
+        <item name="android:padding">0dp</item>
+        <item name= "indicatorTrackGapSize">0dp</item>
+        <item name= "trackColor">@color/color_transparency</item>
+        <item name="trackThickness">32dp</item>
+        <item name="trackCornerRadius">16dp</item>
+    </style>
+
+    <style name="Custom.Material.ChapterButton" parent="Widget.Material3.Button.IconButton.Filled">
+        <item name="android:backgroundTint">@color/color_transparency</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:insetTop">24dp</item>
+        <item name="android:insetLeft">8dp</item>
+        <item name="android:textColor">@color/md_theme_onPrimary</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:gravity">start|top</item>
+        <item name="android:textAlignment">textStart</item>
+        <item name="android:textSize">21sp</item>
+        <item name="android:textAppearance">@style/TextAppearance.Reply.Button</item>
+    </style>
+
+    <style name="Custom.Material.IconButton" parent="Widget.Material3.Button.IconButton">
+        <item name="android:backgroundTint">@color/color_transparency</item>
+        <item name="android:minWidth">0dp</item>
+        <item name="android:paddingStart">0dp</item>
+        <item name="android:paddingEnd">0dp</item>
+        <item name="iconSize">32dp</item>
+        <item name="iconTint">@color/md_theme_onBackground</item>
+        <item name="iconGravity">textStart</item>
+        <item name="background">@null</item>
+        <item name="minWidth">48dp</item>
+    </style>
+
+    <style name="Custom.Material.IconButton.ExpandCategory" parent="Widget.AppCompat.ImageButton">
+        <item name="icon">@drawable/ic_arrow_down_home</item>
+        <item name="iconTint">#FF6F6F6F</item>
+        <item name="iconGravity">end</item>
+        <item name="android:padding">0dp</item>
+    </style>
+
+    <style name="CustomCircularProgress" parent="@style/Widget.MaterialComponents.CircularProgressIndicator">
+        <item name="indicatorColor">@color/md_theme_secondary</item>
+        <item name="trackColor">@color/md_theme_secondaryContainer</item>
+    </style>
+
+    <style name="Custom.Material.BentoButton" parent="Widget.Material3.Button.ElevatedButton.Icon">
+        <item name="android:backgroundTint">@color/md_theme_surfaceVariant</item>
+        <item name="iconTint">@color/md_theme_onSurfaceVariant</item>
+        <item name="android:textColor">@color/md_theme_onSurfaceVariant</item>
+        <item name="android:minWidth">0dp</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="strokeColor">@color/material_on_surface_stroke</item>
+        <item name="cornerRadius">16dp</item>
+        <item name="android:paddingStart">20dp</item>
+        <item name="android:paddingEnd">20dp</item>
+        <item name="android:insetTop">4dp</item>
+        <item name="android:insetBottom">8dp</item>
+        <item name="android:insetLeft">4dp</item>
+        <item name="android:insetRight">4dp</item>
+        <item name="elevation">10dp</item>
+        <item name="android:translationZ">3dp</item>
+        <item name="android:stateListAnimator">@null</item>
+        <item name="iconGravity">textTop</item>
+        <item name="iconSize">32dp</item>
+    </style>
+
+    <style name="Custom.Material.AnswerOptionButton" parent="Widget.Material3.Button.ElevatedButton">
+        <item name="backgroundTint">@color/md_theme_primaryFixed</item>
+        <item name="android:textColor">@color/md_theme_onPrimaryFixed</item>
+        <item name="android:fontFamily">@font/quicksand_bold</item>
+        <item name="android:elevation">0dp</item>
+        <item name="cornerRadius">8dp</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="Custom.Material.NavbarButton" parent="Widget.Material3.Button.IconButton">
+
+
+
+        <item name="android:background">@drawable/bg_navbar_unselected</item>
+        <item name="android:elevation">0dp</item>
+        <item name="iconSize">36dp</item>
+        <item name="iconTint">#222222</item>
+        <item name="iconGravity">textStart</item>
+    </style>
+
+    <style name="Custom.Material.SubmitButton" parent="Widget.Material3.Button.IconButton">
+        <item name="android:background">@drawable/shape_button_submit</item>
+        <item name="backgroundTint">@null</item>
+        <item name="android:elevation">8dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:textColor">@color/md_theme_onPrimary</item>
+    </style>
+
+    <style name="Custom.Material.StartChapterButton" parent="Widget.Material3.Button.IconButton">
+        <item name="android:background">@drawable/bg_navbar_unselected</item>
+        <item name="android:elevation">0dp</item>
+        <item name="android:paddingLeft">0dp</item>
+        <item name="android:paddingRight">0dp</item>
+        <item name="android:insetLeft">0dp</item>
+        <item name="android:insetRight">0dp</item>
+        <item name="iconGravity">textStart</item>
+        <item name="iconTint">@color/md_theme_surface</item>
+    </style>
+
+    <style name="AppTheme.BottomSheetDialog" parent="Theme.MaterialComponents.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/Widget.Material3.BottomSheet.Modal</item>
+    </style>
+
+    <style name="Custom.Material.SettingsTextButton" parent="Widget.Material3.Button.TextButton">
+
+
+        <item name="android:textColor">@color/md_theme_error</item>
+        <item name="android:elevation">0dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:paddingTop">0dp</item>
+        <item name="android:paddingBottom">0dp</item>
+        <item name="android:minHeight">0dp</item>
+        <item name="cornerRadius">8dp</item>
+        <item name="marginHorizontal">8dp</item>
+        <item name="android:inset">8dp</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.MyApp.CardView.Circle" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="TransparentBottomSheetExplanation" parent="ThemeOverlay.Material3.BottomSheetDialog">
+        <item name="android:backgroundTint">@color/color_transparency</item>
+        <item name="android:windowElevation">0dp</item>
+        <item name="android:windowBackground">@drawable/bg_no_stroke</item>
+    </style>
+
+    <style name="TransparentDialog" parent="Theme.MaterialComponents.Light.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowAnimationStyle">@null</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.App.CircleImageView" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+
+</resources>

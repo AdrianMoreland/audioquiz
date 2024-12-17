@@ -14,14 +14,14 @@ import com.audioquiz.core.domain.repository.user.WeeklyScoresRepository;
 import com.audioquiz.core.extensions.di.ExecutorModule;
 import com.audioquiz.data.repository.auth.AuthRepositoryImpl;
 import com.audioquiz.data.repository.question.FrequenciesDataRepository_impl;
-import com.audioquiz.data.repository.question.QuestionRepository_Impl;
+import com.audioquiz.data.repository.question.QuestionRepositoryImpl;
 import com.audioquiz.data.repository.quiz.QuizRepository_impl;
 import com.audioquiz.data.repository.rank.RankRepository_Impl;
-import com.audioquiz.data.repository.stats.CategoryStatsRepository_Impl;
+import com.audioquiz.data.repository.stats.CategoryStatsRepositoryImpl;
 import com.audioquiz.data.repository.stats.FrequencyStatsRepository_Impl;
 import com.audioquiz.data.repository.stats.GeneralStatsRepositoryImpl;
 import com.audioquiz.data.repository.stats.StatsRepository_Impl;
-import com.audioquiz.data.repository.stats.UserProfileRepository_Impl;
+import com.audioquiz.data.repository.stats.UserProfileRepositoryImpl;
 import com.audioquiz.data.repository.stats.WeeklyScoresRepositoryImpl;
 
 import javax.inject.Singleton;
@@ -41,7 +41,7 @@ public abstract class RepositoryModule {
 
     @Binds
     @Singleton
-    abstract QuestionRepository bindQuestionRepository(QuestionRepository_Impl questionRepository);
+    abstract QuestionRepository bindQuestionRepository(QuestionRepositoryImpl questionRepository);
 
     @Binds
     @Singleton
@@ -49,7 +49,7 @@ public abstract class RepositoryModule {
 
     @Binds
     @Singleton
-    public abstract UserProfileRepository bindUserProfileRepository(UserProfileRepository_Impl userProfileRepository);
+    public abstract UserProfileRepository bindUserProfileRepository(UserProfileRepositoryImpl userProfileRepository);
 
     @Binds
     @Singleton
@@ -57,7 +57,7 @@ public abstract class RepositoryModule {
 
     @Binds
     @Singleton
-    abstract CategoryStatsRepository bindCategoryStatsRepository(CategoryStatsRepository_Impl categoryStatsRepository);
+    abstract CategoryStatsRepository bindCategoryStatsRepository(CategoryStatsRepositoryImpl categoryStatsRepository);
 
     @Binds
     @Singleton

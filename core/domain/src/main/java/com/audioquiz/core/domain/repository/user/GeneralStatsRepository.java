@@ -8,9 +8,6 @@ import io.reactivex.rxjava3.core.Single;
 public interface GeneralStatsRepository {
     void init();
     Single<GeneralStats> getGeneralStats();
-
     Completable saveGeneralStats(GeneralStats generalStats);
-
     Completable deleteGeneralStats();
-
  }
