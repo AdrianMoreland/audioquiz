@@ -1,8 +1,6 @@
 import com.android.build.api.dsl.LibraryExtension
-import com.android.build.gradle.BaseExtension
 import com.audioquiz.BuildPlugins
 import com.audioquiz.configureCommonConfig
-import com.audioquiz.configureFlavors
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
@@ -16,7 +14,7 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
         project.extensions.configure<LibraryExtension> {
             try {
                 configureCommonConfig(project)
-                configureFlavors(project)
+                //configureFlavors(project)
                 buildFeatures.buildConfig = true
             } catch (e: Exception) {
                 project.logger.error("Error occurred during configuration: ${e.message}")

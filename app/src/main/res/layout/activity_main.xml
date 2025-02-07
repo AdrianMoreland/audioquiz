@@ -26,12 +26,11 @@
             app:popupTheme="@style/Widget.Material3.Toolbar"
             app:title="@id/tvToolbarTitle" />
 
-        <eightbitlab.com.blurview.BlurView
+        <FrameLayout
             android:id="@+id/blurView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_navbar_active"
-            app:blurOverlayColor="#33FFFFFF"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent">
@@ -43,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:background="?android:attr/windowBackground"  />
 
-        </eightbitlab.com.blurview.BlurView>
+        </FrameLayout>
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/nav_host_fragment"

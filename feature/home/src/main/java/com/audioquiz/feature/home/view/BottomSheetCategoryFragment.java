@@ -101,7 +101,6 @@ public class BottomSheetCategoryFragment extends BottomSheetDialogFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-       // View view = inflater.inflate(R.layout.bottom_sheet_category, container, false);
         binding = BottomSheetCategoryBinding.inflate(inflater, container, false);
         bottomSheetCategoryViewModel = new ViewModelProvider(this).get(BottomSheetCategoryViewModel.class);
         binding.setViewModel(bottomSheetCategoryViewModel); // Set the ViewModel in the binding
@@ -116,6 +115,7 @@ public class BottomSheetCategoryFragment extends BottomSheetDialogFragment {
                 binding.setCategory(category);
                 int currentChapterOrdinal = arguments.getInt(ARG_CURRENT_CHAPTER);
                 Timber.tag("BottomSheetCategory").d("Current chapter ordinal: %d", currentChapterOrdinal);
+                initializeViews();
                 setupViews(category, currentChapterOrdinal);
             } else {
                 handleError("Missing category argument");
@@ -125,12 +125,6 @@ public class BottomSheetCategoryFragment extends BottomSheetDialogFragment {
         }
 
         return view;
-    }
-
-    private void handleError(String message) {
-        Timber.tag("BottomSheetCategoryFragment").e(message);
-        // You can add more error handling logic here, like showing a Toast or Snackbar
-        dismiss(); // Dismiss the fragment
     }
 
     private int getColor(@ColorRes int colorResId) {
@@ -147,7 +141,7 @@ public class BottomSheetCategoryFragment extends BottomSheetDialogFragment {
 
     private void setupViews(String category, int currentChapterOrdinal) {
         HomeViewContract.Chapter chapter = chapters.get(currentChapterOrdinal - 1);
-        initializeViews();
+     //   initializeViews();
 
         binding.setCategory(category);
         Timber.tag("BottomSheetCategory").d("Category: %s", category);
@@ -239,7 +233,7 @@ public class BottomSheetCategoryFragment extends BottomSheetDialogFragment {
     }
 
     private enum ChapterStatus {
-        CURRENT, COMPLETED, FUTURE
+        CURRENT, COMPLETED, FUTURE;
     }
 
     private void styleChapter(int index, ChapterStatus status, int width, int height) {
@@ -273,14 +267,12 @@ public class BottomSheetCategoryFragment extends BottomSheetDialogFragment {
         }
     }
 
-
     private void setupButtonListeners(String category) {
         for (int chapterIndex = 0; chapterIndex < quizButtons.length; chapterIndex++) {
             final int chapter = chapterIndex + 1;
             quizButtons[chapterIndex].setOnClickListener(v -> navigateToQuiz(category, chapter));
         }
     }
-
 
     private void navigateToQuiz(String category, int chapter) {
         String quizType = "lesson";
@@ -289,6 +281,12 @@ public class BottomSheetCategoryFragment extends BottomSheetDialogFragment {
         args.putString("category", category);
         args.putInt("level", chapter);
      //   NavHostFragment.findNavController(this).navigate(com.example.ui.R.id.action_global_infoBottomSheetCategory_to_questionFragment);        dismiss();
+    }
+
+    private void handleError(String message) {
+        Timber.tag("BottomSheetCategoryFragment").e(message);
+        // You can add more error handling logic here, like showing a Toast or Snackbar
+        dismiss(); // Dismiss the fragment
     }
 
 }

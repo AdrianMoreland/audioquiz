@@ -4,7 +4,6 @@ import com.audioquiz.AndroidConfig
 import com.audioquiz.BuildPlugins
 import com.audioquiz.configureBuildFeatures
 import com.audioquiz.configureCommonConfig
-import com.audioquiz.configureFlavors
 import com.audioquiz.configurePackagingOptions
 import com.audioquiz.configureSigningConfigs
 import org.gradle.api.Plugin
@@ -23,7 +22,7 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
                   configureBuildFeatures(this as BaseExtension)
                   configureSigningConfigs(this, project)
                   configureBuildTypes(this)
-                  configureFlavors(project)
+                //  configureFlavors(project)
                   configurePackagingOptions(this as BaseExtension)
             }
       }

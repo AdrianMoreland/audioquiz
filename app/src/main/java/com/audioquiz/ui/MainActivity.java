@@ -41,8 +41,6 @@ import java.util.Objects;
 import javax.inject.Inject;
 
 import dagger.hilt.android.AndroidEntryPoint;
-import eightbitlab.com.blurview.BlurView;
-import eightbitlab.com.blurview.RenderScriptBlur;
 import timber.log.Timber;
 
 
@@ -113,7 +111,7 @@ public class MainActivity extends AppCompatActivity implements NavControllerProv
         Timber.tag("BuildInfo").d("BuildConfig.VERSION_CODE: %s", BuildConfig.VERSION_CODE);
         Timber.tag("BuildInfo").d("BuildConfig.BUILD_TYPE: %s", BuildConfig.BUILD_TYPE);
         Timber.tag("BuildInfo").d("BuildConfig.APPLICATION_ID: %s", BuildConfig.APPLICATION_ID);
-        Timber.tag("BuildInfo").d("BuildConfig.FLAVOR: %s", BuildConfig.FLAVOR);
+//        Timber.tag("BuildInfo").d("BuildConfig.FLAVOR: %s", BuildConfig.FLAVOR);
 //        Timber.tag("BuildInfo").d("Web Client ID: %s", BuildConfig.WEB_CLIENT_ID);
         logSha1Key();
         logGoogleServicesJson();
@@ -216,10 +214,10 @@ public class MainActivity extends AppCompatActivity implements NavControllerProv
     private void setupBlurView() {
         float radius = 10f;
         Drawable windowBackground = getWindow().getDecorView().getBackground();
-        BlurView blurView = binding.blurView;
+/*        BlurView blurView = binding.blurView;
         blurView.setupWith(findViewById(android.R.id.content), new RenderScriptBlur(this)).setFrameClearDrawable(windowBackground).setBlurRadius(radius);
         blurView.setOutlineProvider(ViewOutlineProvider.BACKGROUND);
-        blurView.setClipToOutline(true);
+        blurView.setClipToOutline(true);*/
     }
 
     private void showErrorAndLog(String message) {

@@ -23,6 +23,6 @@ dependencies {
         implementation(glide)
         ksp(glide.compiler)
         implementation(ucrop)
-        implementation(blurview)
+//        implementation(blurview)
     } 
 }

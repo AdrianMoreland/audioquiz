@@ -1,15 +1,13 @@
 [versions]
-jdk = "17"
-
+agentGradlePlugin = "7.6.2"
 kotlin = "2.0.20"
 ksp = "2.0.20-1.0.25"
-androidGradlePlugin = "8.7.2"
+androidGradlePlugin = "8.7.3"
 
 androidxCoreSplashscreen = "1.0.1"
 annotation = "1.9.1"
 appcompat = "1.7.0"
 autofittextview = "0.2.1"
-blurview = "version-2.0.3"
 constraintlayout = "2.2.0"
 credentials = "1.3.0"
 dagger2 = "2.52"
@@ -17,13 +15,8 @@ dependencyAnalysis = "2.0.2"
 dependencyVersions = "0.51.0"
 espressoCore = "3.6.1"
 fragments = "1.8.5"
-firebase_bom = "33.5.1"
-firebase_auth = "23.0.0"
-firebase_firestore = "25.1.0"
-firebase_storage = "21.0.0"
-firebase_appcheck = "18.0.0"
-firebase_analytics = "22.1.0"
-firebaseCrashlyticsPlugin = "3.0.2"
+firebase_bom = "33.9.0"
+firebaseCrashlyticsPlugin = "3.0.3"
 firebasePerfPlugin = "1.4.2"
 firebase_appcheck_safetynet = "18.0.0"
 glide = "4.16.0"
@@ -41,15 +34,14 @@ lifecycle = "2.8.7"
 material = "1.12.0"
 mockk = "1.13.12"
 mockito_core = "5.12.0"
-mockitoKotlin = "4.1.0"
 modelmapper = "3.2.1"
 modulesGraphAssert = "2.7.1"
 mpandroidchart = "v3.1.0"
-navigation = "2.8.3"
-play_services_auth = "21.2.0"
+navigation = "2.8.6"
+play_services_auth = "21.3.0"
 play-services-base = "18.5.0"
 room = "2.6.1"
-roomRuntimeAndroid = "2.7.0-alpha11"
+roomRuntimeAndroid = "2.7.0-alpha13"
 runner = "1.6.2"
 rxjava = "3.1.9"
 rxandroid = "3.0.2"
@@ -84,6 +76,8 @@ audioquiz-hilt = { id = "audioquiz.android.hilt", version = "" }
 [libraries]
 # BUILD LOGIC
 # Dependencies of the included build-logic
+agent-gradle-plugin = { module = "com.newrelic.agent.android:agent-gradle-plugin", version.ref = "agentGradlePlugin" }
+android-agent = { module = "com.newrelic.agent.android:android-agent", version.ref = "agentGradlePlugin" }
 kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidGradlePlugin" }
 ksp-gradlePlugin = { group = "com.google.devtools.ksp", name = "symbol-processing-gradle-plugin", version.ref = "ksp" }
@@ -157,7 +151,7 @@ javax-inject = { group = "javax.inject", name = "javax.inject", version.ref = "j
 rxjava = { group = "io.reactivex.rxjava3", name = "rxjava", version.ref = "rxjava" }
 rxandroid = { group = "io.reactivex.rxjava3", name = "rxandroid", version.ref = "rxandroid" }
 #UI
-blurview = { group = "com.github.Dimezis", name = "BlurView", version.ref = "blurview" }
+#blurview = { group = "com.github.Dimezis", name = "BlurView", version.ref = "blurview" }
 autofittextview = { group = "me.grantland", name = "autofittextview", version.ref = "autofittextview" }
 glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
 glide-compiler = { group = "com.github.bumptech.glide", name = "compiler", version.ref = "glide" }

@@ -7,7 +7,6 @@ import com.android.build.api.variant.LibraryVariant
 plugins {
     id("audioquiz.android.library")
     id("audioquiz.android.hilt")
-  //  id("audioquiz.firebase")
 }
 
 android {
@@ -25,7 +24,7 @@ android {
       androidComponents {
             onVariants(selector().all()) { variant: LibraryVariant ->
                   val flavorName = variant.flavorName
-                  val webClientIdKey = BuildProductFlavor.valueOf(flavorName?.uppercase() ?: "main").webClientId
+                  val webClientIdKey = "WEB_CLIENT_ID"
                   val webClientId = localProperties.getProperty(webClientIdKey)
                   webClientId?.let {
                         val buildConfigField = BuildConfigField("String", "\"$it\"", "")

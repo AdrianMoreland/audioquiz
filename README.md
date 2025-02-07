@@ -1,11 +1,91 @@
 # AudioQuiz
 
 ![](asset/header.jpeg)
+
+
+## Hilt & Modularization
+This Android project implements the Model-View-Intent architecture using Java, Dagger-Hilt, and multi-module structure.
+
+## Project Structure~~~~
+
+This repository demonstrates an online shopping app that follows best practices for Android development. The app is built using the MVI architecture, Domain use cases, Hilt, single activity architecture, and flow. There are 8 modules in this project:
+
+- `app`: This module is the entry point of the Android app and contains only a splash screen.
+- `account`: This module is for all the screens that need the user to be authenticated, such as the dashboard, home, user profile, settings, cart, etc.
+- `login`: This module is for user authentication flow, such as login, signup and forgot password.
+- `home`: This module is for the home screen(s)
+- `stats`: This module is user statistics screen
+- `rank`: This module is user ranking screens
+- `settings`: This module is for user settings
+- `core`: This module contains domain model, interface contracts, base classes, shared classes, and utils.
+- `navigation`: This module contains all the base classes needed for navigation coordinator pattern.
+- `style`: This module has all the shared resources among the other modules, such as styles, colors, theme, drawable, etc.
+- `ui-components`: This module contains all the custom UI components to be used by other modules, such as CustomButton, CustomProgressIndicator, etc.
+
+The project is structured using the multi-module architecture approach, which separates different functionalities into individual modules. The following is a brief overview of each module:
+- `data` package: The classes inside this package that handles data retrieval from different sources, such as APIs or local databases. It uses Retrofit and Room libraries to implement the data layer.
+- `domain` package: The classes inside this package that contains the business logic and domain models of the app. It provides the use cases and repositories that are used by the presentation layer.
+- `presentation` package: The classes inside this package that handles the UI and user interactions. It implements the MVI architecture using Coroutine flow and provides the view models and view states that are used by the app.
+- `di` package: The classes inside this package that contains all the dagger modules and components which is needed in the module.
+- `navigation` package: The classes inside this package that contains navigation flow coordinator and navigation effect to break the dependency of ui and navigation components. This help for a clearer structure and also better unit testing the navigation directions.
+-
+## Notes MVVM+LiveData+MVI
+- ViewState:
+    -     As the name suggests this is part of the model layer, and our view observes this model for state changes. 
+            ViewState should represent the current state of the view at any given time. 
+            So this class should have all the variable content on which our view is dependent. 
+            Every time there is any user input/event we will expose modified copy (to maintain the previous state which is not being modified) of this class.
+
+- ViewEffect:
+    -     In Android, we have certain actions that are more like fire-and-forget, for example- Toast, in those cases,
+             we can not use ViewState as it maintains state. It means, if we use ViewState to show a Toast, 
+           it will be shown again on configuration change or every time there is a new state unless and until we reset its state by passing ‘toast is shown’ effect. 
+           And if you do not wish to do that, you can use ViewEffect as it is based on SingleLiveEvent and does not maintain state.
+
+- ViewEvent:
+    -     It represents all actions/events a user can perform on the view. This is used to pass user input/event to the ViewModel.
+
+# Base Principles
+# Core Principles
+- Separation of Concerns: Divide your app into distinct layers with clear responsibilities:
+  -- UI Layer (presentation)
+  -- Data Layer (business logic)
+  -- Domain Layer (optional - complex/reusable logic)
+- Avoid putting business logic in UI classes like Activities and Fragments.
+- Drive UI from Data Models: Use data models, ideally persistent ones (e.g., database-backed), to represent your app's data. This ensures data survives configuration changes and works offline.
+- Single Source of Truth (SSOT): Each data type has a single owner responsible for modifications. This improves data consistency and debugging.
+- Unidirectional Data Flow (UDF): Data flows in one direction (typically from data layer to UI), while events flow in the opposite direction. This enhances data consistency and reduces errors.
+# Recommended Architecture
+## UI Layer
+- Displays data using Views or Jetpack Compose.
+- Uses state holders (e.g., ViewModels) to hold and manage UI data.
+## Data Layer
+- Contains business logic and exposes data through repositories.
+- Repositories interact with data sources (database, network, etc.).
+## Domain Layer (Optional)
+- Encapsulates complex or reusable business logic in use cases or interactors.
+- Simplifies interactions between UI and data layers.
+# Additional Best Practices
+- Dependency Injection: Use DI (e.g., Hilt) to manage dependencies between classes.
+- Avoid Data in App Components: Don't store data in Activity, Service, etc., as they have short lifecycles.
+- Minimize Android Dependencies: Abstract away from Android classes (e.g., Context) for better testability.
+- Well-Defined Responsibilities: Create modules with clear boundaries and avoid mixing unrelated logic.
+- Testability: Design for testability by isolating modules and using well-defined APIs.
+- Concurrency: Each type manages its own concurrency (e.g., moving long-running tasks off the main thread).
+- Offline Support: Persist data locally to provide functionality even without a network connection.
+
+## Flows
+- Login flow: The auth module represents it when user needs to be authenticated
+- Home flow: The account module represents it when user is authenticated and gets access to the home screen
+- User registration flow: The onboarding module represents it when user needs to be registered
+
+
+# Database Structure
 users-data  (Main collection containing the data of all users with one document per user)
 |
 ├── $userId (Document)  (Document ID is the user's ID)
 |     |
-|     ├── Fields (UserProfile)
+|     ├── Fields (UserProfile) 
 |     |     ├── lastUpdated: long
 |     |     ├── userId: string
 |     |     ├── username: string
@@ -102,288 +182,14 @@ rank-data (collection used to fetch leaderboard data in batches like top 30 perf
 |     |     ├── totalScore: int
 |     |     ├── averageScore: double
 |     |     └── weekScore: int (user's score in the last 7 days)
-|     |
-
-
-
-
-
-
-we will use the login feature as an example to create the structure:
-
-so, we have the :app  module with main activity, application class, navigation, navhostfragment...
-then,
-':feature:login' has the following directories and classes:::
-/di
-LoginFragmentModule.java
-/domain
-LoggedInUserView.java
-LoginResult.java
-LoginViewContract.java
-/presentation
-//navigation
-LoginCoordinatorEvent.java
-LoginFlowCoordinator.java
-LoginNavigation.java
-/view
-LoginFragment.java
-SignupFragment.java
-/viewmodel
-LoginViewModel.java
-SignupViewModel.java
-SimpleTextWatcher.java
-
-
-and the doimain related classes for login logic:
-
---Result
---AccessToken
---LoggedInUser
---Session
---UserProfile
---LoginType
-/repository
---AuthRepository
-/use_case
---UserAuthUseCaseFacade
---LoginUserUseCaseImpl
---SendPasswordResetEmailUseCase_Impl
---UserAuthUseCaseFacadeImpl
-
-
-and finally the data related classes to authentication:
-AuthRepository.java
-AuthCache.java
-UserAuthDao.java
-AppDatabase.java
-AuthDataSource.java
-GoogleSignInDataSource.java
-UserProfileDataSource.java
-UserProfileDto.java
-AuthProvider.java
-AuthorizationGatewayImpl.java
-AuthService.java
-GoogleSignInService.java
-
-
-so using the summary we currenlty have, write the module/directory structure graph
-
-text:
-"S.O.L.I.D. Principles
-
-Single Responsibility Principle (SRP):
-
-A class should have only one reason to change, focusing on a single responsibility or actor.
-Ensures cohesion and isolates different concerns.
-Open-Closed Principle (OCP):
-
-Software entities should be open for extension but closed for modification.
-Encourages adding new functionality through extensions rather than altering existing code, reducing regression bugs and merge conflicts.
-Liskov Substitution Principle (LSP):
-
-Derived classes must be substitutable for their base classes without altering the correctness of the program.
-Avoids tight coupling by favoring composition over inheritance.
-Interface Segregation Principle (ISP):
-
-Clients should not be forced to depend on interfaces they do not use.
-Smaller, more specific interfaces are preferred over large, general ones.
-Dependency Inversion Principle (DIP):
-
-High-level modules should not depend on low-level modules; both should depend on abstractions.
-Decouples components by relying on abstractions rather than concrete implementations.
-Key Insights on OCP
-
-Avoid Modifying Existing Code: The goal of OCP is to extend functionality without modifying existing code. This prevents the introduction of bugs and keeps changes isolated.
-
-Violation of Principles Impacting OCP:
-
-LSP Violation: Incorrect inheritance can force modifications in parent classes when adding subclasses.
-SRP Violation: Classes with multiple responsibilities may require changes affecting other areas, violating OCP.
-DIP Violation: Concrete dependencies can lead to extensive recompilations when modifications are made.
-ISP Violation: Large interfaces can force changes in unrelated code, impacting OCP.
-Flag Arguments and Enums: Using flags or enums to alter behavior can lead to modifications that break OCP. Instead, use specific methods or functions to maintain compliance with OCP.
-
-Modularization Strategies
-
-Package by Layer:
-
-Splits codebase into layers (Presentation-Domain-Data).
-Cons: Often results in large modules that are prone to frequent changes, which can violate SRP, OCP, and other principles.
-Pros: Simplifies initial modularization but lacks reusability and can lead to difficulties in managing changes across layers.
-Package by Feature:
-
-Organizes codebase by features, isolating changes to individual modules.
-Pros: Enhances maintenance and modular independence, supporting parallel compilation and reducing team conflicts.
-Cons: Can lead to large modules combining UI and business logic, and might create dependency issues between feature modules.
-Package by Component:
-
-Divides codebase into UI modules and component modules (domain + data), guided by use cases.
-Pros: Provides reusability, maintains separation of concerns, and supports parallel compilation. Reduces recompilation needs by isolating frequently changing UI code from stable domain logic.
-Cons: Requires careful management of shared code between modules but is effective for UI-heavy projects.
-Summary
-
-SRP: Focus on single responsibilities to ensure cohesion.
-OCP: Design for extension without modification to avoid regression.
-LSP: Favor composition over inheritance to prevent tight coupling.
-ISP: Use focused, specific interfaces to avoid unnecessary dependencies.
-DIP: Depend on abstractions to reduce coupling between components.
+ 
+ 
 Modularization Approach:
 
 Package by Layer: Often unsuitable due to large modules and frequent changes.
 Package by Feature: Good for maintenance but may face issues with reusability and large, complex modules.
 Package by Component: Optimal for UI-heavy projects, supporting reusability and minimizing recompilations."
-
-repeat this, but instead of having everything in the feature module, have separate modules dedicated to core logic such as as local data, remote, api etc:
-:feature:login
-├── di 
-│└── LoginFragmentModule.java
-├── domain
-│ ├── model
-│ │ ├── AccessToken.java
-│ │ ├── LoggedInUser.java
-│ │ ├── LoginType.java
-│ │ ├── Result.java
-│ │ ├── Session.java
-│ │ └── UserProfile.java 
-│ ├── repository 
-│ │ └── AuthRepository.java
-│ └── use-case 
-│ ├── UserAuthUseCaseFacade.java
-│ ├── LoginUserUseCaseImpl.java 
-│ ├── SendPasswordResetEmailUseCaseImpl.java 
-│ └── UserAuthUseCaseFacadeImpl.java 
-├── presentation
-│ ├── navigation 
-│ │ ├── LoginCoordinatorEvent.java 
-│ │ ├── LoginFlowCoordinator.java 
-│ │ └── LoginNavigation.java 
-│ ├── view 
-│ │ ├── LoginFragment.java 
-│ │ └── SignupFragment.java 
-│ └── viewmodel
-│ ├── LoginViewModel.java
-│ ├── SignupViewModel.java 
-│ └── SimpleTextWatcher.java
-└── data
-├── local
-│ ├── AuthCache.java 
-│ ├── UserAuthDao.java
-│ └── AppDatabase.java
-├── remote 
-│ ├── AuthDataSource.java
-│ ├── GoogleSignInDataSource.java 
-│ ├── UserProfileDataSource.java 
-│ └── dto
-│ └── UserProfileDto.java
-├── service
-│ ├── AuthProvider.java
-│ ├── AuthorizationGatewayImpl.java
-│ ├── AuthService.java
-│ └── GoogleSignInService.java
-└── repository
-└── AuthRepositoryImpl.java
-
-├── app
-├── build-logic
-├── core
-│ ├── config
-│ ├── base
-│ ├── extensions
-│ ├── network
-│ ├── sync
-│ ├── test 
-│ └── ui
-├── data
-│ ├── api
-│ ├── local
-│ ├── remote
-│ └── repository
-├── domain
-│ ├── auth
-│ ├── market
-│ ├── quiz
-│ └── rank
-├── feature
-│ ├── home
-│ ├── login
-│ ├── quiz
-│ ├── rank
-│ ├── stats
-│ └── settings
-├── library
-│ ├── designsystem
-│ ├── navigation
-
-documentation
-domain
-feature
-home
-login
-marketdetail
-quiz
-rank
-settings
-stats
-git-hooks
-gradle
-library
-designsystem
-navigation
-
-
-:feature:login
-├── di
-│   └── LoginFragmentModule.java
-|
-├── domain
-│   ├── model
-│   │   ├── AccessToken.java
-│   │   ├── LoggedInUser.java
-│   │   ├── LoginType.java
-│   │   ├── Result.java
-│   │   ├── Session.java
-│   │   └── UserProfile.java
-│   ├── repository
-│   │   └── AuthRepository.java
-│   └── use-case
-│       ├── UserAuthUseCaseFacade.java
-│       ├── LoginUserUseCaseImpl.java
-│       ├── SendPasswordResetEmailUseCaseImpl.java
-│       └── UserAuthUseCaseFacadeImpl.java
-|
-├── presentation
-│   ├── navigation
-│   │   ├── LoginCoordinatorEvent.java
-│   │   ├── LoginFlowCoordinator.java
-│   │   └── LoginNavigation.java
-│   ├── view
-│   │   ├── LoginFragment.java
-│   │   └── SignupFragment.java
-│   └── viewmodel
-│       ├── LoginViewModel.java
-│       ├── SignupViewModel.java
-│       └── SimpleTextWatcher.java
-│  
-└── data
-    ├── local
-    │   ├── AuthCache.java
-    │   ├── UserAuthDao.java
-    │   └── AppDatabase.java
-    ├── remote
-    │   ├── AuthDataSource.java
-    │   ├── GoogleSignInDataSource.java
-    │   ├── UserProfileDataSource.java
-    │   └── dto
-    │       └── UserProfileDto.java
-    ├── service
-    │   ├── AuthProvider.java
-    │   ├── AuthorizationGatewayImpl.java
-    │   ├── AuthService.java
-    │   └── GoogleSignInService.java
-    └── repository
-    └── AuthRepositoryImpl.java
-
-CopyInsert
+  
 
 Explanation
 di: Contains dependency injection modules.
@@ -407,21 +213,9 @@ Separation of Concerns: Each layer (domain, presentation, data) has a clear resp
 Modularity: Changes in one module (e.g., UI) do not affect other modules (e.g., domain logic), supporting the Open-Closed Principle (OCP).
 Testability: Each component can be tested in isolation, improving maintainability and reliability.
 Scalability: New features can be added with minimal impact on existing code, making the system scalable.
+ 
 
-AuthRepository.java
-AuthCache.java
-UserAuthDao.java
-AppDatabase.java
-AuthDataSource.java
-GoogleSignInDataSource.java
-UserProfileDataSource.java
-UserProfileDto.java
-AuthProvider.java
-AuthorizationGatewayImpl.java
-AuthService.java
-GoogleSignInService.java
-
-Root project 'AudioQuiz'
+## Root project 'AudioQuiz'
 +--- Project ':app'
 +--- Project ':core'
 |    +--- Project ':core:base'
@@ -522,9 +316,4 @@ For the detail of handling preview of composable functions in this code-base, pl
 - [Git Hooks](documentation/GitHooks.md) - Learn about Git hooks used in this project for code formatting and analysis.
 - [GitHub Actions](documentation/GitHubActions.md) - Explore the GitHub Actions workflows used to validate the code.
 - [Static Analysis](documentation/StaticAnalysis.md) - Discover how static analysis tools like Detekt and Ktlint are used in this project for code quality assurance.
-
-## 🤝🏻 Contribute
-
-Any PRs are very welcome! 😍 You can fix a bug, add a feature, optimize performance and even propose a new cool approach in code-base architecture. Feel free and make a PR! 😌
-
-We use static analysis tools like Detekt and Ktlint in this project. Please either set up [Git Hooks](documentation/GitHooks.md) on your project or run [Static Analysis](documentation/StaticAnalysis.md) before creating PR.
+ 

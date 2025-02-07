@@ -16,7 +16,7 @@ kotlin {
 }
 
 dependencies {
-    implementation("com.newrelic.agent.android:agent-gradle-plugin:7.6.2")
+    implementation(libs.agent.gradle.plugin)
     implementation(libs.google.services)
     implementation(libs.firebase.performance.gradlePlugin)
     compileOnly(libs.android.gradlePlugin)

@@ -46,7 +46,6 @@ public class BottomNavigationComponent implements BottomNavigationComponentApi {
     }
 
     private void setupNavButton(Runnable action, Button button) {
-       // Button button = activity.findViewById(buttonId);
         if (action != null) { // Added null check
             button.setOnClickListener(v -> {
                 button.setEnabled(false);

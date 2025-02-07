@@ -9,11 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewOutlineProvider;
 
-import eightbitlab.com.blurview.BlurView;
-import eightbitlab.com.blurview.RenderScriptBlur;
-
 public class BlurViewUtils {
-
+/*
     public static void setupBlurView(Activity activity, BlurView blurView, float radius) {
         View decorView = activity.getWindow().getDecorView();
         ViewGroup rootView = decorView.findViewById(android.R.id.content);
@@ -37,5 +34,5 @@ public class BlurViewUtils {
                 }
             }
         });
-    }
+    }*/
 }

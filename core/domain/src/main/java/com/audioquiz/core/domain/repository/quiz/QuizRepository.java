@@ -65,5 +65,6 @@ public interface QuizRepository {
     Integer getCorrectOption2();
 
     Integer getCorrectOption1();
+
 }
 

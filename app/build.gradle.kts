@@ -50,7 +50,7 @@ allprojects {
 
 
 dependencies {
-      implementation("com.newrelic.agent.android:android-agent:7.6.2")
+      implementation(libs.android.agent)
 
       projects.library.apply {
             implementation(designsystem)
@@ -60,7 +60,6 @@ dependencies {
             implementation(model)
             implementation(extensions)
             implementation(sync)
-//        implementation(ui)
       }
       projects.feature.apply {
             implementation(login)
@@ -111,6 +110,6 @@ dependencies {
             implementation(viewmodel)
             implementation(livedata)
             implementation(constraintlayout)
-            implementation(blurview)
+//            implementation(blurview)
       }
 }
