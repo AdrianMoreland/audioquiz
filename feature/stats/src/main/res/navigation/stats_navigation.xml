@@ -8,5 +8,6 @@
     <fragment
         android:id="@+id/statsFragment"
         android:name="com.audioquiz.feature.stats.presentation.fragments.UserStatisticsFragment"
-        tools:layout="@layout/fragment_stats" />
+        tools:layout="@layout/fragment_stats"
+        android:label="StatsFragment"/>
 </navigation>

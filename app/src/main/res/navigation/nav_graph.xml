@@ -26,6 +26,7 @@
 
     </navigation>
 
+
     <navigation android:id="@+id/authorizedGraph"
         android:label="Authorized graph"
         app:startDestination="@id/home_nav_graph">
@@ -35,37 +36,32 @@
         <include app:graph="@navigation/stats_navigation" />
         <include app:graph="@navigation/quiz_nav_graph" />
 
-
-        <action
-            android:id="@+id/navigateFromHomeToStats"
-            app:destination="@+id/statsFragment" />
-
-        <action
-            android:id="@+id/navigateFromHomeToRank"
-            app:destination="@id/rankFragment" />
-
-
-
     </navigation>
 
+
     <action android:id="@+id/navigateToAuthorizedGraph"
-        app:destination="@id/authorizedGraph"
-        app:popUpTo="@id/welcomeFragment"
-        app:popUpToInclusive="true"/>
+    app:destination="@id/authorizedGraph"
+    app:popUpTo="@id/welcomeFragment"
+    app:popUpToInclusive="true"/>
 
     <action android:id="@+id/navigateToUnauthorizedGraph"
         app:destination="@+id/notAuthorizedGraph"  />
 
-    <action
-        android:id="@+id/navigateFromHomeToQuestion"
-        app:destination="@id/quiz_nav_graph" />
+    <action android:id="@+id/navigateFromHomeToQuestion"
+        app:destination="@id/quiz_nav_graph"
+        app:popUpTo="@id/home_nav_graph"
+        app:popUpToInclusive="true"/>
 
-    <action
-        android:id="@+id/navigateFromHomeToSettings"
+    <action android:id="@+id/navigateFromHomeToSettings"
         app:destination="@id/settings_nav_graph" />
 
-    <action
-        android:id="@+id/navigateFromSettingsToWelcome"
+    <action android:id="@+id/navigateFromSettingsToWelcome"
         app:destination="@id/welcomeFragment" />
+
+    <action android:id="@+id/navigateFromHomeToStats"
+        app:destination="@+id/statsFragment" />
+
+    <action android:id="@+id/navigateFromHomeToRank"
+        app:destination="@id/rankFragment" />
 
 </navigation>

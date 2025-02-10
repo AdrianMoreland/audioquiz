@@ -1,7 +1,6 @@
 package com.audioquiz.feature.home.presentation.viewmodel;
 
 
-import android.os.Bundle;
 import android.util.Pair;
 
 import androidx.lifecycle.LiveData;
@@ -14,7 +13,6 @@ import com.audioquiz.core.model.user.stats.CategoryStatsData;
 import com.audioquiz.designsystem.base.SingleLiveEvent;
 import com.audioquiz.designsystem.util.CategoryVisualItem;
 import com.audioquiz.feature.home.domain.HomeViewContract;
-import com.audioquiz.feature.home.navigation.HomeCoordinatorEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,52 +31,51 @@ public class HomeViewModel extends ViewModel {
     private final StatisticsUseCaseFacade statisticsUseCaseFacade;
     private final CompositeDisposable disposables = new CompositeDisposable();
 
-    private final SingleLiveEvent<HomeCoordinatorEvent> _coordinatorEvent = new SingleLiveEvent<>();
-    private final MutableLiveData<HomeViewContract.State> viewState = new MutableLiveData<>();
-    private final MutableLiveData<HomeViewContract.Effect> effect = new MutableLiveData<>();
-    private final MutableLiveData<Boolean> isLoading = new MutableLiveData<>();
+    private final MutableLiveData<HomeViewContract.State> _viewState = new MutableLiveData<>();
+    private final SingleLiveEvent<HomeViewContract.Effect> _effect = new SingleLiveEvent<>();
+    private final SingleLiveEvent<HomeViewContract.Effect> _coordinatorEffect = new SingleLiveEvent<>();
 
-    private final MutableLiveData<List<HomeViewContract.CategoryUi>> categoriesLiveData = new MutableLiveData<>();
-    private final MutableLiveData<Pair<List<HomeViewContract.CategoryUi>, List<Integer>>> updatedCategoriesLiveData = new MutableLiveData<>();
+    private final MutableLiveData<List<HomeViewContract.CategoryCardState>> categoriesLiveData = new MutableLiveData<>();
+    private final MutableLiveData<Pair<List<HomeViewContract.CategoryCardState>, List<Integer>>> updatedCategoriesLiveData = new MutableLiveData<>();
 
     @Inject
     public HomeViewModel(StatisticsUseCaseFacade statisticsUseCaseFacade) {
         this.statisticsUseCaseFacade = statisticsUseCaseFacade;
-        viewState.setValue(createInitialState());
+        _viewState.setValue(createInitialState());
         fetchAndUpdateCategoryData();
     }
 
     //region LIVEDATA
     // GETTERS
-
-    public LiveData<HomeCoordinatorEvent> navigationEvent() {
-        return _coordinatorEvent;
-    }
     public LiveData<HomeViewContract.State> viewState() {
-        return viewState;
+        return _viewState;
     }
-    public LiveData<HomeViewContract.Effect> viewEffects() {
-        return effect;
+    public LiveData<HomeViewContract.Effect> effect() {
+        return _effect;
     }
-    public LiveData<List<HomeViewContract.CategoryUi>> getCategoryListLiveData() {
+    public LiveData<HomeViewContract.Effect> coordinatorEffect() {
+        return _coordinatorEffect;
+    }
+
+    public LiveData<List<HomeViewContract.CategoryCardState>> getCategoryListLiveData() {
         return categoriesLiveData;
     }
-    public LiveData<Pair<List<HomeViewContract.CategoryUi>, List<Integer>>> getUpdatedCategoriesLiveData() {
+    public LiveData<Pair<List<HomeViewContract.CategoryCardState>, List<Integer>>> getUpdatedCategoriesLiveData() {
         return updatedCategoriesLiveData;
     }
     //endregion
 
     //region STATE
     private HomeViewContract.State createInitialState() {
-        HomeViewContract.State initialState = new HomeViewContract.State(false, createDefaultCategoryUiList(), false, false);
+        HomeViewContract.State initialState = new HomeViewContract.State(false, createDefaultCategoryCardStateList(), false, false);
         Timber.tag(TAG).d("createInitialState called");
         return initialState;
     }
 
-    private List<HomeViewContract.CategoryUi> createDefaultCategoryUiList() {
-        List<HomeViewContract.CategoryUi> categoryUiList = new ArrayList<>();
+    private List<HomeViewContract.CategoryCardState> createDefaultCategoryCardStateList() {
+        List<HomeViewContract.CategoryCardState> categoryUiList = new ArrayList<>();
         for (CategoryVisualItem visualItem : CategoryVisualItem.values()) {
-            HomeViewContract.CategoryUi categoryUi = new HomeViewContract.CategoryUi(
+            HomeViewContract.CategoryCardState categoryUi = new HomeViewContract.CategoryCardState(
                     visualItem.ordinal(), // Use enum ordinal as index
                     visualItem.name(),    // Use enum name as category name
                     1,                              // Default currentChapter
@@ -97,13 +94,13 @@ public class HomeViewModel extends ViewModel {
                 statisticsUseCaseFacade.getCategoryStats()
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .map(this::updateCategoryUiList)
+                        .map(this::updateCategoryCardStateList)
                         .subscribe(
                                 categoryListPair -> {
                                     updatedCategoriesLiveData.postValue(categoryListPair);
-                                    HomeViewContract.State currentState = viewState.getValue();
+                                    HomeViewContract.State currentState = _viewState.getValue();
                             if (currentState != null) {
-                                 viewState.setValue(new HomeViewContract.State(currentState.isLoading(), categoryListPair.first, currentState.isShowBadges(), currentState.isBottomSheetVisible()));
+                                 _viewState.setValue(new HomeViewContract.State(currentState.isLoading(), categoryListPair.first, currentState.showBadges(), currentState.isBottomSheetVisible()));
                             }
                         }, error -> {
                                     Timber.tag(TAG).e(error, "Error loading category data");
@@ -112,8 +109,8 @@ public class HomeViewModel extends ViewModel {
         );
     }
 
-    private Pair<List<HomeViewContract.CategoryUi>, List<Integer>> updateCategoryUiList(CategoryStats categoryStats) {
-        List<HomeViewContract.CategoryUi> updatedCategories = new ArrayList<>();
+    private Pair<List<HomeViewContract.CategoryCardState>, List<Integer>> updateCategoryCardStateList(CategoryStats categoryStats) {
+        List<HomeViewContract.CategoryCardState> updatedCategories = new ArrayList<>();
         List<Integer> removedPositions = new ArrayList<>(); // Keep track of removed positions
         int i = 0; // Index to track the original position
         for (CategoryStatsData categoryStatsData : categoryStats.getAllCategoryStatsData().values()) {
@@ -124,7 +121,7 @@ public class HomeViewModel extends ViewModel {
             } else {
                 try {
                     CategoryVisualItem visualItem = CategoryVisualItem.valueOf(categoryStatsData.getCategoryName()); // Safe to assume valid name here
-                    HomeViewContract.CategoryUi categoryUi = new HomeViewContract.CategoryUi(
+                    HomeViewContract.CategoryCardState categoryUi = new HomeViewContract.CategoryCardState(
                             visualItem.ordinal(),
                             visualItem.name(),
                             categoryStatsData.getCurrentChapter(),
@@ -144,9 +141,9 @@ public class HomeViewModel extends ViewModel {
         }
 
         // Rearrange the updatedCategories list based on CategoryVisualItem enum order
-        List<HomeViewContract.CategoryUi> sortedCategories = new ArrayList<>();
+        List<HomeViewContract.CategoryCardState> sortedCategories = new ArrayList<>();
         for (CategoryVisualItem visualItem : CategoryVisualItem.values()) {
-            for (HomeViewContract.CategoryUi categoryUi : updatedCategories) {
+            for (HomeViewContract.CategoryCardState categoryUi : updatedCategories) {
                 if (categoryUi.name.equals(visualItem.name())) {
                     sortedCategories.add(categoryUi);
                     break; // Move to the next visualItem once found
@@ -157,9 +154,9 @@ public class HomeViewModel extends ViewModel {
         return new Pair<>(sortedCategories, removedPositions);
     }
 
-    private HomeViewContract.CategoryUi getCategoryByName(String name) {
-        HomeViewContract.State currentState = viewState.getValue();if (currentState != null && currentState.getCategories() != null) {
-            for (HomeViewContract.CategoryUi categoryUi : currentState.getCategories()) {
+    private HomeViewContract.CategoryCardState getCategoryByName(String name) {
+        HomeViewContract.State currentState = _viewState.getValue();if (currentState != null && currentState.categories() != null) {
+            for (HomeViewContract.CategoryCardState categoryUi : currentState.categories()) {
                 if (categoryUi.name.equals(name)) {
                     return categoryUi;
                 }
@@ -173,40 +170,44 @@ public class HomeViewModel extends ViewModel {
     //region EVENTS
     public void process(HomeViewContract.Event event) {
         Timber.tag(TAG).d("process called with event: %s", event);
-        if (event instanceof HomeViewContract.Event.OnCategoryCardClicked onCategoryCardClicked) {
-            effect.setValue(new HomeViewContract.Effect.ShowCategoryBottomSheet(onCategoryCardClicked.getCategory(), onCategoryCardClicked.getCurrentChapter()));
-        } else if (event instanceof HomeViewContract.Event.OnSettingsButtonClicked) {
-            sendCoordinatorEvent(new HomeCoordinatorEvent.OnSettingsButtonPressed());
-        } else if (event instanceof HomeViewContract.Event.OnViewBadgesButtonClicked) {
+        if (event instanceof HomeViewContract.Event.OnViewBadgesButtonClicked) {
             handleViewBadgesButtonClicked();
+        }else if (event instanceof HomeViewContract.Event.OnCategoryCardClicked onCategoryCardClicked) {
+            _effect.setValue(new HomeViewContract.Effect.ShowCategoryBottomSheet(onCategoryCardClicked.getCategory(), onCategoryCardClicked.getCurrentChapter()));
+        } else if (event instanceof HomeViewContract.Event.OnSettingsButtonClicked) {
+            _coordinatorEffect.setValue(new HomeViewContract.Effect.NavigateToSettings());
+            Timber.tag(TAG).d("process: SettingsButtonClicked event received");
         } else if (event instanceof HomeViewContract.Event.OnStartQuizTriggered startQuizTriggered) {
-            sendCoordinatorEvent(new HomeCoordinatorEvent.OnStartQuizClicked(startQuizTriggered.getBundle()));
+            Timber.tag(TAG).d("process: StartQuizTriggered event received with category: %s, chapter: %d", startQuizTriggered.getCategory(), startQuizTriggered.getChapter());
+            _coordinatorEffect.setValue(new HomeViewContract.Effect.NavigateToQuiz(startQuizTriggered.getCategory(), startQuizTriggered.getChapter()));
         }
-    }
-
-    private void handleCategoryClicked(HomeViewContract.Event.OnCategoryCardClicked event) {
-        Timber.tag(TAG).d("handleCategoryClicked called with event: %s", event + event.getCategory() + event.getCurrentChapter());
-
     }
 
     private void handleViewBadgesButtonClicked() {
         // You can toggle badges or show a dialog here
-        HomeViewContract.State currentState = viewState.getValue();
+        HomeViewContract.State currentState = _viewState.getValue();
         if (currentState != null) {
-            HomeViewContract.State updatedState = new HomeViewContract.State(false, currentState.getCategories(), !currentState.isShowBadges(), currentState.isBottomSheetVisible());
-             viewState.setValue(updatedState);
+            HomeViewContract.State updatedState = new HomeViewContract.State(false, currentState.categories(), !currentState.showBadges(), currentState.isBottomSheetVisible());
+             _viewState.setValue(updatedState);
         }
     }
 
-    protected <E extends HomeCoordinatorEvent> void sendCoordinatorEvent(E event) {
-        Timber.tag(TAG).d("sending coordinatorEvent: %s", event);
-        _coordinatorEvent.postValue(event);
-    }
     //endregion
-
     @Override
     protected void onCleared() {
         disposables.clear();
         super.onCleared();
     }
+
+
+/*    private final SingleLiveEvent<HomeCoordinatorEvent> _coordinatorEvent = new SingleLiveEvent<>();
+    //private final MutableLiveData<HomeViewContract.Effect> effect = new MutableLiveData<>();
+    public LiveData<HomeCoordinatorEvent> navigationEvent() {
+        return _coordinatorEvent;
+    }
+
+    protected <E extends HomeCoordinatorEvent> void sendCoordinatorEvent(E event) {
+        Timber.tag(TAG).d("sending coordinatorEvent: %s", event);
+        _coordinatorEvent.postValue(event);
+    }*/
 }

@@ -40,6 +40,8 @@ public class QuestionViewModel extends ViewModel {
 //    private final UiMapper <QuizResult, QuizResultUi> quizResultMapper = new UiMapper<>();
 
     // LiveData Variables
+    private final MutableLiveData<String> categoryLiveData = new MutableLiveData<>();
+    private final MutableLiveData<Integer> chapterLiveData = new MutableLiveData<>();
     private final MutableLiveData<QuestionUi> questionLiveData = new MutableLiveData<>();
     private final MutableLiveData<Integer> questionCountLiveData = new MutableLiveData<>();
     public final MutableLiveData<Integer> userScoreLiveData = new MutableLiveData<>(0); // Initialize to 0
@@ -229,6 +231,14 @@ public class QuestionViewModel extends ViewModel {
         MutableLiveData<Boolean> isLastQuestion = new MutableLiveData<>();
         isLastQuestion.postValue(quizUseCaseFacade.getIsLastQuestion().blockingLast());
         return isLastQuestion;
+    }
+
+    public void setCategory(String category) {
+        categoryLiveData.setValue(category);
+    }
+
+    public void setCurrentChapter(int currentChapter) {
+        chapterLiveData.setValue(currentChapter);
     }
 
 

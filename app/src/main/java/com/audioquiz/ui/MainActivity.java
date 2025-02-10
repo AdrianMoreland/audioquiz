@@ -34,6 +34,8 @@ import com.audioquiz.ui.component.toolbar.ToolbarComponent;
 import java.io.File;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import javax.inject.Inject;
@@ -149,8 +151,11 @@ public class MainActivity extends AppCompatActivity implements NavControllerProv
     }
 
     private void setupOnDestinationChangedListener(NavController navController) {
+        List<String> backStackIds = new ArrayList<>();
         navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
             Timber.tag(TAG).d("setupOnDestinationChangedListener: %s", destination.getLabel());
+            backStackIds.add(destination.getLabel() != null ? destination.getLabel().toString() : "Unknown");
+            Timber.d("BackStack (tracked): %s", backStackIds);
             // COMMENTED OUT FOR NOW FOR TESTING
 /*            toolbarComponent.updateToolbar(new ToolbarConfiguration.Builder()
                     .setVisible(true)

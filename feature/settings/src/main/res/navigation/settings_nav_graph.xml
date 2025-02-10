@@ -8,14 +8,14 @@
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.audioquiz.feature.settings.view.SettingsFragment"
-        android:label="Settings"
+        android:label="SettingsFragment"
         tools:layout="@layout/fragment_settings">
     </fragment>
 
     <dialog
         android:id="@+id/settingsDialogFragment"
         android:name="com.audioquiz.feature.settings.view.SettingsDialogFragment"
-        android:label="Settings"
+        android:label="SettingsDialogFragment"
         tools:layout="@layout/fragment_settings_dialog">
     </dialog>
 

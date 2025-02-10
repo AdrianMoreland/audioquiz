@@ -1,7 +1,5 @@
 package com.audioquiz.feature.home.domain;
 
-import android.os.Bundle;
-
 import com.audioquiz.designsystem.base.view.ViewEffect;
 import com.audioquiz.designsystem.base.view.ViewEvent;
 
@@ -11,47 +9,12 @@ import timber.log.Timber;
 
 public class HomeViewContract {
 
-    public enum ChapterEnum {
-        CHAPTER_1,
-        CHAPTER_2,
-        CHAPTER_3,
-        FINAL_EXAM,
-        DONE
+    public record State(
+            boolean isLoading, List<CategoryCardState> categories, boolean showBadges,
+                        boolean isBottomSheetVisible) {
     }
 
-    public static class State {
-        private final boolean isLoading;
-        private final List<CategoryUi> categories;
-        private final boolean showBadges;
-        private final boolean isBottomSheetVisible;
-
-
-        public State(boolean isLoading, List<CategoryUi> categories, boolean showBadges, boolean isBottomSheetVisible) {
-            this.isLoading = isLoading;
-            this.categories = categories;
-            this.showBadges = showBadges;
-            this.isBottomSheetVisible = isBottomSheetVisible;
-        }
-
-        // Getters and setters for each property
-        public boolean isLoading() {
-            return isLoading;
-        }
-
-        public List<CategoryUi> getCategories() {
-            return categories;
-        }
-
-        public boolean isShowBadges() {
-            return showBadges;
-        }
-
-        public boolean isBottomSheetVisible() {
-            return isBottomSheetVisible;
-        }
-    }
-
-    public static class CategoryUi {
+    public static class CategoryCardState {
         public final int categoryIndex;
         public final String name;
         public final int currentChapter;
@@ -61,7 +24,7 @@ public class HomeViewContract {
         public final Integer badgeResId;
 
         // Constructor for BottomSheetCategory
-        public CategoryUi(int categoryIndex,
+        public CategoryCardState(int categoryIndex,
                           String name,
                           int currentChapter,
                           Integer imageResId,
@@ -112,43 +75,10 @@ public class HomeViewContract {
         public int getMaxChapter() {
             return 5;
         }
-
-    }
-
-
-
-    public static class ImageResources {
-        public int imageResId;
-        public int badgeResId;
-
-        public ImageResources(int imageResId, int badgeResId) {
-            this.imageResId = imageResId;
-            this.badgeResId = badgeResId;
-        }
-
-
-        public int getImageResId() {
-            return imageResId;
-        }
-
-        public int getBadgeResId() {
-            return badgeResId;
-        }
     }
 
     public static abstract class Event implements ViewEvent {
-        Type getType() {
-            return null;
-        }
 
-        enum Type {
-            CATEGORY_CLICKED,
-            SETTINGS_BUTTON_CLICKED,
-            VIEW_BADGES_BUTTON_CLICKED,
-            START_QUIZ_TRIGGERED
-        }
-
-        // Add specific data classes for events with data
         public static class OnCategoryCardClicked extends Event {
             private final String category;
             private final int currentChapter;
@@ -167,37 +97,30 @@ public class HomeViewContract {
             }
         }
 
-        public static class OnSettingsButtonClicked extends Event {
-            @Override
-            Type getType() {
-                return Type.SETTINGS_BUTTON_CLICKED;
-            }
-        }
-
-        public static class OnViewBadgesButtonClicked extends Event {
-            @Override
-            Type getType() {
-                return Type.VIEW_BADGES_BUTTON_CLICKED;
-            }
-        }
-
         public static class OnStartQuizTriggered extends Event {
-            @Override
-            Type getType() {
-                return Type.START_QUIZ_TRIGGERED;
-            }
-            private final Bundle bundle;
+            private final String category;
+            private final int chapter;
 
-            public OnStartQuizTriggered(Bundle bundle) {
-                this.bundle = bundle;
+            public OnStartQuizTriggered(String category, int chapter) {
+                this.category = category;
+                this.chapter = chapter;
             }
-
-            public Bundle getBundle() {
-                return bundle;
+            public String getCategory() {
+                return category;
+            }
+            public int getChapter() {
+                return chapter;
             }
 
         }
+
+        public static class OnSettingsButtonClicked extends Event {}
+
+        public static class OnViewBadgesButtonClicked extends Event {}
+
+
     }
+
 
     public abstract static class Effect implements ViewEffect {
 
@@ -221,8 +144,8 @@ public class HomeViewContract {
 
         public static class NavigateToQuiz extends Effect {
             private final String category;
-
             private final int currentChapter;
+
             public NavigateToQuiz(String category, int currentChapter) {
                 this.category = category;
                 this.currentChapter = currentChapter;
@@ -249,6 +172,33 @@ public class HomeViewContract {
                 return error;
             }
         }
+
+        public static class NavigateToSettings extends Effect {
+            public NavigateToSettings() {
+                // Empty constructor
+            }
+        }
     }
 
 }
+
+//region TRASH
+/*public static class ImageResources {
+    public int imageResId;
+    public int badgeResId;
+
+    public ImageResources(int imageResId, int badgeResId) {
+        this.imageResId = imageResId;
+        this.badgeResId = badgeResId;
+    }
+
+
+    public int getImageResId() {
+        return imageResId;
+    }
+
+    public int getBadgeResId() {
+        return badgeResId;
+    }
+}*/
+//endRegion

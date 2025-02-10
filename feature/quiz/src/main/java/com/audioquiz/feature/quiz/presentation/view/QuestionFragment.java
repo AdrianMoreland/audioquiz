@@ -105,7 +105,7 @@ public class QuestionFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d(TAG, "onCreate called");
+        Timber.tag(TAG).d("onCreate called");
         viewModel = new ViewModelProvider(this).get(QuestionViewModel.class);
     }
 
@@ -137,12 +137,30 @@ public class QuestionFragment extends Fragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        Timber.d("onResume called in %s", this.getClass().getSimpleName());
+    }
+
+    @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        Log.d(TAG, "onCreateView called");
-        // Retrieve the category from arguments
-        category = requireArguments().getString(CATEGORY_KEY, "default");
-        // Inflate the fragment layout using view binding
         binding = FragmentQuestionBinding.inflate(inflater, container, false);
+        Timber.tag(TAG).d("onCreateView called");
+        // Retrieve arguments
+        Bundle args = getArguments();
+        if (args != null) {
+            category = args.getString("category");
+            int currentChapter = args.getInt("current_chapter");
+            Timber.tag(TAG).d("onCreateView: Arguments received - Category: %s, Chapter: %d", category, currentChapter);
+
+            // Use the arguments (e.g., pass them to the ViewModel)
+            if (category != null) {
+                viewModel.setCategory(category);
+            }
+            viewModel.setCurrentChapter(currentChapter);
+        } else {
+            Timber.tag(TAG).e("onCreateView: No arguments received!");
+        }
         return binding.getRoot();
     }
 
@@ -150,7 +168,8 @@ public class QuestionFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         // Call the superclass method
         super.onViewCreated(view, savedInstanceState);
-        Log.d(TAG, "onViewCreated called");
+        view.bringToFront();
+        Timber.tag(TAG).d("onViewCreated called");
         TypedArray intervalButtonsIdArrayResource = getResources().obtainTypedArray(R.array.intervalButtonsIdArray);
         intervalButtonsIdArray = new int[intervalButtonsIdArrayResource.length()];
         for (int i = 0; i < intervalButtonsIdArray.length; i++) {
@@ -625,11 +644,12 @@ public class QuestionFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        Log.d(TAG, "onDestroyView called");
+        Timber.tag(TAG).d("onDestroyView called");
         // Nullify views
         binding.questionTextView.setText("");
         binding.submitButton.setEnabled(false);
         binding.quizProgressIndicator.setProgress(0);
+        binding = null;
         // Clear the list of buttons
         allButtons.clear();
         // Clear LiveData observers to avoid memory leaks and stale data

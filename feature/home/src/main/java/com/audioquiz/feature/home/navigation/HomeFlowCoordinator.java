@@ -1,6 +1,10 @@
 package com.audioquiz.feature.home.navigation;
 
 
+import android.os.Bundle;
+
+import com.audioquiz.feature.home.domain.HomeViewContract;
+
 import javax.inject.Inject;
 
 import timber.log.Timber;
@@ -20,28 +24,24 @@ public class HomeFlowCoordinator {
         this.homeNavigation = homeNavigation;
     }
 
-    public boolean onEvent(HomeCoordinatorEvent event) {
+    public boolean onEvent(HomeViewContract.Effect event) {
         Timber.tag(TAG).d("onEvent Called with: %s", event);
-        if (event instanceof HomeCoordinatorEvent.OnSettingsButtonPressed) {
+        if (event instanceof HomeViewContract.Effect.NavigateToSettings) {
             Timber.tag(TAG).d("OnEvent: Settings flow");
             homeNavigation.navigateHomeToSettings();
             return true;
-        } else if (event instanceof HomeCoordinatorEvent.OnCategoryClicked onCategoryClicked) {
-            Timber.tag(TAG).d("Navigating to bottom sheet category");
-//            homeNavigation.navigateHomeToCategorySheet(onCategoryClicked.getBundle());
+        } else if (event instanceof HomeViewContract.Effect.ShowCategoryBottomSheet) {
+            Timber.tag(TAG).d("OnEvent: Category flow");
             return true;
-        } else if (event instanceof HomeCoordinatorEvent.OnStartQuizClicked onStartQuizClicked) {
-            Timber.tag(TAG).d("Navigating to quiz");
-            homeNavigation.navigateHomeToQuiz(onStartQuizClicked.getBundle());
+        } else if (event instanceof HomeViewContract.Effect.NavigateToQuiz navigateToQuiz) {
+            Bundle bundle = new Bundle();
+            bundle.putString("category", navigateToQuiz.getCategory());
+            bundle.putInt("chapter", navigateToQuiz.getCurrentChapter());
+            Timber.tag(TAG).d("onEvent: Bundle received from ViewModel: %s", bundle);
+            homeNavigation.navigateHomeToQuiz(bundle);
             return true;
         } else {
             return false;
         }
-    }
-
-    private boolean toCategoryBottomSheetFlow() {
-        Timber.tag(TAG).d("Navigating to bottom sheet category");
-      ///  getNavController().navigate(R.id.action_homeFragment_to_bottomSheetCategoryFragment);
-        return true;
     }
 }

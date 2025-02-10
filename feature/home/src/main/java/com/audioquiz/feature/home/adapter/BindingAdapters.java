@@ -25,15 +25,15 @@ public class BindingAdapters {
 
     @BindingAdapter("categoryBadges")
     public static void setCategoryBadges(LinearLayout badgesContainer, HomeViewContract.State state) {
-        if (state != null && state.getCategories() != null) {
-            for (int i = 0; i < state.getCategories().size(); i++) {
-                Timber.tag(TAG).d("Setting badge for category: %s", state.getCategories().get(i).name);
-                HomeViewContract.CategoryUi categoryUi = state.getCategories().get(i);
+        if (state != null && state.categories() != null) {
+            for (int i = 0; i < state.categories().size(); i++) {
+                Timber.tag(TAG).d("Setting badge for category: %s", state.categories().get(i).getName());
+                HomeViewContract.CategoryCardState categoryCardState = state.categories().get(i);
                 ImageView badgeView = (ImageView) badgesContainer.getChildAt(i);
                 if (badgeView != null) {
-                    if (categoryUi.isCompleted()) {
-                        Timber.tag(TAG).d("Setting badge for category: " + categoryUi.name + ", badgeResId: " + categoryUi.badgeResId);
-                        badgeView.setImageResource(categoryUi.badgeResId);
+                    if (categoryCardState.isCompleted()) {
+                        Timber.tag(TAG).d("Setting badge for category: " + categoryCardState.getName() + ", badgeResId: " + categoryCardState.getBadgeResId());
+                        badgeView.setImageResource(categoryCardState.getBadgeResId());
                     } else {
                         badgeView.setImageResource(com.audioquiz.designsystem.R.drawable.ic_badge_empty);
                     }

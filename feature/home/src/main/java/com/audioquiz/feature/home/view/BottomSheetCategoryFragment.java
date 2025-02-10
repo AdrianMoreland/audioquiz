@@ -24,9 +24,8 @@ import com.audioquiz.feature.home.R;
 import com.audioquiz.feature.home.databinding.BottomSheetCategoryBinding;
 import com.audioquiz.feature.home.domain.CategoryViewContract;
 import com.audioquiz.feature.home.domain.ChapterUi;
-import com.audioquiz.feature.home.navigation.HomeCoordinatorEvent;
-import com.audioquiz.feature.home.navigation.HomeFlowCoordinator;
 import com.audioquiz.feature.home.presentation.viewmodel.BottomSheetCategoryViewModel;
+
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
@@ -34,8 +33,6 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
-import javax.inject.Inject;
 
 import dagger.hilt.android.AndroidEntryPoint;
 import timber.log.Timber;
@@ -45,8 +42,7 @@ public class BottomSheetCategoryFragment extends BottomSheetDialogFragment {
     private static final String TAG = "BottomSheetCategory";
     private static final int TOTAL_CHAPTERS = 3; // Constant for progress calculation
     BottomSheetCategoryBinding binding;
-    @Inject
-    HomeFlowCoordinator homeFlowCoordinator;
+
     private BottomSheetCategoryViewModel viewModel;
     private Integer currentChapterOrdinal;
     private String category;
@@ -61,6 +57,16 @@ public class BottomSheetCategoryFragment extends BottomSheetDialogFragment {
     // Setter for the listener
     public void setOnQuizNavigateListener(OnQuizNavigateListener listener) {
         this.onQuizNavigateListener = listener;
+    }
+
+    // Static method to create a new instance with arguments
+    public static BottomSheetCategoryFragment newInstance(String category, int currentChapter) {
+        BottomSheetCategoryFragment fragment = new BottomSheetCategoryFragment();
+        Bundle args = new Bundle();
+        args.putString("category", category);
+        args.putInt("current_chapter", currentChapter);
+        fragment.setArguments(args);
+        return fragment;
     }
 
     @NonNull
@@ -100,7 +106,6 @@ public class BottomSheetCategoryFragment extends BottomSheetDialogFragment {
         viewModel = new ViewModelProvider(this).get(BottomSheetCategoryViewModel.class);
         binding.setViewModel(viewModel); // Set the ViewModel in the binding
 
-
         setupColors();
         initializeViews();
 
@@ -137,7 +142,11 @@ public class BottomSheetCategoryFragment extends BottomSheetDialogFragment {
      * When the state changes, update all the text views with the corresponding strings.
      */
     private void onViewStateChanged(CategoryViewContract.State state) {
-        if (state != null) {
+        if (state == null) {
+            Timber.tag(TAG).w("onViewStateChanged: State is null");
+            return;
+        }
+
             Timber.tag(TAG).d("onViewStateChanged called");
             // Update category header if needed.
             binding.tvCategory.setText(state.getCategoryName());
@@ -160,7 +169,6 @@ public class BottomSheetCategoryFragment extends BottomSheetDialogFragment {
                 ChapterUi.Chapter currentChapter = chapters.get(currentChapterOrdinal - 1);
                 applyChapterStyles(currentChapter);
             }
-        }
     }
 
     private void initializeViews() {
@@ -207,10 +215,10 @@ public class BottomSheetCategoryFragment extends BottomSheetDialogFragment {
         int widthSmall = (int) (25 * scale + 0.5f);
         int heightSmall = (int) (25 * scale + 0.5f);
 
-        for (int i = 0; i <= currentChapter.index + 2 && i < chapters.size(); i++) {
-            if (i == currentChapter.index) {
+        for (int i = 0; i <= currentChapter.getIndex() + 2 && i < chapters.size(); i++) {
+            if (i == currentChapter.getIndex()) {
                 styleChapter(i, ChapterStatus.CURRENT, widthLarge, heightLarge);
-            } else if (i < currentChapter.index) {
+            } else if (i < currentChapter.getIndex()) {
                 styleChapter(i, ChapterStatus.COMPLETED, widthSmall, heightSmall);
             } else {
                 styleChapter(i, ChapterStatus.FUTURE, 0, 0); // No size changes for future chapters
@@ -219,33 +227,28 @@ public class BottomSheetCategoryFragment extends BottomSheetDialogFragment {
     }
 
     private void styleChapter(int index, ChapterStatus status, int width, int height) {
-        TextView title = chapterTitles[index];
-        TextView description = chapterDescriptions[index];
-        LinearLayout container = chapterContainers[index];
-        Button button = quizButtons[index];
-
-        ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) button.getLayoutParams();
+        ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) quizButtons[index].getLayoutParams();
         params.width = width;
         params.height = height;
-        button.setLayoutParams(params);
+        quizButtons[index].setLayoutParams(params);
 
         switch (status) {
             case CURRENT:
-                title.setTextColor(inversePrimaryColor);
-                description.setTextColor(onTertiaryColor);
-                description.setVisibility(View.VISIBLE);
-                container.setBackgroundResource(com.audioquiz.designsystem.R.drawable.shape_frame_rounded_chapter);
-                button.setBackgroundTintList(ColorStateList.valueOf(primaryColor));
-                button.setText("Start");
+                chapterTitles[index].setTextColor(inversePrimaryColor);
+                chapterDescriptions[index].setTextColor(onTertiaryColor);
+                chapterDescriptions[index].setVisibility(View.VISIBLE);
+                chapterContainers[index].setBackgroundResource(com.audioquiz.designsystem.R.drawable.shape_frame_rounded_chapter);
+                quizButtons[index].setBackgroundTintList(ColorStateList.valueOf(primaryColor));
+                quizButtons[index].setText("Start");
                 break;
             case COMPLETED:
                 Drawable drawable = ContextCompat.getDrawable(requireContext(), com.audioquiz.designsystem.R.drawable.ic_correct);
                 DrawableCompat.setTint(DrawableCompat.wrap(Objects.requireNonNull(drawable)), ContextCompat.getColor(requireContext(), com.audioquiz.designsystem.R.color.md_theme_surface));
-                button.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
+                quizButtons[index].setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
                 break;
             case FUTURE:
-                title.setTextColor(onSurfaceColor);
-                container.setBackgroundResource(0);
+                chapterTitles[index].setTextColor(onSurfaceColor);
+                chapterContainers[index].setBackgroundResource(0);
                 break;
         }
     }

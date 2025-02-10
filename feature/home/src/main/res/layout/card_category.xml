@@ -5,7 +5,7 @@
     <data>
         <variable
             name="category"
-            type="com.audioquiz.feature.home.domain.HomeViewContract.CategoryUi" />
+            type="com.audioquiz.feature.home.domain.HomeViewContract.CategoryCardState" />
     </data>
 
     <com.google.android.material.card.MaterialCardView

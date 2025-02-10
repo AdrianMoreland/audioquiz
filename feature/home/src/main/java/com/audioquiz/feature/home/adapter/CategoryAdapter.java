@@ -14,10 +14,10 @@ import java.util.List;
 import timber.log.Timber;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder> {
-    private final List<HomeViewContract.CategoryUi> categories;
+    private final List<HomeViewContract.CategoryCardState> categories;
     private final OnCategoryClickListener listener;
 
-    public CategoryAdapter(List<HomeViewContract.CategoryUi> categories, OnCategoryClickListener listener) {
+    public CategoryAdapter(List<HomeViewContract.CategoryCardState> categories, OnCategoryClickListener listener) {
         this.categories = categories;
         this.listener = listener;
     }
@@ -31,7 +31,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
     @Override
     public void onBindViewHolder(@NonNull CategoryViewHolder holder, int position) {
-        HomeViewContract.CategoryUi categoryUi = categories.get(position);
+        HomeViewContract.CategoryCardState categoryUi = categories.get(position);
         holder.bind(categoryUi);
     }
 
@@ -40,7 +40,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         return categories.size();
     }
 
-    public void updateCategories(List<HomeViewContract.CategoryUi> newCategories, List<Integer> removedIndices) {
+    public void updateCategories(List<HomeViewContract.CategoryCardState> newCategories, List<Integer> removedIndices) {
         if (categories.isEmpty()) {
             // If the list is empty, simply add the new categories
             categories.addAll(newCategories);
@@ -77,12 +77,12 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
             });
         }
 
-        public void bind(HomeViewContract.CategoryUi categoryUi) {
+        public void bind(HomeViewContract.CategoryCardState categoryUi) {
             binding.setCategory(categoryUi);
         }
     }
 
     public interface OnCategoryClickListener {
-        void onCategoryClick(HomeViewContract.CategoryUi categoryUi);
+        void onCategoryClick(HomeViewContract.CategoryCardState categoryUi);
     }
 }

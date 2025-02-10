@@ -20,7 +20,6 @@ import com.audioquiz.feature.home.R;
 import com.audioquiz.feature.home.adapter.CategoryAdapter;
 import com.audioquiz.feature.home.databinding.FragmentHomeBinding;
 import com.audioquiz.feature.home.domain.HomeViewContract;
-import com.audioquiz.feature.home.navigation.HomeCoordinatorEvent;
 import com.audioquiz.feature.home.navigation.HomeFlowCoordinator;
 import com.audioquiz.feature.home.presentation.viewmodel.HomeViewModel;
 
@@ -81,6 +80,12 @@ public class HomeFragment extends Fragment implements BottomSheetCategoryFragmen
         Timber.tag(TAG).d("onViewCreated done");
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        Timber.d("onResume called in %s", this.getClass().getSimpleName());
+    }
+
     private void setupRecyclerView(RecyclerView view) {
         recyclerView = view;
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
@@ -98,15 +103,16 @@ public class HomeFragment extends Fragment implements BottomSheetCategoryFragmen
 
     private void observeViewModel() {
         homeViewModel.viewState().observe(getViewLifecycleOwner(), this::onViewStateChanged);
-        homeViewModel.viewEffects().observe(getViewLifecycleOwner(), this::onViewEffectReceived);
-        homeViewModel.navigationEvent().observe(getViewLifecycleOwner(), this::handleNavigation);
+        homeViewModel.effect().observe(getViewLifecycleOwner(), this::onViewEffectReceived);
+        homeViewModel.coordinatorEffect().observe(getViewLifecycleOwner(), this::onNavigationEffectReceived);
+
         homeViewModel.getUpdatedCategoriesLiveData().observe(getViewLifecycleOwner(), pair -> adapter.updateCategories(pair.first, pair.second));
         Timber.tag(TAG).d("observeViewModel called");
     }
 
     private void onViewStateChanged(HomeViewContract.State state) {
         if (state == null) return;
-        binding.frameIconsCompleted.setVisibility(state.isShowBadges() ? View.VISIBLE : View.GONE);
+        binding.frameIconsCompleted.setVisibility(state.showBadges() ? View.VISIBLE : View.GONE);
         Timber.tag(TAG).d("onViewStateChanged called");
     }
 
@@ -120,7 +126,7 @@ public class HomeFragment extends Fragment implements BottomSheetCategoryFragmen
         Timber.tag(TAG).d("onViewEffectReceived called");
     }
 
-    private void handleNavigation(HomeCoordinatorEvent event) {
+    private void onNavigationEffectReceived(HomeViewContract.Effect event) {
         if (homeFlowCoordinator != null) {
             homeFlowCoordinator.onEvent(event);
         } else {
@@ -164,17 +170,9 @@ public class HomeFragment extends Fragment implements BottomSheetCategoryFragmen
             Timber.tag(TAG).e("Category is null, cannot start quiz.");
             return;
         }
-        Timber.tag(TAG).d("onQuizNavigate called with chapter: %d", chapter);
-
-        Bundle args = new Bundle();
-        args.putString("category", currentCategory);
-        args.putInt("current_chapter", chapter);
-
-        homeViewModel.process(new HomeViewContract.Event.OnStartQuizTriggered(args));
-
+        homeViewModel.process(new HomeViewContract.Event.OnStartQuizTriggered(currentCategory, chapter));
         Timber.tag(TAG).d("Navigating to quiz: Category=%s, Chapter=%d", currentCategory, chapter);
     }
-
 
     @Override
     public void onDestroy() {

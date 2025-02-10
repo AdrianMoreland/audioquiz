@@ -1,7 +1,5 @@
 package com.audioquiz.feature.home.presentation.viewmodel;
 
-import android.util.Log;
-
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -9,10 +7,7 @@ import androidx.lifecycle.ViewModel;
 import com.audioquiz.core.domain.usecase.resources.SyncStaticResourcesUseCase;
 import com.audioquiz.core.domain.usecase.user.stats.StatisticsUseCaseFacade;
 import com.audioquiz.core.model.quiz.CategoryStaticData;
-import com.audioquiz.designsystem.base.SingleLiveEvent;
 import com.audioquiz.feature.home.domain.CategoryViewContract;
-import com.audioquiz.feature.home.domain.HomeViewContract;
-import com.audioquiz.feature.home.navigation.HomeCoordinatorEvent;
 
 import java.util.Objects;
 
@@ -48,12 +43,13 @@ public class BottomSheetCategoryViewModel extends ViewModel {
                                         SyncStaticResourcesUseCase syncStaticResourcesUseCase) {
         this.statisticsUseCaseFacade = statisticsUseCaseFacade;
         this.syncStaticResourcesUseCase = syncStaticResourcesUseCase;
-        viewState.setValue(new CategoryViewContract.State(false, 1, "","", "", "", "", "", ""));
+        viewState.setValue(new CategoryViewContract.State(false, 1, "", "", "", "", "", "", ""));
     }
 
     public LiveData<CategoryViewContract.State> viewState() {
         return viewState;
     }
+
     public LiveData<CategoryViewContract.Effect> viewEffects() {
         return effect;
     }
@@ -155,24 +151,30 @@ public class BottomSheetCategoryViewModel extends ViewModel {
         switch (categoryName) {
             case "soundwaves" -> {
                 return 0;
-            } case "synthesis" -> {
+            }
+            case "synthesis" -> {
                 return 1;
-            } case "production" -> {
+            }
+            case "production" -> {
                 return 2;
-            } case "mixing" -> {
+            }
+            case "mixing" -> {
                 return 3;
-            } case "processing" -> {
+            }
+            case "processing" -> {
                 return 4;
-            } case "musictheory" -> {
+            }
+            case "musictheory" -> {
                 return 5;
-            } default -> {
+            }
+            default -> {
                 return null;
             }
         }
     }
 
     public String getChapterDescription(String category, int chapter) {
-    //    int descriptionArrayResId = getChapterDescriptionResId(category);
+        //    int descriptionArrayResId = getChapterDescriptionResId(category);
         return "Description"; // Or handle the case where the chapter is not found
     }
 
@@ -189,6 +191,7 @@ public class BottomSheetCategoryViewModel extends ViewModel {
         }
         return 0;
     }
+
     @Override
     protected void onCleared() {
         super.onCleared();

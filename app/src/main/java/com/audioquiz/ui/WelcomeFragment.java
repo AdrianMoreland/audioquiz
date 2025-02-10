@@ -76,12 +76,13 @@ public class WelcomeFragment extends Fragment {
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        if (context instanceof ThemeEvents) {
-            themeEvents = (ThemeEvents) context;
+        if (context instanceof ThemeEvents themeevents) {
+            this.themeEvents = themeevents;
         } else {
-            throw new ClassCastException(context.toString() + " must implement ThemeEvents");
+            throw new ClassCastException(context + " must implement ThemeEvents");
         }
     }
+
 
     private void handleStartButtonClick(boolean isUserAuthorized) {
         MainCoordinatorEvent event = isUserAuthorized ? navigateFromAppLauncherToAuthorizedGraph() : navigateFromAppLauncherToNotAuthorizedGraph();

@@ -8,7 +8,9 @@
     <fragment
         android:id="@+id/questionFragment"
         android:name="com.audioquiz.feature.quiz.presentation.view.QuestionFragment"
-        tools:layout="@layout/fragment_question">
+        tools:layout="@layout/fragment_question"
+        android:label="QuestionFragment">
+
         <argument
             android:name="category"
             app:argType="string" />
@@ -16,11 +18,10 @@
             android:name="chapter"
             app:argType="integer"
             android:defaultValue="1"/>
+
         <action
             android:id="@+id/action_questionFragment_to_quizResultsFragment"
             app:destination="@id/quizResultsFragment" />
-        <deepLink
-            app:uri="audioquiz://quiz/{category}/{chapter}" />
     </fragment>
 
     <fragment

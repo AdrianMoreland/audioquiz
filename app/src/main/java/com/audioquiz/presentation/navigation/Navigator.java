@@ -85,6 +85,12 @@ public class Navigator implements GlobalNavigation, StartNavigation, LoginNaviga
     }
 
     @Override
+    public void navigateHomeToQuiz(Bundle args) {
+        Timber.tag(TAG).d("navigateHomeToQuiz: Bundle before passing to NavController: %s", args.toString());
+        navigate(R.id.navigateFromHomeToQuestion, args);
+    }
+
+    @Override
     public void navigateToHome() {
         Timber.d("navigateToHome");
         navigate(R.id.navigateToAuthorizedGraph);
@@ -106,12 +112,8 @@ public class Navigator implements GlobalNavigation, StartNavigation, LoginNaviga
     }
 
     @Override
-    public void navigateHomeToQuiz(Bundle args) {
-        navigate(R.id.navigateFromHomeToQuestion, args);
-    }
-    @Override
     public void navigateHomeToCategorySheet(Bundle args) {
-        navigate(R.id.navigateFromHomeToQuestion, args);
+       // navigate(R.id.navigateFromHomeToQuestion, args);
     }
 
     @Override
