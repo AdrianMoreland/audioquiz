@@ -9,9 +9,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Base64;
-import android.util.Log;
 import android.view.View;
-import android.view.ViewOutlineProvider;
 import android.view.Window;
 import android.widget.Toast;
 import com.newrelic.agent.android.NewRelic;
@@ -106,35 +104,6 @@ public class MainActivity extends AppCompatActivity implements NavControllerProv
 
     }
 
-    private void logBuildData() {
-        Timber.tag("BuildInfo").d("BuildConfig.VERSION_NAME: %s", BuildConfig.VERSION_NAME);
-        Timber.tag("BuildInfo").d("BuildConfig.VERSION_CODE: %s", BuildConfig.VERSION_CODE);
-        Timber.tag("BuildInfo").d("BuildConfig.BUILD_TYPE: %s", BuildConfig.BUILD_TYPE);
-        Timber.tag("BuildInfo").d("BuildConfig.APPLICATION_ID: %s", BuildConfig.APPLICATION_ID);
-//        Timber.tag("BuildInfo").d("BuildConfig.FLAVOR: %s", BuildConfig.FLAVOR);
-//        Timber.tag("BuildInfo").d("Web Client ID: %s", BuildConfig.WEB_CLIENT_ID);
-        logSha1Key();
-        logGoogleServicesJson();
-    }
-
-    private void logGoogleServicesJson() {
-        File googleServicesJsonFile = new File(getFilesDir().getParentFile(), "google-services.json");
-        Timber.tag("BuildInfo").d("google-services.json Path: %s", googleServicesJsonFile.getAbsolutePath());
-    }
-
-    private void logSha1Key() {
-        try {
-            PackageInfo packageInfo = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_SIGNATURES);
-            for (Signature signature : packageInfo.signatures) {
-                MessageDigest md = MessageDigest.getInstance("SHA1");
-                md.update(signature.toByteArray());
-                String sha1Key = Base64.encodeToString(md.digest(), Base64.NO_WRAP);
-                Timber.tag("BuildInfo").d("SHA-1 Key: %s", sha1Key);
-            }
-        } catch (PackageManager.NameNotFoundException | NoSuchAlgorithmException e) {
-            Timber.tag("BuildInfo").e(e, "Error getting SHA-1 key");
-        }
-    }
 
     private void observeViewModel() {
         mainViewModel.getCurrentUser().observe(this, user -> {
@@ -179,7 +148,6 @@ public class MainActivity extends AppCompatActivity implements NavControllerProv
         }
     }
 
-
     private void setupOnDestinationChangedListener(NavController navController) {
         navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
             Timber.tag(TAG).d("setupOnDestinationChangedListener: %s", destination.getLabel());
@@ -190,7 +158,6 @@ public class MainActivity extends AppCompatActivity implements NavControllerProv
                     .build());*/
         });
     }
-
 
     private void setupBottomNavigation() {
         if (bottomNavigationComponent != null) {
@@ -238,6 +205,7 @@ public class MainActivity extends AppCompatActivity implements NavControllerProv
     public void toggleNightMode() {
         int currentMode = AppCompatDelegate.getDefaultNightMode();
         int newMode = (currentMode == AppCompatDelegate.MODE_NIGHT_YES) ? AppCompatDelegate.MODE_NIGHT_NO : AppCompatDelegate.MODE_NIGHT_YES;
+        Timber.tag(TAG).d("toggleNightMode: %s", newMode == AppCompatDelegate.MODE_NIGHT_YES ? "Night Mode" : "Day Mode");
         AppCompatDelegate.setDefaultNightMode(newMode);
 
         updateStatusBarAndUi(newMode == AppCompatDelegate.MODE_NIGHT_YES);
@@ -263,6 +231,37 @@ public class MainActivity extends AppCompatActivity implements NavControllerProv
         super.onDestroy();
         // Clear the binding reference to avoid memory leaks
         binding = null;
+    }
+
+
+    private void logBuildData() {
+        Timber.tag("BuildInfo").d("BuildConfig.VERSION_NAME: %s", BuildConfig.VERSION_NAME);
+        Timber.tag("BuildInfo").d("BuildConfig.VERSION_CODE: %s", BuildConfig.VERSION_CODE);
+        Timber.tag("BuildInfo").d("BuildConfig.BUILD_TYPE: %s", BuildConfig.BUILD_TYPE);
+        Timber.tag("BuildInfo").d("BuildConfig.APPLICATION_ID: %s", BuildConfig.APPLICATION_ID);
+//        Timber.tag("BuildInfo").d("BuildConfig.FLAVOR: %s", BuildConfig.FLAVOR);
+//        Timber.tag("BuildInfo").d("Web Client ID: %s", BuildConfig.WEB_CLIENT_ID);
+        logSha1Key();
+        logGoogleServicesJson();
+    }
+
+    private void logGoogleServicesJson() {
+        File googleServicesJsonFile = new File(getFilesDir().getParentFile(), "google-services.json");
+        Timber.tag("BuildInfo").d("google-services.json Path: %s", googleServicesJsonFile.getAbsolutePath());
+    }
+
+    private void logSha1Key() {
+        try {
+            PackageInfo packageInfo = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_SIGNATURES);
+            for (Signature signature : packageInfo.signatures) {
+                MessageDigest md = MessageDigest.getInstance("SHA1");
+                md.update(signature.toByteArray());
+                String sha1Key = Base64.encodeToString(md.digest(), Base64.NO_WRAP);
+                Timber.tag("BuildInfo").d("SHA-1 Key: %s", sha1Key);
+            }
+        } catch (PackageManager.NameNotFoundException | NoSuchAlgorithmException e) {
+            Timber.tag("BuildInfo").e(e, "Error getting SHA-1 key");
+        }
     }
 
 }

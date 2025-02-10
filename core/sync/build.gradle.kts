@@ -14,7 +14,6 @@ android {
 }
 
 dependencies {
-
     projects.core.apply {
         implementation(model)
         implementation(domain)
@@ -23,7 +22,6 @@ dependencies {
 
     projects.data.apply {
         implementation(api)
-     //   implementation(repository)
         implementation(remote)
         implementation(local)
     }

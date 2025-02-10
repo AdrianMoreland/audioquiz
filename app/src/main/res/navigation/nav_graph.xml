@@ -33,6 +33,7 @@
         <include app:graph="@navigation/home_nav_graph" />
         <include app:graph="@navigation/settings_nav_graph" />
         <include app:graph="@navigation/stats_navigation" />
+        <include app:graph="@navigation/quiz_nav_graph" />
 
 
         <action
@@ -43,9 +44,7 @@
             android:id="@+id/navigateFromHomeToRank"
             app:destination="@id/rankFragment" />
 
-        <action
-            android:id="@+id/navigateFromHomeToQuestion"
-            app:destination="@id/questionFragment" />
+
 
     </navigation>
 
@@ -56,6 +55,10 @@
 
     <action android:id="@+id/navigateToUnauthorizedGraph"
         app:destination="@+id/notAuthorizedGraph"  />
+
+    <action
+        android:id="@+id/navigateFromHomeToQuestion"
+        app:destination="@id/quiz_nav_graph" />
 
     <action
         android:id="@+id/navigateFromHomeToSettings"

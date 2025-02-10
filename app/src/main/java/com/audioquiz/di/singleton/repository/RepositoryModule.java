@@ -1,6 +1,7 @@
 package com.audioquiz.di.singleton.repository;
 
 import com.audioquiz.core.domain.repository.auth.AuthRepository;
+import com.audioquiz.core.domain.repository.quiz.CategoryRepository;
 import com.audioquiz.core.domain.repository.quiz.FrequenciesDataRepository;
 import com.audioquiz.core.domain.repository.quiz.QuestionRepository;
 import com.audioquiz.core.domain.repository.quiz.QuizRepository;
@@ -15,6 +16,7 @@ import com.audioquiz.core.extensions.di.ExecutorModule;
 import com.audioquiz.data.repository.auth.AuthRepositoryImpl;
 import com.audioquiz.data.repository.question.FrequenciesDataRepository_impl;
 import com.audioquiz.data.repository.question.QuestionRepositoryImpl;
+import com.audioquiz.data.repository.quiz.CategoryRepositoryImpl;
 import com.audioquiz.data.repository.quiz.QuizRepository_impl;
 import com.audioquiz.data.repository.rank.RankRepository_Impl;
 import com.audioquiz.data.repository.stats.CategoryStatsRepositoryImpl;
@@ -34,6 +36,10 @@ import dagger.hilt.components.SingletonComponent;
 @Module(includes = ExecutorModule.class)
 @InstallIn(SingletonComponent.class)
 public abstract class RepositoryModule {
+
+    @Binds
+    @Singleton
+    abstract CategoryRepository bindCategoryRepository(CategoryRepositoryImpl categoryRepository);
 
     @Binds
     @Singleton

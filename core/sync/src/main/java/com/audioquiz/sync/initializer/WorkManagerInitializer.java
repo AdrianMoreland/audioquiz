@@ -14,10 +14,12 @@ import androidx.work.WorkerParameters;
 
 import com.audioquiz.core.domain.usecase.quiz.question.QuestionUseCaseFacade;
 import com.audioquiz.core.domain.usecase.rank.RankUseCaseFacade;
+import com.audioquiz.core.domain.usecase.resources.SyncStaticResourcesUseCase;
 import com.audioquiz.core.domain.usecase.user.SyncUserDataUseCase;
 import com.audioquiz.sync.di.InitializerEntryPoint;
 import com.audioquiz.sync.worker.SyncQuestionDataWorker;
 import com.audioquiz.sync.worker.SyncRankDataWorker;
+import com.audioquiz.sync.worker.SyncStaticResourcesWorker;
 import com.audioquiz.sync.worker.SyncUserDataWorker;
 
 import java.util.List;
@@ -81,6 +83,8 @@ public class WorkManagerInitializer implements Initializer<WorkManager>, Configu
             Log.d("CustomWorkerFactory", "createWorker: " + workerClassName);
 
             return switch (workerClassName) {
+                case "com.audioquiz.sync.worker.SyncStaticResourcesWorker" ->
+                        new SyncStaticResourcesWorker(appContext, workerParameters, entryPoint.syncStaticResourceUseCase());
                 case "com.audioquiz.sync.worker.SyncUserDataWorker" ->
                         new SyncUserDataWorker(appContext, workerParameters, entryPoint.syncUserDataUseCase());
                 case "SyncQuestionDataWorker" ->
@@ -96,6 +100,7 @@ public class WorkManagerInitializer implements Initializer<WorkManager>, Configu
     @EntryPoint
     @InstallIn(SingletonComponent.class)
     public interface WorkerEntryPoint {
+        SyncStaticResourcesUseCase syncStaticResourceUseCase();
         SyncUserDataUseCase syncUserDataUseCase();
         QuestionUseCaseFacade syncQuestionDataUseCase();
         RankUseCaseFacade syncRankDataUseCase();

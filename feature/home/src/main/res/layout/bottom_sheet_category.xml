@@ -87,7 +87,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="1dp"
-                            android:text="@{viewModel.getAccuracy(category)}"
+                            android:text="@{viewModel.getAccuracy(category).toString()}"
                             android:textColor="@color/md_theme_onSurface"
                             android:textSize="16sp" />
 
@@ -130,7 +130,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:gravity="center"
-                            android:text="@{viewModel.getQuizzesTaken(category)}"
+                            android:text="@{viewModel.getQuizzesTaken(category).toString()}"
                             android:textColor="@color/md_theme_onSurface"
                             android:textSize="16sp" />
 
@@ -175,7 +175,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="2dp"
                             android:gravity="center"
-                            android:text="@{viewModel.getLivesEarned(category)}"
+                            android:text="@{viewModel.getLivesEarned(category).toString()}"
                             android:textColor="@color/md_theme_onSurface"
                             android:textSize="16sp" />
 
@@ -380,7 +380,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="8dp"
-                                android:text="@{viewModel.getChapterTitle(category, 1)}"
+                                android:text="@{viewModel.viewState().nameChapter1}"
                                 android:textAppearance="@style/TextAppearance.Reply.Headline5"
                                 android:textColor="@color/md_theme_onTertiary"
                                 android:textSize="16sp" />
@@ -390,7 +390,7 @@
                                 android:id="@+id/tv_description_chapter_1"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="@{viewModel.getChapterDescription(category, 2)}"
+                                android:text="@{viewModel.viewState().descriptionChapter1}"
                                 android:textAppearance="@style/TextAppearance.Reply.Headline5"
                                 android:textColor="@color/md_theme_onTertiaryContainer"
                                 android:textSize="14sp" />
@@ -423,7 +423,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="8dp"
-                                android:text="@{viewModel.getChapterTitle(category, 2)}"
+                                android:text="@{viewModel.viewState().nameChapter2}"
                                 android:textAppearance="@style/TextAppearance.Reply.Headline5"
                                 android:textColor="@color/md_theme_onSurface"
                                 android:textSize="16sp" />
@@ -432,7 +432,7 @@
                                 android:id="@+id/tv_description_chapter_2"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@{viewModel.getChapterDescription(category, 2)}"
+                                android:text="@{viewModel.viewState().descriptionChapter2}"
                                 android:textAppearance="@style/TextAppearance.Reply.Headline5"
                                 android:textColor="#6F6F6F"
                                 android:textSize="14sp"
@@ -466,7 +466,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="8dp"
-                                android:text="@{viewModel.getChapterTitle(category, 2)}"
+                                android:text="@{viewModel.viewState().nameChapter3}"
                                 android:textAppearance="@style/TextAppearance.Reply.Headline5"
                                 android:textColor="@color/md_theme_onSurface"
                                 android:textSize="16sp" />
@@ -475,7 +475,7 @@
                                 android:id="@+id/tv_description_chapter_3"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/string_description_chapter_3"
+                                android:text="@{viewModel.viewState().descriptionChapter3}"
                                 android:textAppearance="@style/TextAppearance.Reply.Headline5"
                                 android:textColor="#6F6F6F"
                                 android:textSize="14sp"

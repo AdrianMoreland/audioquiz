@@ -23,7 +23,7 @@ public interface QuizUseCaseFacade {
     Integer getCorrectOption1();
     Integer getCorrectOption2();
 
-    Boolean getIsLastQuestion();
+    Observable<Boolean> getIsLastQuestion();
 
 
 

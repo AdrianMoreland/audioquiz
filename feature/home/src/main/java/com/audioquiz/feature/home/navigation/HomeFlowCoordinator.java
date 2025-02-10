@@ -26,9 +26,13 @@ public class HomeFlowCoordinator {
             Timber.tag(TAG).d("OnEvent: Settings flow");
             homeNavigation.navigateHomeToSettings();
             return true;
-        } else if (event instanceof HomeCoordinatorEvent.OnCategoryClicked) {
+        } else if (event instanceof HomeCoordinatorEvent.OnCategoryClicked onCategoryClicked) {
             Timber.tag(TAG).d("Navigating to bottom sheet category");
-           // getNavController().navigate(R.id.action_homeFragment_to_bottomSheetCategoryFragment);
+//            homeNavigation.navigateHomeToCategorySheet(onCategoryClicked.getBundle());
+            return true;
+        } else if (event instanceof HomeCoordinatorEvent.OnStartQuizClicked onStartQuizClicked) {
+            Timber.tag(TAG).d("Navigating to quiz");
+            homeNavigation.navigateHomeToQuiz(onStartQuizClicked.getBundle());
             return true;
         } else {
             return false;

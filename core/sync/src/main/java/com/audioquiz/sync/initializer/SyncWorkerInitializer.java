@@ -32,6 +32,8 @@ public class SyncWorkerInitializer implements Initializer<Void> {
 
         // Now you can safely use workScheduler
         if (workScheduler != null) {
+            workScheduler.scheduleOneTimeStaticResourcesSync();
+            Log.d(TAG, "SyncStaticResourcesWorker enqueued");
             workScheduler.scheduleImmediateUserDataSync();
             Log.d(TAG, "SyncUserDataWorker enqueued");
         } else {

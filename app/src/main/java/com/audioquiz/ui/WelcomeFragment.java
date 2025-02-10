@@ -1,5 +1,6 @@
 package com.audioquiz.ui;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -72,9 +73,17 @@ public class WelcomeFragment extends Fragment {
         Timber.tag(TAG).d("onViewCreated ");
     }
 
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        if (context instanceof ThemeEvents) {
+            themeEvents = (ThemeEvents) context;
+        } else {
+            throw new ClassCastException(context.toString() + " must implement ThemeEvents");
+        }
+    }
+
     private void handleStartButtonClick(boolean isUserAuthorized) {
-     //  MainCoordinatorEvent event1 = navigateFromAppLauncherToNotAuthorizedGraph();
-//        MainCoordinatorEvent event2 = navigateFromAppLauncherToAuthorizedGraph();
         MainCoordinatorEvent event = isUserAuthorized ? navigateFromAppLauncherToAuthorizedGraph() : navigateFromAppLauncherToNotAuthorizedGraph();
         Timber.tag(TAG).d("handleStartButtonClick %s", event);
         mainFlowCoordinator.onEvent(event);

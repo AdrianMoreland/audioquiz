@@ -60,7 +60,11 @@ public class QuizRepository_impl implements QuizRepository {
 
     @Override
     public Observable<Boolean> getIsLastQuestionObservable() {
-        return null;
+        Observable<Boolean> isLastQuestionObservable;
+        isLastQuestionObservable = Observable.create(emitter -> {
+            emitter.onNext(isLastQuestionLiveData);
+        });
+        return isLastQuestionObservable;
     }
 
     @Override

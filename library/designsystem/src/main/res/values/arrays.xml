@@ -34,8 +34,18 @@
         <item>@string/string_badge_5</item>
         <item>@string/string_badge_6</item>
     </string-array>
+
+
+    <!--    BOTTOM-SHEET CATEGORY-CHAPTERS   -->
+    <!--  Array containing all static string arrays for categories and chapters   -->
+    <string-array name="categoriesDataArray">
+        <item>categoriesArray</item>
+        <item>categoryChapters</item>
+        <item>categoryDescriptions</item>
+    </string-array>
+
     <!--    Names of the home  quiz categories   -->
-    <string-array name="categoriesArray">
+    <string-array name="categoryNamesArray">
         <item>@string/string_category_1</item>
         <item>@string/string_category_2</item>
         <item>@string/string_category_3</item>
@@ -44,7 +54,6 @@
         <item>@string/string_category_6</item>
     </string-array>
 
-    <!--    BOTTOM-SHEET CATEGORY-CHAPTERS   -->
     <!--    Collection of chapters for each categoryUi   -->
     <array name="categoryChapters">
         <item>soundwaves_chapters</item>
@@ -53,15 +62,6 @@
         <item>mixing_chapters</item>
         <item>processing_chapters</item>
         <item>musictheory_chapters</item>
-    </array>
-    <!--    Collection of descriptions for each categoryUi   -->
-    <array name="categoryDescriptions">
-        <item>soundwaves_descriptions</item>
-        <item>synthesis_descriptions</item>
-        <item>production_descriptions</item>
-        <item>mixing_descriptions</item>
-        <item>processing_descriptions</item>
-        <item>musictheory_descriptions</item>
     </array>
     <!--    Chapters names for each categoryUi   -->
     <string-array name="soundwaves_chapters">
@@ -94,6 +94,16 @@
         <item>@string/string_chapter_2_musictheory</item>
         <item>@string/string_chapter_3_musictheory</item>
     </string-array>
+
+    <!--    Collection of descriptions for each categoryUi   -->
+    <array name="categoryDescriptions">
+        <item>soundwaves_descriptions</item>
+        <item>synthesis_descriptions</item>
+        <item>production_descriptions</item>
+        <item>mixing_descriptions</item>
+        <item>processing_descriptions</item>
+        <item>musictheory_descriptions</item>
+    </array>
     <!--    Description texts for each categoryUi   -->
     <string-array name="soundwaves_descriptions">
         <item> @string/string_description_chapter_1</item>

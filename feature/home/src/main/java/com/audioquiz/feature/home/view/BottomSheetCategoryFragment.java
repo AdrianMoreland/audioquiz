@@ -4,7 +4,6 @@ import android.app.Dialog;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,55 +22,52 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.audioquiz.feature.home.R;
 import com.audioquiz.feature.home.databinding.BottomSheetCategoryBinding;
-import com.audioquiz.feature.home.domain.HomeViewContract;
+import com.audioquiz.feature.home.domain.CategoryViewContract;
+import com.audioquiz.feature.home.domain.ChapterUi;
+import com.audioquiz.feature.home.navigation.HomeCoordinatorEvent;
+import com.audioquiz.feature.home.navigation.HomeFlowCoordinator;
 import com.audioquiz.feature.home.presentation.viewmodel.BottomSheetCategoryViewModel;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
+
+import javax.inject.Inject;
 
 import dagger.hilt.android.AndroidEntryPoint;
 import timber.log.Timber;
 
 @AndroidEntryPoint
 public class BottomSheetCategoryFragment extends BottomSheetDialogFragment {
-    private BottomSheetCategoryViewModel bottomSheetCategoryViewModel;
+    private static final String TAG = "BottomSheetCategory";
+    private static final int TOTAL_CHAPTERS = 3; // Constant for progress calculation
     BottomSheetCategoryBinding binding;
+    @Inject
+    HomeFlowCoordinator homeFlowCoordinator;
+    private BottomSheetCategoryViewModel viewModel;
+    private Integer currentChapterOrdinal;
+    private String category;
     private Button[] quizButtons;
     private TextView[] chapterTitles;
     private TextView[] chapterDescriptions;
     private LinearLayout[] chapterContainers;
-    private List<HomeViewContract.Chapter> chapters;
-
+    private List<ChapterUi.Chapter> chapters;
     private int primaryColor, inversePrimaryColor, surfaceColor, onTertiaryColor, onSurfaceColor;
+    private OnQuizNavigateListener onQuizNavigateListener;
 
-
-    private static final int TOTAL_CHAPTERS = 3; // Constant for progress calculation
-
-    private static final Map<String, HomeViewContract.ChapterResources> RESOURCES = new HashMap<>();
-    static {
-        RESOURCES.put("soundwaves", new HomeViewContract.ChapterResources(com.audioquiz.designsystem.R.array.soundwaves_chapters, com.audioquiz.designsystem.R.array.soundwaves_descriptions));
-        RESOURCES.put("synthesis", new HomeViewContract.ChapterResources(com.audioquiz.designsystem.R.array.synthesis_chapters, com.audioquiz.designsystem.R.array.synthesis_descriptions));
-        RESOURCES.put("production", new HomeViewContract.ChapterResources(com.audioquiz.designsystem.R.array.production_chapters, com.audioquiz.designsystem.R.array.production_descriptions));
-        RESOURCES.put("mixing", new HomeViewContract.ChapterResources(com.audioquiz.designsystem.R.array.mixing_chapters, com.audioquiz.designsystem.R.array.mixing_descriptions));
-        RESOURCES.put("processing", new HomeViewContract.ChapterResources(com.audioquiz.designsystem.R.array.processing_chapters, com.audioquiz.designsystem.R.array.processing_descriptions));
-        RESOURCES.put("musictheory", new HomeViewContract.ChapterResources(com.audioquiz.designsystem.R.array.musictheory_chapters, com.audioquiz.designsystem.R.array.musictheory_descriptions));
+    // Setter for the listener
+    public void setOnQuizNavigateListener(OnQuizNavigateListener listener) {
+        this.onQuizNavigateListener = listener;
     }
-
-    private static final String ARG_CATEGORY = "category";
-    private static final String ARG_CURRENT_CHAPTER = "current_chapter";
 
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         return new BottomSheetDialog(requireContext(), com.audioquiz.designsystem.R.style.AppTheme_BottomSheetDialog);
     }
-
 
     @Override
     public void onStart() {
@@ -81,8 +77,8 @@ public class BottomSheetCategoryFragment extends BottomSheetDialogFragment {
         FrameLayout bottomSheet = Objects.requireNonNull(dialog).findViewById(com.google.android.material.R.id.design_bottom_sheet);
         if (bottomSheet != null) {
             BottomSheetBehavior<FrameLayout> behavior = BottomSheetBehavior.from(bottomSheet);
-            behavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-            behavior.setPeekHeight(BottomSheetBehavior.PEEK_HEIGHT_AUTO);
+            behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+            behavior.setPeekHeight(BottomSheetBehavior.STATE_EXPANDED);
 
             // Find the separator view
             View separator = bottomSheet.findViewById(R.id.container_arrow);
@@ -97,63 +93,74 @@ public class BottomSheetCategoryFragment extends BottomSheetDialogFragment {
         }
     }
 
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = BottomSheetCategoryBinding.inflate(inflater, container, false);
-        bottomSheetCategoryViewModel = new ViewModelProvider(this).get(BottomSheetCategoryViewModel.class);
-        binding.setViewModel(bottomSheetCategoryViewModel); // Set the ViewModel in the binding
-        View view = binding.getRoot();
-        setupColors();
+        viewModel = new ViewModelProvider(this).get(BottomSheetCategoryViewModel.class);
+        binding.setViewModel(viewModel); // Set the ViewModel in the binding
 
+
+        setupColors();
+        initializeViews();
 
         Bundle arguments = getArguments();
-        if (arguments != null) {
-            String category = arguments.getString(ARG_CATEGORY);
-            if (category != null) {
-                binding.setCategory(category);
-                int currentChapterOrdinal = arguments.getInt(ARG_CURRENT_CHAPTER);
-                Timber.tag("BottomSheetCategory").d("Current chapter ordinal: %d", currentChapterOrdinal);
-                initializeViews();
-                setupViews(category, currentChapterOrdinal);
-            } else {
-                handleError("Missing category argument");
-            }
+        if (arguments != null){
+            category = arguments.getString("category");
+            currentChapterOrdinal = arguments.getInt("current_chapter");
         } else {
             handleError("Missing arguments");
         }
-
-        return view;
-    }
-
-    private int getColor(@ColorRes int colorResId) {
-        return ContextCompat.getColor(requireContext(), colorResId);
-    }
-
-    private void setupColors() {
-        primaryColor = getColor(com.audioquiz.designsystem.R.color.md_theme_primary);
-        inversePrimaryColor = getColor(com.audioquiz.designsystem.R.color.md_theme_inversePrimary);
-        surfaceColor = getColor(com.audioquiz.designsystem.R.color.md_theme_surface);
-        onTertiaryColor = getColor(com.audioquiz.designsystem.R.color.md_theme_onTertiaryContainer);
-        onSurfaceColor = getColor(com.audioquiz.designsystem.R.color.md_theme_onSurface);
-    }
-
-    private void setupViews(String category, int currentChapterOrdinal) {
-        HomeViewContract.Chapter chapter = chapters.get(currentChapterOrdinal - 1);
-     //   initializeViews();
-
+        if (category == null) handleError("Missing category argument");
         binding.setCategory(category);
-        Timber.tag("BottomSheetCategory").d("Category: %s", category);
-
         binding.tvCategory.setText(category);
 
-        final float progress = ((float) (currentChapterOrdinal) / TOTAL_CHAPTERS) * 100;
-        binding.progressCategory.setProgress((int) progress);
+        setupButtonListeners();
 
-        setupChapterData(category);
-        applyChapterStyles(chapter);
-        setupButtonListeners(category);
+        viewModel.loadCategoryData(category);
+        return binding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        // Observe the state and events from the ViewModel.
+        observeViewModel();
+    }
+
+    private void observeViewModel() {
+        viewModel.viewState().observe(getViewLifecycleOwner(), this::onViewStateChanged);
+        Timber.tag(TAG).d("observeViewModel called");
+    }
+
+    /**
+     * When the state changes, update all the text views with the corresponding strings.
+     */
+    private void onViewStateChanged(CategoryViewContract.State state) {
+        if (state != null) {
+            Timber.tag(TAG).d("onViewStateChanged called");
+            // Update category header if needed.
+            binding.tvCategory.setText(state.getCategoryName());
+            // Update each chapter’s title and description.
+            binding.tvNameChapter1.setText(state.getNameChapter1());
+            binding.tvDescriptionChapter1.setText(state.getDescriptionChapter1());
+
+            binding.tvNameChapter2.setText(state.getNameChapter2());
+            binding.tvDescriptionChapter2.setText(state.getDescriptionChapter2());
+
+            binding.tvNameChapter3.setText(state.getNameChapter3());
+            binding.tvDescriptionChapter3.setText(state.getDescriptionChapter3());
+
+            // Update progress bar based on the current chapter (from state)
+            float progress = ((float) currentChapterOrdinal / TOTAL_CHAPTERS) * 100;
+            binding.progressCategory.setProgress((int) progress);
+
+            // Apply styling to chapters based on the current chapter
+            if (chapters != null && currentChapterOrdinal > 0 && currentChapterOrdinal <= chapters.size()) {
+                ChapterUi.Chapter currentChapter = chapters.get(currentChapterOrdinal - 1);
+                applyChapterStyles(currentChapter);
+            }
+        }
     }
 
     private void initializeViews() {
@@ -186,35 +193,14 @@ public class BottomSheetCategoryFragment extends BottomSheetDialogFragment {
                 binding.btnFinishQuiz
         };
         chapters = new ArrayList<>();
-        chapters.add(new HomeViewContract.Chapter(0, binding.tvNameChapter1, binding.tvDescriptionChapter1, binding.containerChapter1, binding.btnChapter1));
-        chapters.add(new HomeViewContract.Chapter(1, binding.tvNameChapter2, binding.tvDescriptionChapter2, binding.containerChapter2, binding.btnChapter2));
-        chapters.add(new HomeViewContract.Chapter(2, binding.tvNameChapter3, binding.tvDescriptionChapter3, binding.containerChapter3, binding.btnChapter3));
-        chapters.add(new HomeViewContract.Chapter(3, binding.tvTest, binding.tvTestDescription, binding.containerTest, binding.btnTest));
-        chapters.add(new HomeViewContract.Chapter(4, binding.tvCategoryEndTitle, binding.tvCategoryEndDescription, binding.containerCategoryEnd, binding.btnFinishQuiz));
+        chapters.add(new ChapterUi.Chapter(0, binding.tvNameChapter1, binding.tvDescriptionChapter1, binding.containerChapter1, binding.btnChapter1));
+        chapters.add(new ChapterUi.Chapter(1, binding.tvNameChapter2, binding.tvDescriptionChapter2, binding.containerChapter2, binding.btnChapter2));
+        chapters.add(new ChapterUi.Chapter(2, binding.tvNameChapter3, binding.tvDescriptionChapter3, binding.containerChapter3, binding.btnChapter3));
+        chapters.add(new ChapterUi.Chapter(3, binding.tvTest, binding.tvTestDescription, binding.containerTest, binding.btnTest));
+        chapters.add(new ChapterUi.Chapter(4, binding.tvCategoryEndTitle, binding.tvCategoryEndDescription, binding.containerCategoryEnd, binding.btnFinishQuiz));
     }
 
-    private void setupChapterData(String category) {
-        HomeViewContract.ChapterResources resources = RESOURCES.getOrDefault(category.toLowerCase(), new HomeViewContract.ChapterResources(0, 0));
-        int chapterArrayResId = Objects.requireNonNull(resources).chaptersResId;
-        int descriptionsArrayResId = resources.descriptionsResId;
-        if (chapterArrayResId != 0) {
-            String[] chapters = getResources().getStringArray(chapterArrayResId);
-            for (int i = 0; i < chapters.length && i < chapterTitles.length; i++) {
-                chapterTitles[i].setText(chapters[i]);
-            }
-            binding.tvTest.setText(R.string.final_exam);
-            binding.tvCategoryEndTitle.setText(R.string.done);
-        }
-
-        if (descriptionsArrayResId != 0) {
-            String[] descriptions = getResources().getStringArray(descriptionsArrayResId);
-            for (int i = 0; i < descriptions.length && i < chapterDescriptions.length; i++) {
-                chapterDescriptions[i].setText(descriptions[i]);
-            }
-        }
-    }
-
-    private void applyChapterStyles(HomeViewContract.Chapter currentChapter) {
+    private void applyChapterStyles(ChapterUi.Chapter currentChapter) {
         final float scale = getResources().getDisplayMetrics().density;
         int widthLarge = (int) (44 * scale + 0.5f);
         int heightLarge = (int) (44 * scale + 0.5f);
@@ -230,10 +216,6 @@ public class BottomSheetCategoryFragment extends BottomSheetDialogFragment {
                 styleChapter(i, ChapterStatus.FUTURE, 0, 0); // No size changes for future chapters
             }
         }
-    }
-
-    private enum ChapterStatus {
-        CURRENT, COMPLETED, FUTURE;
     }
 
     private void styleChapter(int index, ChapterStatus status, int width, int height) {
@@ -261,32 +243,48 @@ public class BottomSheetCategoryFragment extends BottomSheetDialogFragment {
                 DrawableCompat.setTint(DrawableCompat.wrap(Objects.requireNonNull(drawable)), ContextCompat.getColor(requireContext(), com.audioquiz.designsystem.R.color.md_theme_surface));
                 button.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
                 break;
-            case FUTURE:title.setTextColor(onSurfaceColor);
+            case FUTURE:
+                title.setTextColor(onSurfaceColor);
                 container.setBackgroundResource(0);
                 break;
         }
     }
 
-    private void setupButtonListeners(String category) {
-        for (int chapterIndex = 0; chapterIndex < quizButtons.length; chapterIndex++) {
-            final int chapter = chapterIndex + 1;
-            quizButtons[chapterIndex].setOnClickListener(v -> navigateToQuiz(category, chapter));
+    private void setupButtonListeners() {
+        for (int i = 0; i < quizButtons.length; i++) {
+            final int chapter = i + 1;
+            quizButtons[i].setOnClickListener(v -> {
+                if (onQuizNavigateListener == null) return;
+                onQuizNavigateListener.onQuizNavigate(chapter);
+                dismiss();  // Dismiss when the button is clicked.
+            });
         }
     }
 
-    private void navigateToQuiz(String category, int chapter) {
-        String quizType = "lesson";
-      //  homeViewModel.startQuiz(category, chapter, quizType);
-        Bundle args = new Bundle();
-        args.putString("category", category);
-        args.putInt("level", chapter);
-     //   NavHostFragment.findNavController(this).navigate(com.example.ui.R.id.action_global_infoBottomSheetCategory_to_questionFragment);        dismiss();
-    }
-
     private void handleError(String message) {
-        Timber.tag("BottomSheetCategoryFragment").e(message);
+        Timber.tag(TAG).e(message);
         // You can add more error handling logic here, like showing a Toast or Snackbar
         dismiss(); // Dismiss the fragment
     }
 
+    private int getColor(@ColorRes int colorResId) {
+        return ContextCompat.getColor(requireContext(), colorResId);
+    }
+
+    private void setupColors() {
+        primaryColor = getColor(com.audioquiz.designsystem.R.color.md_theme_primary);
+        inversePrimaryColor = getColor(com.audioquiz.designsystem.R.color.md_theme_inversePrimary);
+        surfaceColor = getColor(com.audioquiz.designsystem.R.color.md_theme_surface);
+        onTertiaryColor = getColor(com.audioquiz.designsystem.R.color.md_theme_onTertiaryContainer);
+        onSurfaceColor = getColor(com.audioquiz.designsystem.R.color.md_theme_onSurface);
+    }
+
+    private enum ChapterStatus {
+        CURRENT, COMPLETED, FUTURE
+    }
+
+    // Define the callback interface
+    public interface OnQuizNavigateListener {
+        void onQuizNavigate(int chapter);
+    }
 }

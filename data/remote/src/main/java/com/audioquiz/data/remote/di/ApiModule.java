@@ -4,6 +4,7 @@ import com.audioquiz.api.datasources.firebase_auth.AuthApi;
 import com.audioquiz.api.datasources.question.QuestionDataSource;
 import com.audioquiz.api.datasources.rank.RankAllTimeDataSource;
 import com.audioquiz.api.datasources.rank.RankWeeklyDataSource;
+import com.audioquiz.api.datasources.resources.ResourceDataSource;
 import com.audioquiz.api.datasources.user.UserProfileDataSource;
 import com.audioquiz.api.datasources.user_stats.CategoryStatsDataSource;
 import com.audioquiz.api.datasources.user_stats.DailyScoresDataSource;

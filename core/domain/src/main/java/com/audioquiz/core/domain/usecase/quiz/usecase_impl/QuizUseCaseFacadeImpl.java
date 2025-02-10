@@ -140,8 +140,8 @@ public class QuizUseCaseFacadeImpl implements QuizUseCaseFacade {
     }
 
     @Override
-    public Boolean getIsLastQuestion() {
-        return null;
+    public Observable<Boolean> getIsLastQuestion() {
+        return getQuizResultDataImpl.getIsLastQuestionObservable();
     }
 
 

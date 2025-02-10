@@ -227,7 +227,7 @@ public class QuestionViewModel extends ViewModel {
 
     public LiveData<Boolean> getIsLastQuestion() {
         MutableLiveData<Boolean> isLastQuestion = new MutableLiveData<>();
-        isLastQuestion.postValue(quizUseCaseFacade.getIsLastQuestion());
+        isLastQuestion.postValue(quizUseCaseFacade.getIsLastQuestion().blockingLast());
         return isLastQuestion;
     }
 

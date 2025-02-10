@@ -1,7 +1,9 @@
 package com.audioquiz.presentation.navigation;
 
 import android.content.Context;
+import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
@@ -52,13 +54,17 @@ public class Navigator implements GlobalNavigation, StartNavigation, LoginNaviga
         return navController;
     }
 
-    private void navigate (int actionId) {
+    private void navigate(int actionId) {
+        navigate(actionId, Bundle.EMPTY);
+    }
+
+    private void navigate(int actionId, Bundle bundle) {
         if (navController != null) {
-            Timber.d("Navigating to actionId: " + actionId + " with NavController: " + navController);
-            navController.navigate(actionId);
-            return;
+            Timber.d("Navigating to actionId: %d with NavController: %s", actionId, navController);
+            navController.navigate(actionId, bundle);
+        } else {
+            Timber.e("NavController is null when trying to navigate");
         }
-        Timber.e("NavController is null when trying to navigate");
     }
 
     @Override
@@ -97,6 +103,15 @@ public class Navigator implements GlobalNavigation, StartNavigation, LoginNaviga
     @Override
     public void navigateToRank() {
         navigate(R.id.navigateFromHomeToRank);
+    }
+
+    @Override
+    public void navigateHomeToQuiz(Bundle args) {
+        navigate(R.id.navigateFromHomeToQuestion, args);
+    }
+    @Override
+    public void navigateHomeToCategorySheet(Bundle args) {
+        navigate(R.id.navigateFromHomeToQuestion, args);
     }
 
     @Override

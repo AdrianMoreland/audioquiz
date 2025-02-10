@@ -12,8 +12,14 @@ import org.gradle.kotlin.dsl.configure
 
 class AndroidApplicationConventionPlugin : Plugin<Project> {
       override fun apply(project: Project) {
-            project.pluginManager.apply(BuildPlugins.ANDROID_APPLICATION)
-            project.pluginManager.apply(BuildPlugins.KOTLIN_ANDROID)
+            with(project) {
+                  with(pluginManager) {
+                        apply(BuildPlugins.ANDROID_APPLICATION)
+                        apply(BuildPlugins.KOTLIN_ANDROID)
+                  }
+            }
+
+
         //    project.pluginManager.apply(BuildPlugins.GMS)
 
             configureCommonConfig(project)

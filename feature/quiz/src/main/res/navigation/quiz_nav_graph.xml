@@ -13,19 +13,14 @@
             android:name="category"
             app:argType="string" />
         <argument
-            android:name="level"
-            app:argType="integer" />
+            android:name="chapter"
+            app:argType="integer"
+            android:defaultValue="1"/>
         <action
             android:id="@+id/action_questionFragment_to_quizResultsFragment"
             app:destination="@id/quizResultsFragment" />
-        <argument
-            android:name="categoryUi"
-            app:argType="string" />
-        <argument
-            android:name="level"
-            app:argType="string" />
         <deepLink
-            app:uri="audioquiz://quiz/{categoryUi}/{level}" />
+            app:uri="audioquiz://quiz/{category}/{chapter}" />
     </fragment>
 
     <fragment

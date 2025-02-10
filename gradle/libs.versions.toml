@@ -20,10 +20,10 @@ firebaseCrashlyticsPlugin = "3.0.3"
 firebasePerfPlugin = "1.4.2"
 firebase_appcheck_safetynet = "18.0.0"
 glide = "4.16.0"
-gson = "2.11.0"
+gson = "2.12.1"
 googleServices = "4.4.2"
 googleId = "1.1.1"
-hilt = "2.52"
+hilt = "2.55"
 androidHiltCompiler = "1.2.0"
 hiltWork = "1.2.0"
 hilt-navigation = "1.2.0"
@@ -32,9 +32,9 @@ junit-jupiter = "5.11.0"
 leakcanary = "1.5.1"
 lifecycle = "2.8.7"
 material = "1.12.0"
-mockk = "1.13.12"
+mockk = "1.13.16"
 mockito_core = "5.12.0"
-modelmapper = "3.2.1"
+modelmapper = "3.2.2"
 modulesGraphAssert = "2.7.1"
 mpandroidchart = "v3.1.0"
 navigation = "2.8.6"
@@ -43,11 +43,11 @@ play-services-base = "18.5.0"
 room = "2.6.1"
 roomRuntimeAndroid = "2.7.0-alpha13"
 runner = "1.6.2"
-rxjava = "3.1.9"
+rxjava = "3.1.10"
 rxandroid = "3.0.2"
 startupRuntime = "1.2.0"
 timber = "5.0.1"
-ucrop = "2.2.9"
+ucrop = "2.2.10"
 viewmodels = "2.8.7"
 work = "2.10.0"
 
@@ -60,6 +60,7 @@ hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 room-gradle = { id = "androidx.room", version.ref="room" }
 gms = { id = "com.google.gms.google-services", version.ref = "googleServices" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+
 firebase-crashlytics = { id = "com.google.firebase.crashlytics" }
 firebase-perf = { id = "com.google.firebase.firebase-perf" }
 dependency-analysis = { id = "com.autonomousapps.dependency-analysis", version.ref = "dependencyAnalysis" }

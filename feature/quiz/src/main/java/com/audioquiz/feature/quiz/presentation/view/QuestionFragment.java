@@ -45,6 +45,7 @@ import javax.inject.Inject;
 import dagger.hilt.android.AndroidEntryPoint;
 import me.grantland.widget.AutofitHelper;
 import me.grantland.widget.AutofitTextView;
+import timber.log.Timber;
 
 @AndroidEntryPoint
 public class QuestionFragment extends Fragment {
@@ -189,11 +190,11 @@ public class QuestionFragment extends Fragment {
     private void observeLiveData() {
         viewModel.getMaxQuestionsLiveData().observe(getViewLifecycleOwner(), maxQuestionsLiveData -> maxQuestions = maxQuestionsLiveData);
         viewModel.getIsLastQuestion().observe(getViewLifecycleOwner(), isLastQuestionLiveData -> {
-            Log.d(TAG, "isLastQuestion: " + isLastQuestionLiveData);
+            Timber.tag(TAG).d("isLastQuestion: %s", isLastQuestionLiveData);
             isLastQuestion = isLastQuestionLiveData;
         });
         viewModel.getQuestionCountLiveData().observe(getViewLifecycleOwner(), questionCountLiveData -> {
-            Log.d(TAG, "questionCount: " + questionCountLiveData);
+            Timber.tag(TAG).d("questionCount: %s", questionCountLiveData);
             questionCount = questionCountLiveData;
         });
         viewModel.getQuestionLiveData().observe(getViewLifecycleOwner(), question -> {

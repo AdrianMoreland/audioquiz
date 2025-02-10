@@ -12,6 +12,7 @@ import javax.inject.Inject;
 
 public class WorkScheduler {
 
+    private static final String SYNC_STATIC_RESOURCES_WORK = "SyncStaticResourcesWork";
     private static final String SYNC_USER_DATA_WORK = "SyncUserDataWork";
     private static final String SYNC_RANK_DATA_WORK = "SyncRankDataWork";
 
@@ -62,6 +63,18 @@ public class WorkScheduler {
                                 syncRequest
                         )
                 )
+                .ignoreElement()
+                .subscribe();
+    }
+
+    public void scheduleOneTimeStaticResourcesSync() {
+        syncFactory.createOneTimeWorker(SyncStaticResourcesWorker.class)
+                .doOnSuccess(syncRequest ->
+                        workManager.enqueueUniqueWork(
+                                SYNC_STATIC_RESOURCES_WORK,
+                                ExistingWorkPolicy.REPLACE,
+                                syncRequest
+                        ))
                 .ignoreElement()
                 .subscribe();
     }

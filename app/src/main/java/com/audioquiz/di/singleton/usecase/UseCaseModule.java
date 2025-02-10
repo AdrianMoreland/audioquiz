@@ -11,6 +11,8 @@ import com.audioquiz.core.domain.usecase.quiz.usecase.QuizUseCaseFacade;
 import com.audioquiz.core.domain.usecase.quiz.usecase_impl.QuizUseCaseFacadeImpl;
 import com.audioquiz.core.domain.usecase.rank.RankUseCaseFacade;
 import com.audioquiz.core.domain.usecase.rank.RankUseCaseFacadeImpl;
+import com.audioquiz.core.domain.usecase.resources.SyncStaticResourcesUseCase;
+import com.audioquiz.core.domain.usecase.resources.SyncStaticResourcesUseCaseImpl;
 import com.audioquiz.core.domain.usecase.user.SyncUserDataUseCase;
 import com.audioquiz.core.domain.usecase.user.SyncUserDataUseCaseImpl;
 import com.audioquiz.core.domain.usecase.user.profile.UserProfileUseCaseFacade;
@@ -27,6 +29,9 @@ import dagger.hilt.components.SingletonComponent;
 @Module
 @InstallIn(SingletonComponent.class)
 public abstract class UseCaseModule {
+
+    @Binds
+    public abstract SyncStaticResourcesUseCase bindSyncStaticResourcesUseCase(SyncStaticResourcesUseCaseImpl impl);
 
     @Binds
     public abstract SyncUserDataUseCase bindSyncUserDataUseCase(SyncUserDataUseCaseImpl impl);
